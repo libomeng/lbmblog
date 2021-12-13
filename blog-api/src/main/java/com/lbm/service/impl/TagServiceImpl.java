@@ -79,12 +79,12 @@ public class TagServiceImpl implements TagService {
         }
         return detailTagVos;
     }
-    @Cache
+
     @Override
     public TagVo findTagById(Long id) {
         Tag tag = tagMapper.selectById(id);
-        DetailTagVo detailTagVo = copyToDetailTagVo(tag);
-        return copy(tag);
+        TagVo tagVo = copy(tag);
+        return tagVo;
     }
 
     private  DetailTagVo copyToDetailTagVo(Tag tag){

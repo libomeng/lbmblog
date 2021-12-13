@@ -19,7 +19,6 @@
     <description>lbmBLog</description>
     <properties>
         <java.version>1.8</java.version>
-        <mysql.version>5.1.49</mysql.version>
     </properties>
     <dependencies>
 <!--        starter-->

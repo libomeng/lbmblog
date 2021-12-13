@@ -3,7 +3,6 @@ package com.lbm.controller;
 import com.lbm.service.RegisterService;
 import com.lbm.vo.Result;
 import com.lbm.vo.params.RegisterParams;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

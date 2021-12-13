@@ -9,7 +9,7 @@
     </select>
     <select id="selectHots" parameterType="int" resultType="com.lbm.dao.entity.Tag">
         select
-            `art`.tag_id,t.tag_name
+            `art`.tag_id as id,t.tag_name as tagName t.avatar as avatar
         from
             ms_article_tag art
                 RIGHT JOIN
