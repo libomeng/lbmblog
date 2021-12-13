@@ -1,0 +1,4 @@
+[submodule "blog-view"]
+	url  = https://gitee.com/lbmc/lbmBlog
+	path = blog-view
+
