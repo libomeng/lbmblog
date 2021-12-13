@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lbm.dao.mapper.TagMapper">
+    <select id="selectByTagId"  parameterType="long" resultType="com.lbm.dao.entity.Tag">
+        select id,avatar,tag_name as tagName from ms_tag
+        where id in (select tag_id from ms_article_tag where article_id =#{ArticleId})
+    </select>
+    <select id="selectHots" parameterType="int" resultType="com.lbm.dao.entity.Tag">
+        select
+            `art`.tag_id,t.tag_name
+        from
+            ms_article_tag art
+                RIGHT JOIN
+            ms_tag t
+            ON
+                `art`.tag_id =t.id
+        GROUP BY art.tag_id
+        ORDER BY count(art.tag_id)
+                DESC
+            LIMIT #{limit}
+    </select>
+</mapper>
