@@ -82,8 +82,16 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public TagVo findTagById(Long id) {
+        //从redis中获取数据
+        String key = RedisKeyConfig.FIND_TAG_BY_ID;
+        TagVo entity = redisService.getEntity(key, id, TagVo.class);
+        if(entity != null){
+            return entity;
+        }
+        //没有数据才从数据库中获取
         Tag tag = tagMapper.selectById(id);
         TagVo tagVo = copy(tag);
+        redisService.setEntity(key,id,tagVo);
         return tagVo;
     }
 

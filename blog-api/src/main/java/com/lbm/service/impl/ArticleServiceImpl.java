@@ -123,6 +123,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public List<ArticleVo> findArticles(PageParams pageParams) {
+        //从Redis中获取数据
         String key = RedisKeyConfig.ARTICLE_VO_LIST;
         List articleVoList = redisService.getListByKey(key, pageParams);
         if (articleVoList != null) {
