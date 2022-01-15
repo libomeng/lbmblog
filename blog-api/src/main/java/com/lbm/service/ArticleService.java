@@ -53,4 +53,6 @@ public interface ArticleService extends IService<Article> {
      * @return
      */
     Long  createArticle(ArticleParam articleParam);
+
+    Result getSimpleList();
 }

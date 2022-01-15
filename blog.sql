@@ -1,17 +1,17 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : mysql
+ Source Server         : lbmblog
  Source Server Type    : MySQL
- Source Server Version : 50536
- Source Host           : localhost:3306
+ Source Server Version : 80027
+ Source Host           : 192.168.3.147:3306
  Source Schema         : blog
 
  Target Server Type    : MySQL
- Target Server Version : 50536
+ Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 13/12/2021 16:42:53
+ Date: 31/12/2021 16:43:10
 */
 
 SET NAMES utf8mb4;
@@ -22,7 +22,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `about`;
 CREATE TABLE `about`  (
-  `id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL,
   `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name_zh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
@@ -42,8 +42,8 @@ INSERT INTO `about` VALUES (4, 'commentEnabled', '评论开关', 'true');
 -- ----------------------------
 DROP TABLE IF EXISTS `blog_tag`;
 CREATE TABLE `blog_tag`  (
-  `blog_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL
+  `blog_id` bigint NOT NULL,
+  `tag_id` bigint NOT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -55,10 +55,10 @@ CREATE TABLE `blog_tag`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of category
@@ -69,11 +69,11 @@ CREATE TABLE `category`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_admin`;
 CREATE TABLE `ms_admin`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_admin
@@ -86,11 +86,11 @@ INSERT INTO `ms_admin` VALUES (2, 'mszlu', '$2a$10$RZECQ90DjOT/t1mhnXsl5.XSuZWc0
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_admin_permission`;
 CREATE TABLE `ms_admin_permission`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `admin_id` bigint(20) NOT NULL,
-  `permission_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `admin_id` bigint NOT NULL,
+  `permission_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_admin_permission
@@ -103,54 +103,47 @@ INSERT INTO `ms_admin_permission` VALUES (2, 2, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article`;
 CREATE TABLE `ms_article`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `comment_counts` int(11) NULL DEFAULT NULL COMMENT '评论数量',
-  `create_date` bigint(20) NULL DEFAULT NULL COMMENT '创建时间',
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `comment_counts` int NULL DEFAULT NULL COMMENT '评论数量',
+  `create_date` bigint NULL DEFAULT NULL COMMENT '创建时间',
   `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '简介',
   `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `view_counts` int(11) NULL DEFAULT NULL COMMENT '浏览数量',
-  `weight` int(11) NOT NULL COMMENT '是否置顶',
-  `author_id` bigint(20) NULL DEFAULT NULL COMMENT '作者id',
-  `body_id` bigint(20) NULL DEFAULT NULL COMMENT '内容id',
-  `category_id` int(11) NULL DEFAULT NULL COMMENT '类别id',
+  `view_counts` int NULL DEFAULT NULL COMMENT '浏览数量',
+  `weight` int NOT NULL COMMENT '是否置顶',
+  `author_id` bigint NULL DEFAULT NULL COMMENT '作者id',
+  `body_id` bigint NULL DEFAULT NULL COMMENT '内容id',
+  `category_id` int NULL DEFAULT NULL COMMENT '类别id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1469579087743401986 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942186532865 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_article
 -- ----------------------------
-INSERT INTO `ms_article` VALUES (1, 20, 1602132131231, '通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\r\n\r\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。', 'springboot介绍以及入门案例', 194, 0, 1, 1, 2);
-INSERT INTO `ms_article` VALUES (9, 0, 1632132131231, 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。', 'Vue.js 到底是什么', 26, 0, 1, 20, 2);
+INSERT INTO `ms_article` VALUES (1, 20, 1602132131231, '通过Spring Boot实现的服务，只需要依靠一个Java类，把它打包成jar，并通过`java -jar`命令就可以运行起来。\r\n\r\n这一切相较于传统Spring应用来说，已经变得非常的轻便、简单。', 'springboot介绍以及入门案例', 197, 0, 1, 1, 2);
+INSERT INTO `ms_article` VALUES (9, 0, 1632132131231, 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。', 'Vue.js 到底是什么', 32, 0, 1, 20, 2);
 INSERT INTO `ms_article` VALUES (10, 0, 1532132131231, '本节将介绍如何在项目中使用 Element。', 'Element相关', 11, 0, 1, 21, 2);
-INSERT INTO `ms_article` VALUES (1405564731300831233, 0, 1432132131231, '66666666666', '666666666666666', 2, 0, 1, 1405564731351162882, 2);
-INSERT INTO `ms_article` VALUES (1405909844724051969, 0, 1332132131231, '123', '123123', 3, 0, 1, 1405909844828909569, 3);
-INSERT INTO `ms_article` VALUES (1405916999732707330, 0, 1232132131231, 'springboot入门案例', 'SpringBoot入门案例', 5, 0, 1, 1405916999854342146, 2);
-INSERT INTO `ms_article` VALUES (1468182881431461889, 0, 1638877051112, '魔刀千刃简介', '魔刀千刃', 17, 0, 1, 1468182881431461890, 4);
-INSERT INTO `ms_article` VALUES (1468187310301925377, 1, 1638878107043, '李搏猛是神', '李搏猛牛逼', 8, 0, 1, 1468187310331285506, 2);
-INSERT INTO `ms_article` VALUES (1468192662137425921, 1, 1638879383050, '村正简介', '村正', 5, 0, 1, 1468192662275837954, 3);
-INSERT INTO `ms_article` VALUES (1468227279309623298, 0, 1638887636398, '测试摘要', '测试', 14, 0, 1, 1468227279322206210, 2);
-INSERT INTO `ms_article` VALUES (1468231964523352066, 0, 1638888753433, '测试', 'test', 6, 0, 1468228187896532994, 1468231964527546370, 2);
-INSERT INTO `ms_article` VALUES (1468473952799608834, 0, 1638946447937, '啥啥啥', '程序猿', 8, 0, 1468473254548656129, 1468473952807997441, 3);
-INSERT INTO `ms_article` VALUES (1468562564480266241, 0, 1638967574620, '1111', '新文章', 3, 0, 1, 1468562564547375106, 1);
-INSERT INTO `ms_article` VALUES (1468562816797102082, 1, 1638967634775, '111', '新的', 67, 0, 1, 1468562816851628034, 1);
-INSERT INTO `ms_article` VALUES (1469349701563756546, 0, 1639155242724, '测试', 'Redis测试', 4, 0, 1, 1469349701626671105, 4);
-INSERT INTO `ms_article` VALUES (1469350256096944130, 0, 1639155374936, '测试', 'Redis测试', 0, 0, 1, 1469350256159858689, 4);
-INSERT INTO `ms_article` VALUES (1469574735540588545, 0, 1639208895006, '111', '新文章', 0, 0, 1, 1469574735607697410, 2);
-INSERT INTO `ms_article` VALUES (1469578376494260225, 0, 1639209763076, '111', '文章', 1, 0, 1, 1469578376552980481, 2);
-INSERT INTO `ms_article` VALUES (1469579087743401985, 1, 1639209932652, '12323', '信信信的', 7, 0, 1, 1469579087810510850, 1);
+INSERT INTO `ms_article` VALUES (1405916999732707330, 0, 1232132131231, 'springboot入门案例', 'SpringBoot入门案例', 6, 0, 1, 1405916999854342146, 2);
+INSERT INTO `ms_article` VALUES (1468182881431461889, 0, 1638877051112, '魔刀千刃简介', '魔刀千刃', 26, 0, 1, 1468182881431461890, 4);
+INSERT INTO `ms_article` VALUES (1471856156936065026, 0, 1639752828248, '调错日记，关于maven依赖注入时的版本问题', '【调错日记】fastjson:not found', 25, 0, 1, 1471856156936065027, 2);
+INSERT INTO `ms_article` VALUES (1472928309869883394, 0, 1640008449582, 'docker部署前后端分离项目', 'Docker部署Springboot+vue前后端分离项目', 21, 0, 1, 1472928310499028994, 2);
+INSERT INTO `ms_article` VALUES (1472932224111816706, 0, 1640009382659, '调错日记', '【调错日记】容器时间与宿主机系统时间不符导致数据库链接失败', 43, 0, 1, 1472932224141176834, 2);
+INSERT INTO `ms_article` VALUES (1474394237451186177, 0, 1640357953894, '结构化面试', '社会现象题答题模板', 1, 0, 1, 1474394237883199489, 2);
+INSERT INTO `ms_article` VALUES (1474394448995102722, 0, 1640358004224, '结构化面试', '【结构化面试】人际关系', 4, 0, 1, 1474394449003491329, 2);
+INSERT INTO `ms_article` VALUES (1474394705053167618, 0, 1640358065274, '结构化面试', '【结构化面试】组织管理题', 6, 0, 1, 1474394705061556225, 1);
+INSERT INTO `ms_article` VALUES (1474394942186532865, 0, 1640358121810, '结构化面试', '【结构化面试】综合分析题答题思路', 8, 0, 1, 1474394942190727170, 1);
 
 -- ----------------------------
 -- Table structure for ms_article_body
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article_body`;
 CREATE TABLE `ms_article_body`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `content_html` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `article_id` bigint(20) NOT NULL,
+  `article_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1469579087810510851 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942190727170 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_article_body
@@ -174,19 +167,29 @@ INSERT INTO `ms_article_body` VALUES (1469350256159858689, '开始测试', '<p>�
 INSERT INTO `ms_article_body` VALUES (1469574735607697410, '新文章来拉', '<p>新文章来拉</p>\n', 1469574735540588545);
 INSERT INTO `ms_article_body` VALUES (1469578376552980481, '文章', '<p>文章</p>\n', 1469578376494260225);
 INSERT INTO `ms_article_body` VALUES (1469579087810510850, '0507', '<p>0507</p>\n', 1469579087743401985);
+INSERT INTO `ms_article_body` VALUES (1471856156936065027, '### 【调错日记】Dependency ‘com.alibaba:fastjson:not found\n\n今天在写新项目时，导入fastjson依赖时一直爆红\n\n~~~ xml\n<dependency>\n 	<groupId>com.alibaba</groupId>\n 	<artifactId>fastjson</artifactId>\n  	 <version>1.2.76</version>\n </dependency>\n~~~\n\n\n\n之前一直都是一次成功导入，完全没有处理经验。网上搜索的方法大多都是:\n\n* **从新加载工程；**\n\n* **网络原因；**\n\n* **本地仓库依赖破损，需要从新下载；**\n* ......\n\n​		全部都试过一个有用的都没有\n\n点开**fastjson**父依赖\n\n![image-20211217210601181](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217210601181.png)\n\n**新版本的fastjson居然要求maven 3.8.0以上!**\n\n\n\nIDEA2021.2版本中，maven默认只给到3.6.3版本.手动到maven官网下载最新版本：https://maven.apache.org/download.cgi\n\n![image-20211217213043496](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217213043496.png)\n\n\n\n下载新版本后在IEDA指定maven为刚刚下载好的版本，apply完美解决\n\n![image-20211217212943386](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217212943386.png)\n\n', '<h3><a id=\"Dependency_comalibabafastjsonnot_found_0\"></a>【调错日记】Dependency ‘com.alibaba:fastjson:not found</h3>\n<p>今天在写新项目时，导入fastjson依赖时一直爆红</p>\n<pre><div class=\"hljs\"><code class=\"lang-xml\"><span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">dependency</span>&gt;</span>\n 	<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">groupId</span>&gt;</span>com.alibaba<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">groupId</span>&gt;</span>\n 	<span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">artifactId</span>&gt;</span>fastjson<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">artifactId</span>&gt;</span>\n  	 <span class=\"hljs-tag\">&lt;<span class=\"hljs-name\">version</span>&gt;</span>1.2.76<span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">version</span>&gt;</span>\n <span class=\"hljs-tag\">&lt;/<span class=\"hljs-name\">dependency</span>&gt;</span>\n</code></div></pre>\n<p>之前一直都是一次成功导入，完全没有处理经验。网上搜索的方法大多都是:</p>\n<ul>\n<li>\n<p><strong>从新加载工程；</strong></p>\n</li>\n<li>\n<p><strong>网络原因；</strong></p>\n</li>\n<li>\n<p><strong>本地仓库依赖破损，需要从新下载；</strong></p>\n</li>\n<li>\n<p>…</p>\n</li>\n</ul>\n<p>​		全部都试过一个有用的都没有</p>\n<p>点开<strong>fastjson</strong>父依赖</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217210601181.png\" alt=\"image-20211217210601181\" /></p>\n<p><strong>新版本的fastjson居然要求maven 3.8.0以上!</strong></p>\n<p>IDEA2021.2版本中，maven默认只给到3.6.3版本.手动到maven官网下载最新版本：https://maven.apache.org/download.cgi</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217213043496.png\" alt=\"image-20211217213043496\" /></p>\n<p>下载新版本后在IEDA指定maven为刚刚下载好的版本，apply完美解决</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211217212943386.png\" alt=\"image-20211217212943386\" /></p>\n', 1471856156936065026);
+INSERT INTO `ms_article_body` VALUES (1472928310499028994, '# 手把手教你Docker+nginx部署Springboot+vue前后端分离项目\n\n配套视频：https://www.bilibili.com/video/BV17A411E7aE/\n\n------\n\n### 项目回顾\n其实我觉得我已经录制得很详细的了，可能大家水平不一，有些人觉得我很多地方讲清楚，还有就是有些人按照视频同步做实验，还一路踩坑，这个我也预料不到哈哈。说实话，我自己做实验的过程还是挺顺利的。\n\n有些同学们提出个问题，不知道如何打包部署Vue前后端分离项目。那么今天，我们就来学习一下，如何部署简单快捷部署我们的vueblog项目！\n\n**这里给出vueblog项目的视频地址：**\n\n名称：[实战]基于SpringBoot+Vue开发的前后端分离博客项目完整教学（vueblog）\n\n视频：https://www.bilibili.com/video/BV1PQ4y1P7hZ/\n\n文档：https://juejin.im/post/6844903823966732302\n\n线上演示：http://www.markerhub.com:8084/blogs\n\n### 配套部署视频\n\n- 视频：https://www.bilibili.com/video/BV17A411E7aE/\n- 文档：https://juejin.im/post/6886061338804617229/\n\n### 工具\n\n- xshell 6 绿色破解版：关注公众号：**JavaCat**，回复**xshell**获取\n\n- Navicat 11 简体中文版：关注公众号：\n\n  JavaCat\n\n  ，回复\n\n  navicat\n\n  获取\n\n  ### 上线前准备\n\n这里我们同步演示怎么部署到win环境和linux（centos7）系统中，前端服务器采用nginx部署，并使用docker统一管理前后端服务器。\n\n所以我们会用到：\n\n- nginx\n- docker compose\n\n希望你看视频前有点基础哈，当然了，这次部署比较简单，不需要很精通，一般看了我的视频应该都能部署成功的哈。\n\n话不多说，直接上手！别忘了给我一个一键三联哈，顺便关注我B站，感谢！\n\n### 1、win环境\n\nwin环境我就用本机来演示了，我们需要分别打包前后端，前后端打包都是一条命令即可，只不过我们打包之前注意需要配置好线上的环境参数等。\n\n#### 1.1、前端\n\n先来配置一下后端的调用路径，因为现在部署在本地localhost，所以在axios.js中，我们配置好链接，因为等下后端部署也是本机，所以我这里直接这样配置就好了，如下：\n\n- src\\axios.js\n\n  ```plain\n  axios.defaults.baseURL = \"http://localhost:8081\"\n  ```\n\n  上面配置的就是前端访问后端接口的服务。\n  然后前端部署还需要考虑一个问题：打包之后项目资源引用路径，比如我们打包后链接是否需要带项目名称等。按照Vue官方的部署说明，我们添加一个**vue.config.js**文件，\n\n- vueblog-vue/vue.config.js\n\n  ```plain\n  module.exports = {\n  publicPath: \'/\'\n  }\n  ```\n\n  当然了，publicPath默认其实是空的，也就是publicPath: ‘’，两个效果貌似其实是一样的，哈哈哈，我只是提醒一下有这回事而已，嘿嘿。\n  设置完毕之后，我们执行打包命令：\n\n```plain\n# 打包命令\nnpm run build\n```\n\n命令执行之后，我们在项目根目录下就可以找到一个dist的目录，这个就是打包之后的文件夹，里面有个index.html，但是我们点击直接打开是看不到任何内容的，这时候，我们需要部署到nginx中。\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/e6f843e72b754170979ff89d30fa4ddc.png)\n\n首先我们下载一个nginx，下载地址：http://nginx.org/en/download.html，这里我们下载nginx/Windows-1.18.0版本，下载之后解压zip。根据我们对nginx的熟悉，静态文件我们放在html文件夹下面，所以先把html文件夹中的index.html和50x.html删掉，然后把打包出来的dist文件夹内的所有文件都复制到nginx的html中，如图：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/b9c6f2e4f249418aaac8fb9b1cf76db9.png)\n\n双击nginx.exe启动nginx，然后浏览器输入[http://localhost](http://localhost/)，出现了我们熟悉的界面，虽然没有博客数据，链接也自动跳转到了http://localhost/blogs，\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/f62108a4241e4b22a8efb9f9db89e963.png)\n\n我们点击任意一个链接或者按钮或者刷新界面，这时候出现了404：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/7854f0f0b97747368331c6de57299f0a.png)\n\n刷新之后nginx就找不到路由了，这是为啥，得和你们科普一下，vue项目的入口是index.html文件，nginx路由的时候都必须要先经过这个文件，所以我们得给nginx定义一下规则，让它匹配不到资源路径的时候，先去读取index.html，然后再路由。所以我们配置一下nginx.conf文件。具体操作就是找到**location /**,添加上一行代码**try_files $uri $uri/ /index.html last**;如下：\n\n- nginx-1.18.0/conf/nginx.conf\n\n  ```plain\n  location / {\n    root   html;\n    try_files $uri $uri/ /index.html last;\n    index  index.html index.htm;\n  }\n  ```\n\n  这一行代码是什么意思呢？\n\n  try_files的语法规则： 格式1：try_files file … uri，表示按指定的file顺序查找存在的文件，并使用第一个找到的文件进行请求处理，last表示匹配不到就内部直接匹配最后一个。\n\n重启nginx之后，链接再刷新都正常啦。但是没有数据，所以我们去部署一下后端。windows环境nginx的重启我一般都是打开任务管理器直接干掉nginx进程，然后再重新双击的~~\n\n![图片](https://gitee.com/lbmc/imagehost/raw/master/img/a1b0e6cb51fe4e57a8acc2b5ae252d5e.png)\n\n#### 1.2、后端\n\n后端的打包就简单多了，应该大家都挺熟悉的，注意配置redis、mysql的链接密码啥的，然后执行命令，本机测试，redis和mysql我都已经提前安装好的了，sql文件也在vueblog-java的resources目录下。\n\n对了，pom.xml文件里面，spring-boot-maven-plugin之前注释掉了，现在一定要打开。不然执行jar会找不到主类。\n\n- pom.xml\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/acf52fdbf43b4094816461fe490cf946.png)\n\n执行打包命令：\n\n```plain\n# 跳过测试打包\nmvn clean package -Dmaven.test.skip=true\n```\n\n得到target下的vueblog-0.0.1-SNAPSHOT.jar，然后再执行命令\n\n```plain\njava -jar vueblog-0.0.1-SNAPSHOT.jar --spring.profiles.active=default\n```\n\n后端上线之后，我们再访问下前端，发现已经可以正常浏览网页啦！spring.profiles.active表示指定环境配置文件。\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/7349025903a2439ba475a758f91935c8.png)\n\n### 2、linux环境\n\nlinux环境部署相对复杂一点，因为我们还要部署redis、mysql等。之前我发布过一个视频，是部署传统的博客项目eblog，采用的是docker容器，但是我们没有docker compose进行编排，这次我们使用docker compose来编排我们的服务，一起性搞定部署。\n\n二话不说，我们先来安装一下docker和docker compose，对于docker知识还不是特别懂的同学，建议自行去补习补习哈。\n\n#### 2.1、安装docker\n\n```plain\n#更新yum\n sudo yum update\n#安装\nyum install docker\n#检验安装是否成功\n[root@localhost opt]# \nDocker version 1.13.1, build 7f2769b/1.13.1\n#启动\nsystemctl start docker\n```\n\n#### 2.2、安装docker compose\n\n可以参考：https://docs.docker.com/compose/install/\n\n```plain\nsudo curl -L \"https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose\n#\nsudo chmod +x /usr/local/bin/docker-compose\n# 检查是否安装成功\ndocker-compose --version\n```\n\n#### 2.3、编写Dockerfile文件\n\n因为我们的项目需要成为docker的镜像，所以我们必须先编写Dockerfile文件构建我们的项目镜像然后进行编排，Dockerfile文件可以帮我们进行构建。\n\n- Dockerfile\n\n  ```plain\n  FROM java:8\n  EXPOSE 8080\n  ADD vueblog-0.0.1-SNAPSHOT.jar app.jar\n  RUN bash -c \'touch /app.jar\'\n  ENTRYPOINT [\"java\", \"-jar\", \"/app.jar\", \"--spring.profiles.active=pro\"]\n  ```\n\n  上面几行命令其实很简单，首先依赖jdk8环境，对外暴露8080，然后就是复制vueblog-0.0.1-SNAPSHOT.jar到docker容器中并命名为app.jar，最后是执行命令\n\n  java -jar /app.jar —spring.profiles.active=pro\n\n  ，使用的是我们另外编写的一个线上环境配置。\n\n- application-pro.yml\n\n  ```plain\n  # DataSource Config\n  spring:\n  datasource:\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    url: jdbc//localhost:3306/vueblog?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai\n    username: root\n    password: admin\n  shiro-redis:\n  enabled: true\n  redis-manager:\n    host: 127.0.0.1:6379\n  ```\n\n  等会儿我们需要修改application-pro.yml的redis和mysql链接等信息的一些配置，需要注意。\n\n#### 2.4、编写docker-compose.yml文件\n\n我们需要用到的软件与服务分别有nginx、mysql、redis、还有我们的springboot项目，所以编写如下：\n\n- docker-compose.yml\n\n  ```plain\n  version: \"3\"\n  services:\n  nginx: # 服务名称，用户自定义\n    image: nginx:latest  # 镜像版本\n    ports:\n    - 80:80  # 暴露端口\n    volumes: # 挂载\n    - /root/nginx/html:/usr/share/nginx/html\n    - /root/nginx/nginx.conf:/etc/nginx/nginx.conf\n    privileged: true # 这个必须要，解决nginx的文件调用的权限问题\n  mysql:\n    image: mysql:5.7.27\n    ports:\n    - 3306:3306\n    environment: # 指定用户root的密码\n      - MYSQL_ROOT_PASSWORD=admin\n  redis:\n    image: redis:latest\n  vueblog:\n    image: vueblog:latest\n    build: . # 表示以当前目录下的Dockerfile开始构建镜像\n    ports:\n    - 8081:8081\n    depends_on: # 依赖与mysql、redis，其实可以不填，默认已经表示可以\n      - mysql\n      - redis\n  ```\n\n  上面的意思，我都用注释解释一遍了，希望可以讲清楚！需要注意的是，nginx中我们对nginx的放置静态资源的html文件夹和配置文件nginx.conf进行了一个挂载，所以我们打包后的文件放置到宿主机\n\n  /root/nginx/html\n\n  文件目录就行了哈\n\n  #### 2.5、修改application-pro.yml\n\n然后我们再回头看看application-pro.yml文件，mysql和redis的链接之前还是localhost，现在我们需要修改成容器之间的调用，如何知道mysql和redis的链接地址呢？docker compose就帮我们解决了这个问题，我们可以使用镜像容器的服务名称来表示链接。比如docker-compose.yml中mysql的服务名称就叫mysql、redis就叫redis。\n\n![图片](https://gitee.com/lbmc/imagehost/raw/master/img/dbd9201e9a64423582e245a9d0d001cf.png)\n\n所以我们最终得到的配置文件如下：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/28a935f2f8854759bead5d5ca62a2a11.png)\n\n#### 2.6、准备好nginx的挂载目录和配置\n\ndocker-compose.yml中已经提到，\n\n- 宿主机的挂载目录：/root/nginx/html\n- 挂载配置：/root/nginx/nginx.conf\n\n所以我们在root目录下新建nginx目录，并进入nginx目录下新建html目录和一个nginx.conf配置文件。\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/f2d055c3ecf944108f28bdc4f2daf38e.png)\n\n然后对nginx.conf进行编写，具体配置如下：\n\n- nginx.conf\n\n  ```plain\n  #user  root;\n  worker_processes  1;\n  events {\n    worker_connections  1024;\n  }\n  http {\n    include       mime.types;\n    default_type  application/octet-stream;\n    sendfile        on;\n    keepalive_timeout  65;\n    server {\n        listen       80;\n        server_name  localhost;\n        location / {\n            root   /usr/share/nginx/html;\n            try_files $uri $uri/ /index.html last; # 别忘了这个哈\n            index  index.html index.htm;\n        }\n        error_page   500 502 503 504  /50x.html;\n        location = /50x.html {\n            root   html;\n        }\n    }\n  }\n  ```\n\n  #### 2.7、上传前端\n\n前端打包之后先修改前端调用后端的接口，因为我是虚拟机，所以配置如下：\n\n- axios.js\n\n  ```plain\n  axios.defaults.baseURL = \"http://192.168.0.117:8081\"\n  ```\n\n  然后\n\n  npm run build\n\n  打包得到\n\n  dist\n\n  文件夹，并把dist压缩成dist.zip上传到linux之后解压到\n\n  /root/nginx/html\n\n  目录下。如下图：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/4a30914758cf4e2f84548d7631980960.png)\n\n#### 2.8、部署后端\n\n一切准备就绪之后，我们就开始编排部署了哈。\n\n首先本地打包vueblog项目，vueblog-0.0.1-SNAPSHOT.jar，并上传到linux中，同时docker-compose.yml、Dockerfile也上传到同一目录下。如图所示：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/35413954bd1a4fc78823e26f9a2ff2a6.png)\n\n然后我们执行一下编排命令:\n\n```plain\n# 开始编排\ncd ~\ndocker-compose up -d\n```\n\n其中-d表示后台服务形式启动\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/fd9b5b1103ff408b8a7aaae79116df25.png)\n\n然后我们稍等片刻，特别是开始**Building vueblog**的时候可能时间有点长，耐心等待即可！\n\n最后提示如下：\n\n![图片](https://gitee.com/lbmc/imagehost/raw/master/img/919cf60d670f43198c8c3f43d512fa89.png)\n\n说明我们已经成功编排啦。\n\nnginx是80端口，所以我们直接输入ip地址，如下可以看到一个界面然后有弹窗：\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/a32711d1d1e94ee7ad702c7bb064a4f5.png)\n\n这个简单，是因为我们的数据库还没创建哈。接下来我们去手动创建一下数据库并导入sql文件。\n\n- vueblog-java/src/main/resources/vueblog.sql\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/963212f8ddd241b2ba7b6af4152e0572.png)\n\n然后再刷新一下浏览器链接，数据就出来啦，搞定，轻松！\n\n![图片](https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/5a9d24b5b4bb482aa8d6400fc8b969c7.png)\n\n### 3.删除所有容器镜像\n\n~~~ docker system prune -a\n    docker system prune -a\n~~~\n\n### 3、结束语\n\n好啦，部署完毕，别忘了一键三联，关注我的B站MarkerHub，公众同名，哈哈。\n\n关注公众号 JavaCat ，回复关键字**前后端部署**，获取本文档！\n\n视频讲解：https://www.bilibili.com/video/BV17A411E7aE/\n\n ', '<h1><a id=\"DockernginxSpringbootvue_0\"></a>手把手教你Docker+nginx部署Springboot+vue前后端分离项目</h1>\n<p>配套视频：https://www.bilibili.com/video/BV17A411E7aE/</p>\n<hr />\n<h3><a id=\"_6\"></a>项目回顾</h3>\n<p>其实我觉得我已经录制得很详细的了，可能大家水平不一，有些人觉得我很多地方讲清楚，还有就是有些人按照视频同步做实验，还一路踩坑，这个我也预料不到哈哈。说实话，我自己做实验的过程还是挺顺利的。</p>\n<p>有些同学们提出个问题，不知道如何打包部署Vue前后端分离项目。那么今天，我们就来学习一下，如何部署简单快捷部署我们的vueblog项目！</p>\n<p><strong>这里给出vueblog项目的视频地址：</strong></p>\n<p>名称：[实战]基于SpringBoot+Vue开发的前后端分离博客项目完整教学（vueblog）</p>\n<p>视频：https://www.bilibili.com/video/BV1PQ4y1P7hZ/</p>\n<p>文档：https://juejin.im/post/6844903823966732302</p>\n<p>线上演示：http://www.markerhub.com:8084/blogs</p>\n<h3><a id=\"_21\"></a>配套部署视频</h3>\n<ul>\n<li>视频：https://www.bilibili.com/video/BV17A411E7aE/</li>\n<li>文档：https://juejin.im/post/6886061338804617229/</li>\n</ul>\n<h3><a id=\"_26\"></a>工具</h3>\n<ul>\n<li>\n<p>xshell 6 绿色破解版：关注公众号：<strong>JavaCat</strong>，回复<strong>xshell</strong>获取</p>\n</li>\n<li>\n<p>Navicat 11 简体中文版：关注公众号：</p>\n<p>JavaCat</p>\n<p>，回复</p>\n<p>navicat</p>\n<p>获取</p>\n<h3><a id=\"_40\"></a>上线前准备</h3>\n</li>\n</ul>\n<p>这里我们同步演示怎么部署到win环境和linux（centos7）系统中，前端服务器采用nginx部署，并使用docker统一管理前后端服务器。</p>\n<p>所以我们会用到：</p>\n<ul>\n<li>nginx</li>\n<li>docker compose</li>\n</ul>\n<p>希望你看视频前有点基础哈，当然了，这次部署比较简单，不需要很精通，一般看了我的视频应该都能部署成功的哈。</p>\n<p>话不多说，直接上手！别忘了给我一个一键三联哈，顺便关注我B站，感谢！</p>\n<h3><a id=\"1win_53\"></a>1、win环境</h3>\n<p>win环境我就用本机来演示了，我们需要分别打包前后端，前后端打包都是一条命令即可，只不过我们打包之前注意需要配置好线上的环境参数等。</p>\n<h4><a id=\"11_57\"></a>1.1、前端</h4>\n<p>先来配置一下后端的调用路径，因为现在部署在本地localhost，所以在axios.js中，我们配置好链接，因为等下后端部署也是本机，所以我这里直接这样配置就好了，如下：</p>\n<ul>\n<li>\n<p>src\\axios.js</p>\n<pre><code class=\"lang-plain\">axios.defaults.baseURL = &quot;http://localhost:8081&quot;\n</code></pre>\n<p>上面配置的就是前端访问后端接口的服务。<br />\n然后前端部署还需要考虑一个问题：打包之后项目资源引用路径，比如我们打包后链接是否需要带项目名称等。按照Vue官方的部署说明，我们添加一个<strong>vue.config.js</strong>文件，</p>\n</li>\n<li>\n<p>vueblog-vue/vue.config.js</p>\n<pre><code class=\"lang-plain\">module.exports = {\npublicPath: \'/\'\n}\n</code></pre>\n<p>当然了，publicPath默认其实是空的，也就是publicPath: ‘’，两个效果貌似其实是一样的，哈哈哈，我只是提醒一下有这回事而已，嘿嘿。<br />\n设置完毕之后，我们执行打包命令：</p>\n</li>\n</ul>\n<pre><code class=\"lang-plain\"># 打包命令\nnpm run build\n</code></pre>\n<p>命令执行之后，我们在项目根目录下就可以找到一个dist的目录，这个就是打包之后的文件夹，里面有个index.html，但是我们点击直接打开是看不到任何内容的，这时候，我们需要部署到nginx中。<br />\n<img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/e6f843e72b754170979ff89d30fa4ddc.png\" alt=\"图片\" /></p>\n<p>首先我们下载一个nginx，下载地址：http://nginx.org/en/download.html，这里我们下载nginx/Windows-1.18.0版本，下载之后解压zip。根据我们对nginx的熟悉，静态文件我们放在html文件夹下面，所以先把html文件夹中的index.html和50x.html删掉，然后把打包出来的dist文件夹内的所有文件都复制到nginx的html中，如图：</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/b9c6f2e4f249418aaac8fb9b1cf76db9.png\" alt=\"图片\" /></p>\n<p>双击nginx.exe启动nginx，然后浏览器输入<a href=\"http://localhost/\" target=\"_blank\">http://localhost</a>，出现了我们熟悉的界面，虽然没有博客数据，链接也自动跳转到了http://localhost/blogs，</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/f62108a4241e4b22a8efb9f9db89e963.png\" alt=\"图片\" /></p>\n<p>我们点击任意一个链接或者按钮或者刷新界面，这时候出现了404：</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/7854f0f0b97747368331c6de57299f0a.png\" alt=\"图片\" /></p>\n<p>刷新之后nginx就找不到路由了，这是为啥，得和你们科普一下，vue项目的入口是index.html文件，nginx路由的时候都必须要先经过这个文件，所以我们得给nginx定义一下规则，让它匹配不到资源路径的时候，先去读取index.html，然后再路由。所以我们配置一下nginx.conf文件。具体操作就是找到<strong>location /</strong>,添加上一行代码<strong>try_files $uri $uri/ /index.html last</strong>;如下：</p>\n<ul>\n<li>\n<p>nginx-1.18.0/conf/nginx.conf</p>\n<pre><code class=\"lang-plain\">location / {\n  root   html;\n  try_files $uri $uri/ /index.html last;\n  index  index.html index.htm;\n}\n</code></pre>\n<p>这一行代码是什么意思呢？</p>\n<p>try_files的语法规则： 格式1：try_files file … uri，表示按指定的file顺序查找存在的文件，并使用第一个找到的文件进行请求处理，last表示匹配不到就内部直接匹配最后一个。</p>\n</li>\n</ul>\n<p>重启nginx之后，链接再刷新都正常啦。但是没有数据，所以我们去部署一下后端。windows环境nginx的重启我一般都是打开任务管理器直接干掉nginx进程，然后再重新双击的~~</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/a1b0e6cb51fe4e57a8acc2b5ae252d5e.png\" alt=\"图片\" /></p>\n<h4><a id=\"12_121\"></a>1.2、后端</h4>\n<p>后端的打包就简单多了，应该大家都挺熟悉的，注意配置redis、mysql的链接密码啥的，然后执行命令，本机测试，redis和mysql我都已经提前安装好的了，sql文件也在vueblog-java的resources目录下。</p>\n<p>对了，pom.xml文件里面，spring-boot-maven-plugin之前注释掉了，现在一定要打开。不然执行jar会找不到主类。</p>\n<ul>\n<li>pom.xml</li>\n</ul>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/acf52fdbf43b4094816461fe490cf946.png\" alt=\"图片\" /></p>\n<p>执行打包命令：</p>\n<pre><code class=\"lang-plain\"># 跳过测试打包\nmvn clean package -Dmaven.test.skip=true\n</code></pre>\n<p>得到target下的vueblog-0.0.1-SNAPSHOT.jar，然后再执行命令</p>\n<pre><code class=\"lang-plain\">java -jar vueblog-0.0.1-SNAPSHOT.jar --spring.profiles.active=default\n</code></pre>\n<p>后端上线之后，我们再访问下前端，发现已经可以正常浏览网页啦！spring.profiles.active表示指定环境配置文件。<br />\n<img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/7349025903a2439ba475a758f91935c8.png\" alt=\"图片\" /></p>\n<h3><a id=\"2linux_147\"></a>2、linux环境</h3>\n<p>linux环境部署相对复杂一点，因为我们还要部署redis、mysql等。之前我发布过一个视频，是部署传统的博客项目eblog，采用的是docker容器，但是我们没有docker compose进行编排，这次我们使用docker compose来编排我们的服务，一起性搞定部署。</p>\n<p>二话不说，我们先来安装一下docker和docker compose，对于docker知识还不是特别懂的同学，建议自行去补习补习哈。</p>\n<h4><a id=\"21docker_153\"></a>2.1、安装docker</h4>\n<pre><code class=\"lang-plain\">#更新yum\n sudo yum update\n#安装\nyum install docker\n#检验安装是否成功\n[root@localhost opt]# \nDocker version 1.13.1, build 7f2769b/1.13.1\n#启动\nsystemctl start docker\n</code></pre>\n<h4><a id=\"22docker_compose_167\"></a>2.2、安装docker compose</h4>\n<p>可以参考：https://docs.docker.com/compose/install/</p>\n<pre><code class=\"lang-plain\">sudo curl -L &quot;https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose\n#\nsudo chmod +x /usr/local/bin/docker-compose\n# 检查是否安装成功\ndocker-compose --version\n</code></pre>\n<h4><a id=\"23Dockerfile_179\"></a>2.3、编写Dockerfile文件</h4>\n<p>因为我们的项目需要成为docker的镜像，所以我们必须先编写Dockerfile文件构建我们的项目镜像然后进行编排，Dockerfile文件可以帮我们进行构建。</p>\n<ul>\n<li>\n<p>Dockerfile</p>\n<pre><code class=\"lang-plain\">FROM java:8\nEXPOSE 8080\nADD vueblog-0.0.1-SNAPSHOT.jar app.jar\nRUN bash -c \'touch /app.jar\'\nENTRYPOINT [&quot;java&quot;, &quot;-jar&quot;, &quot;/app.jar&quot;, &quot;--spring.profiles.active=pro&quot;]\n</code></pre>\n<p>上面几行命令其实很简单，首先依赖jdk8环境，对外暴露8080，然后就是复制vueblog-0.0.1-SNAPSHOT.jar到docker容器中并命名为app.jar，最后是执行命令</p>\n<p>java -jar /app.jar —spring.profiles.active=pro</p>\n<p>，使用的是我们另外编写的一个线上环境配置。</p>\n</li>\n<li>\n<p>application-pro.yml</p>\n<pre><code class=\"lang-plain\"># DataSource Config\nspring:\ndatasource:\n  driver-class-name: com.mysql.cj.jdbc.Driver\n  url: jdbc//localhost:3306/vueblog?useUnicode=true&amp;useSSL=false&amp;characterEncoding=utf8&amp;serverTimezone=Asia/Shanghai\n  username: root\n  password: admin\nshiro-redis:\nenabled: true\nredis-manager:\n  host: 127.0.0.1:6379\n</code></pre>\n<p>等会儿我们需要修改application-pro.yml的redis和mysql链接等信息的一些配置，需要注意。</p>\n</li>\n</ul>\n<h4><a id=\"24dockercomposeyml_217\"></a>2.4、编写docker-compose.yml文件</h4>\n<p>我们需要用到的软件与服务分别有nginx、mysql、redis、还有我们的springboot项目，所以编写如下：</p>\n<ul>\n<li>\n<p>docker-compose.yml</p>\n<pre><code class=\"lang-plain\">version: &quot;3&quot;\nservices:\nnginx: # 服务名称，用户自定义\n  image: nginx:latest  # 镜像版本\n  ports:\n  - 80:80  # 暴露端口\n  volumes: # 挂载\n  - /root/nginx/html:/usr/share/nginx/html\n  - /root/nginx/nginx.conf:/etc/nginx/nginx.conf\n  privileged: true # 这个必须要，解决nginx的文件调用的权限问题\nmysql:\n  image: mysql:5.7.27\n  ports:\n  - 3306:3306\n  environment: # 指定用户root的密码\n    - MYSQL_ROOT_PASSWORD=admin\nredis:\n  image: redis:latest\nvueblog:\n  image: vueblog:latest\n  build: . # 表示以当前目录下的Dockerfile开始构建镜像\n  ports:\n  - 8081:8081\n  depends_on: # 依赖与mysql、redis，其实可以不填，默认已经表示可以\n    - mysql\n    - redis\n</code></pre>\n<p>上面的意思，我都用注释解释一遍了，希望可以讲清楚！需要注意的是，nginx中我们对nginx的放置静态资源的html文件夹和配置文件nginx.conf进行了一个挂载，所以我们打包后的文件放置到宿主机</p>\n<p>/root/nginx/html</p>\n<p>文件目录就行了哈</p>\n<h4><a id=\"25applicationproyml_258\"></a>2.5、修改application-pro.yml</h4>\n</li>\n</ul>\n<p>然后我们再回头看看application-pro.yml文件，mysql和redis的链接之前还是localhost，现在我们需要修改成容器之间的调用，如何知道mysql和redis的链接地址呢？docker compose就帮我们解决了这个问题，我们可以使用镜像容器的服务名称来表示链接。比如docker-compose.yml中mysql的服务名称就叫mysql、redis就叫redis。</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/dbd9201e9a64423582e245a9d0d001cf.png\" alt=\"图片\" /></p>\n<p>所以我们最终得到的配置文件如下：</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/28a935f2f8854759bead5d5ca62a2a11.png\" alt=\"图片\" /></p>\n<h4><a id=\"26nginx_268\"></a>2.6、准备好nginx的挂载目录和配置</h4>\n<p>docker-compose.yml中已经提到，</p>\n<ul>\n<li>宿主机的挂载目录：/root/nginx/html</li>\n<li>挂载配置：/root/nginx/nginx.conf</li>\n</ul>\n<p>所以我们在root目录下新建nginx目录，并进入nginx目录下新建html目录和一个nginx.conf配置文件。</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/f2d055c3ecf944108f28bdc4f2daf38e.png\" alt=\"图片\" /></p>\n<p>然后对nginx.conf进行编写，具体配置如下：</p>\n<ul>\n<li>\n<p>nginx.conf</p>\n<pre><code class=\"lang-plain\">#user  root;\nworker_processes  1;\nevents {\n  worker_connections  1024;\n}\nhttp {\n  include       mime.types;\n  default_type  application/octet-stream;\n  sendfile        on;\n  keepalive_timeout  65;\n  server {\n      listen       80;\n      server_name  localhost;\n      location / {\n          root   /usr/share/nginx/html;\n          try_files $uri $uri/ /index.html last; # 别忘了这个哈\n          index  index.html index.htm;\n      }\n      error_page   500 502 503 504  /50x.html;\n      location = /50x.html {\n          root   html;\n      }\n  }\n}\n</code></pre>\n<h4><a id=\"27_310\"></a>2.7、上传前端</h4>\n</li>\n</ul>\n<p>前端打包之后先修改前端调用后端的接口，因为我是虚拟机，所以配置如下：</p>\n<ul>\n<li>\n<p>axios.js</p>\n<pre><code class=\"lang-plain\">axios.defaults.baseURL = &quot;http://192.168.0.117:8081&quot;\n</code></pre>\n<p>然后</p>\n<p>npm run build</p>\n<p>打包得到</p>\n<p>dist</p>\n<p>文件夹，并把dist压缩成dist.zip上传到linux之后解压到</p>\n<p>/root/nginx/html</p>\n<p>目录下。如下图：</p>\n</li>\n</ul>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/4a30914758cf4e2f84548d7631980960.png\" alt=\"图片\" /></p>\n<h4><a id=\"28_336\"></a>2.8、部署后端</h4>\n<p>一切准备就绪之后，我们就开始编排部署了哈。</p>\n<p>首先本地打包vueblog项目，vueblog-0.0.1-SNAPSHOT.jar，并上传到linux中，同时docker-compose.yml、Dockerfile也上传到同一目录下。如图所示：</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/35413954bd1a4fc78823e26f9a2ff2a6.png\" alt=\"图片\" /></p>\n<p>然后我们执行一下编排命令:</p>\n<pre><code class=\"lang-plain\"># 开始编排\ncd ~\ndocker-compose up -d\n</code></pre>\n<p>其中-d表示后台服务形式启动<br />\n<img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/fd9b5b1103ff408b8a7aaae79116df25.png\" alt=\"图片\" /></p>\n<p>然后我们稍等片刻，特别是开始<strong>Building vueblog</strong>的时候可能时间有点长，耐心等待即可！</p>\n<p>最后提示如下：</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/919cf60d670f43198c8c3f43d512fa89.png\" alt=\"图片\" /></p>\n<p>说明我们已经成功编排啦。</p>\n<p>nginx是80端口，所以我们直接输入ip地址，如下可以看到一个界面然后有弹窗：</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/a32711d1d1e94ee7ad702c7bb064a4f5.png\" alt=\"图片\" /></p>\n<p>这个简单，是因为我们的数据库还没创建哈。接下来我们去手动创建一下数据库并导入sql文件。</p>\n<ul>\n<li>vueblog-java/src/main/resources/vueblog.sql</li>\n</ul>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/963212f8ddd241b2ba7b6af4152e0572.png\" alt=\"图片\" /></p>\n<p>然后再刷新一下浏览器链接，数据就出来啦，搞定，轻松！</p>\n<p><img src=\"https://image-1300566513.cos.ap-guangzhou.myqcloud.com/upload/images/20201021/5a9d24b5b4bb482aa8d6400fc8b969c7.png\" alt=\"图片\" /></p>\n<h3><a id=\"3_377\"></a>3.删除所有容器镜像</h3>\n<pre><code class=\"lang-docker\">    docker system prune -a\n</code></pre>\n<h3><a id=\"3_383\"></a>3、结束语</h3>\n<p>好啦，部署完毕，别忘了一键三联，关注我的B站MarkerHub，公众同名，哈哈。</p>\n<p>关注公众号 JavaCat ，回复关键字<strong>前后端部署</strong>，获取本文档！</p>\n<p>视频讲解：https://www.bilibili.com/video/BV17A411E7aE/</p>\n', 1472928309869883394);
+INSERT INTO `ms_article_body` VALUES (1472932224141176834, '# 【调错日记】容器时间与宿主机系统时间不符导致数据库链接失败\n\n#### 环境：docker\n\n#### 项目：web分布式应用\n\n#### 数据库：MySQL\n\n在使用docker部署一个分布式项目时，一直链接不上数据库。在测试环境明明没有任何问题，上到生产环境却一直报错。\n\n![image-20211220170656255](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170656255.png)\n\n\n\n**经过一轮仔细排错发现.docker里容器的时间比宿主机时间慢了几个小时**\n\n![image-20211220170727550](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170727550.png)\n\n**查看宿主机时区：**\n\n![image-20211220170748132](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170748132.png)\n\n可以看到容器的时间与宿主机的时间相差8小时，宿主机采用的时区为CST ,可以推断出**容器默认的时区为UTC**\n\n> （China Shanghai Time，东八区时间）\n>\n> （Coordinated Universal Time，标准时间）\n\n\n\n#### **错误原因**：由于时区不一致产生的时差，触发Mysql长时间闲置自动断连机制.\n\n\n\n> 更多关于Mysql超时原因解析：https://www.cnblogs.com/xiaoboluo768/p/6222862.html\n\n\n\n**查看默认值**：进入mysql容器后，使用date命令查看时区，果然时区为UTC\n\n![image-20211220172543131](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220172543131.png)\n\n**解决办法1：修改默认时区为CST**\n\n~~~shell\n#进入容器\ndocker exec -it 77994ee5093d /bin/bash\n\n#修改时区\ncp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime\n\n\n~~~\n\n**验证问题是否解决：**\n\n![image-20211220173105295](https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220173105295.png)\n\n​	可以看到时区已经正确设置\n\n**解决方法2：**\n\n```shell\n1 登录mysql\nmysql -u root -p\n输入密码\n \n2 查看wait_timeou\nshow global variables like \'wait_timeout\'; \n \n3 设置\nset global wait_timeout=604800; \nset global interactive_timeout=604800;\n \n4 重启mysql\ndocker-compose restart mysql;# docker restart mysql;\n```\n\n', '<h1><a id=\"_0\"></a>【调错日记】容器时间与宿主机系统时间不符导致数据库链接失败</h1>\n<h4><a id=\"docker_2\"></a>环境：docker</h4>\n<h4><a id=\"web_4\"></a>项目：web分布式应用</h4>\n<h4><a id=\"MySQL_6\"></a>数据库：MySQL</h4>\n<p>在使用docker部署一个分布式项目时，一直链接不上数据库。在测试环境明明没有任何问题，上到生产环境却一直报错。</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170656255.png\" alt=\"image-20211220170656255\" /></p>\n<p><strong>经过一轮仔细排错发现.docker里容器的时间比宿主机时间慢了几个小时</strong></p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170727550.png\" alt=\"image-20211220170727550\" /></p>\n<p><strong>查看宿主机时区：</strong></p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220170748132.png\" alt=\"image-20211220170748132\" /></p>\n<p>可以看到容器的时间与宿主机的时间相差8小时，宿主机采用的时区为CST ,可以推断出<strong>容器默认的时区为UTC</strong></p>\n<blockquote>\n<p>（China Shanghai Time，东八区时间）</p>\n<p>（Coordinated Universal Time，标准时间）</p>\n</blockquote>\n<h4><a id=\"Mysql_30\"></a><strong>错误原因</strong>：由于时区不一致产生的时差，触发Mysql长时间闲置自动断连机制.</h4>\n<blockquote>\n<p>更多关于Mysql超时原因解析：https://www.cnblogs.com/xiaoboluo768/p/6222862.html</p>\n</blockquote>\n<p><strong>查看默认值</strong>：进入mysql容器后，使用date命令查看时区，果然时区为UTC</p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220172543131.png\" alt=\"image-20211220172543131\" /></p>\n<p><strong>解决办法1：修改默认时区为CST</strong></p>\n<pre><div class=\"hljs\"><code class=\"lang-shell\"><span class=\"hljs-meta\">#</span><span class=\"bash\">进入容器</span>\ndocker exec -it 77994ee5093d /bin/bash\n<span class=\"hljs-meta\">\n#</span><span class=\"bash\">修改时区</span>\ncp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime\n\n\n</code></div></pre>\n<p><strong>验证问题是否解决：</strong></p>\n<p><img src=\"https://gitee.com/lbmc/imagehost/raw/master/img/image-20211220173105295.png\" alt=\"image-20211220173105295\" /></p>\n<p>​	可以看到时区已经正确设置</p>\n<p><strong>解决方法2：</strong></p>\n<pre><div class=\"hljs\"><code class=\"lang-shell\">1 登录mysql\nmysql -u root -p\n输入密码\n \n2 查看wait_timeou\nshow global variables like \'wait_timeout\'; \n \n3 设置\nset global wait_timeout=604800; \nset global interactive_timeout=604800;\n \n4 重启mysql\ndocker-compose restart mysql;# docker restart mysql;\n</code></div></pre>\n', 1472932224111816706);
+INSERT INTO `ms_article_body` VALUES (1472967439488200705, '123123', '<p>123123</p>\n', 1472967438955524098);
+INSERT INTO `ms_article_body` VALUES (1472968451183685633, '123', '<p>123</p>\n', 1472968450655203330);
+INSERT INTO `ms_article_body` VALUES (1472970772357656577, '啊实打实', '<p>啊实打实</p>\n', 1472970771699150849);
+INSERT INTO `ms_article_body` VALUES (1474394237883199489, '​		无风不起浪，万物皆有因。任何消极的社会问题背后都有多方面原理，针对XX现象，我认为主要有一下几点原因。首先，思想意识上存在偏差，其次缺乏有力措施。最后制度规范不够完善。\n\n​		正如我们所看到的，XX现象背后的原因是多层次的复杂的，但是办法总比困难多，我们要在发展中解决问题。我认为要改善这一局面，需要明确各方责任，多措并举，做实做好以下各项工作，才能针对性的解决XX问题。第一，强化意识（各级媒体，各级政府，基层干部，通过  两位一端，自媒体、走访宣讲、实地座谈等方式 做好相关主体的宣传教育培训）传递给主体正确思想意识，从问题源头去解决问题。第二，强化治理（增加相关部门治理决心，力度） 第三，完善规范（相关部门广泛调用，科学指定，充分解读，及时落实执行）。\n\n​		当然，解决XX问题不可一簇而就，需要在实现中不断探索前行，需要根据实际情况不断调整策略，因地制宜，精准施策。只要我们正视问题，精准处置，积极行动，一定能实现XX 的没要愿景', '<p>​		无风不起浪，万物皆有因。任何消极的社会问题背后都有多方面原理，针对XX现象，我认为主要有一下几点原因。首先，思想意识上存在偏差，其次缺乏有力措施。最后制度规范不够完善。</p>\n<p>​		正如我们所看到的，XX现象背后的原因是多层次的复杂的，但是办法总比困难多，我们要在发展中解决问题。我认为要改善这一局面，需要明确各方责任，多措并举，做实做好以下各项工作，才能针对性的解决XX问题。第一，强化意识（各级媒体，各级政府，基层干部，通过  两位一端，自媒体、走访宣讲、实地座谈等方式 做好相关主体的宣传教育培训）传递给主体正确思想意识，从问题源头去解决问题。第二，强化治理（增加相关部门治理决心，力度） 第三，完善规范（相关部门广泛调用，科学指定，充分解读，及时落实执行）。</p>\n<p>​		当然，解决XX问题不可一簇而就，需要在实现中不断探索前行，需要根据实际情况不断调整策略，因地制宜，精准施策。只要我们正视问题，精准处置，积极行动，一定能实现XX 的没要愿景</p>\n', 1474394237451186177);
+INSERT INTO `ms_article_body` VALUES (1474394449003491329, '### 面试中的领导\n\n1.尊重领导权威\n\n2.适应领导风格\n\n3.服从领导安排\n\n4.请示领导意见\n\n5完成领导人物\n\n6.汇报工作成果\n\n\n\n### 面试中的下属（不常见）\n\n1.理解下属有苦衷\n\n2.主动解其难和蒙\n\n3.用好长处多鼓励\n\n4.以身作则常带动 \n\n\n\n### 面试中的群众\n\n1.放低姿态笑脸迎\n\n2.人民至上记心中\n\n3.情理利法解问题\n\n4.兼顾灵活守原则', '<h3><a id=\"_0\"></a>面试中的领导</h3>\n<p>1.尊重领导权威</p>\n<p>2.适应领导风格</p>\n<p>3.服从领导安排</p>\n<p>4.请示领导意见</p>\n<p>5完成领导人物</p>\n<p>6.汇报工作成果</p>\n<h3><a id=\"_16\"></a>面试中的下属（不常见）</h3>\n<p>1.理解下属有苦衷</p>\n<p>2.主动解其难和蒙</p>\n<p>3.用好长处多鼓励</p>\n<p>4.以身作则常带动</p>\n<h3><a id=\"_28\"></a>面试中的群众</h3>\n<p>1.放低姿态笑脸迎</p>\n<p>2.人民至上记心中</p>\n<p>3.情理利法解问题</p>\n<p>4.兼顾灵活守原则</p>\n', 1474394448995102722);
+INSERT INTO `ms_article_body` VALUES (1474394705061556225, '### 调研题\n\n审题：目的分析→ 内容 →对象→方式\n\n答题： 准备工作 →展开调研 →总结调研成果\n\n调研题难点是在于确定调研内容\n\n#### **阐述目的和意义**\n\n#### 准备工作：\n\n​	1.成立调研小组  \n\n​	2.确定调研内容 \n\n​	3.与相关部门沟通对接 \n\n​	4.规划调研路线\n\n#### 展开工作：\n\n​	1.调研对象主体  \n\n​	2.调研对象周边 \n\n​	3.召集相关工作人员组织座谈会\n\n#### 总结调研成果：\n\n​	1.汇总调研内容 \n\n​	2.总结归纳 \n\n​	3.将调研报告呈给相关部门或者领导\n\n \n\n### 宣传题\n\n#### 阐述目的和意义\n\n#### 前期准备 \n\n​	1.成立宣传小组\n\n​	 2.政策学习 \n\n​	3.制作宣传素材 \n\n​	4.做好物资准备 \n\n​	5.资金预算 \n\n​	6.了解隔壁社区工作经验\n\n#### 展开工作\n\n​	1.线下宣传，营造氛围 标语 横幅 广播 针对化宣传\n\n​	2.线上宣传，宣传日常化，持久化\n\n​	3.活动宣传，深化效果\n\n#### 宣传成效 \n\n​	成效如何？ \n\n​	有需要改进的地方？\n\n', '<h3><a id=\"_0\"></a>调研题</h3>\n<p>审题：目的分析→ 内容 →对象→方式</p>\n<p>答题： 准备工作 →展开调研 →总结调研成果</p>\n<p>调研题难点是在于确定调研内容</p>\n<h4><a id=\"_8\"></a><strong>阐述目的和意义</strong></h4>\n<h4><a id=\"_10\"></a>准备工作：</h4>\n<p>​	1.成立调研小组</p>\n<p>​	2.确定调研内容</p>\n<p>​	3.与相关部门沟通对接</p>\n<p>​	4.规划调研路线</p>\n<h4><a id=\"_20\"></a>展开工作：</h4>\n<p>​	1.调研对象主体</p>\n<p>​	2.调研对象周边</p>\n<p>​	3.召集相关工作人员组织座谈会</p>\n<h4><a id=\"_28\"></a>总结调研成果：</h4>\n<p>​	1.汇总调研内容</p>\n<p>​	2.总结归纳</p>\n<p>​	3.将调研报告呈给相关部门或者领导</p>\n<h3><a id=\"_38\"></a>宣传题</h3>\n<h4><a id=\"_40\"></a>阐述目的和意义</h4>\n<h4><a id=\"_42\"></a>前期准备</h4>\n<p>​	1.成立宣传小组</p>\n<p>​	 2.政策学习</p>\n<p>​	3.制作宣传素材</p>\n<p>​	4.做好物资准备</p>\n<p>​	5.资金预算</p>\n<p>​	6.了解隔壁社区工作经验</p>\n<h4><a id=\"_56\"></a>展开工作</h4>\n<p>​	1.线下宣传，营造氛围 标语 横幅 广播 针对化宣传</p>\n<p>​	2.线上宣传，宣传日常化，持久化</p>\n<p>​	3.活动宣传，深化效果</p>\n<h4><a id=\"_64\"></a>宣传成效</h4>\n<p>​	成效如何？</p>\n<p>​	有需要改进的地方？</p>\n', 1474394705053167618);
+INSERT INTO `ms_article_body` VALUES (1474394942190727170, '\n## 消极类社会现象题思路总结\n\n### 1.概括话题做否定\n\n### 2.联系现状做说明\n\n### 3.分析原因点问题\n\n### 4.解决问题展未来\n\n\n\n## 积极类社会现象题\n\n### 1.肯定话题，阐明意义\n\n### 2.好的原因是什么\n\n### 3.有没有不足之处\n\n### 4. 如何好上加好\n\n\n\n### 政策行为题\n\n#### 1.概括政策的目的和意义\n\n#### 2.分析政策合理必要性\n\n#### 3.点出可能存在的问题\n\n#### 4.提出解决优化的对策\n\n\n\n', '<h2><a id=\"_1\"></a>消极类社会现象题思路总结</h2>\n<h3><a id=\"1_3\"></a>1.概括话题做否定</h3>\n<h3><a id=\"2_5\"></a>2.联系现状做说明</h3>\n<h3><a id=\"3_7\"></a>3.分析原因点问题</h3>\n<h3><a id=\"4_9\"></a>4.解决问题展未来</h3>\n<h2><a id=\"_13\"></a>积极类社会现象题</h2>\n<h3><a id=\"1_15\"></a>1.肯定话题，阐明意义</h3>\n<h3><a id=\"2_17\"></a>2.好的原因是什么</h3>\n<h3><a id=\"3_19\"></a>3.有没有不足之处</h3>\n<h3><a id=\"4__21\"></a>4. 如何好上加好</h3>\n<h3><a id=\"_25\"></a>政策行为题</h3>\n<h4><a id=\"1_27\"></a>1.概括政策的目的和意义</h4>\n<h4><a id=\"2_29\"></a>2.分析政策合理必要性</h4>\n<h4><a id=\"3_31\"></a>3.点出可能存在的问题</h4>\n<h4><a id=\"4_33\"></a>4.提出解决优化的对策</h4>\n', 1474394942186532865);
 
 -- ----------------------------
 -- Table structure for ms_article_tag
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article_tag`;
 CREATE TABLE `ms_article_tag`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `article_id` bigint(20) NOT NULL,
-  `tag_id` bigint(20) NOT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `article_id` bigint NOT NULL,
+  `tag_id` bigint NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE,
   INDEX `tag_id`(`tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1469579087856648195 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942199115778 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_article_tag
@@ -216,18 +219,28 @@ INSERT INTO `ms_article_tag` VALUES (1469350256197607426, 1469350256096944130, 5
 INSERT INTO `ms_article_tag` VALUES (1469574735632863234, 1469574735540588545, 5);
 INSERT INTO `ms_article_tag` VALUES (1469578376599117826, 1469578376494260225, 5);
 INSERT INTO `ms_article_tag` VALUES (1469579087856648194, 1469579087743401985, 5);
+INSERT INTO `ms_article_tag` VALUES (1471856157007368194, 1471856156936065026, 5);
+INSERT INTO `ms_article_tag` VALUES (1472928310633246722, 1472928309869883394, 5);
+INSERT INTO `ms_article_tag` VALUES (1472932224204091394, 1472932224111816706, 5);
+INSERT INTO `ms_article_tag` VALUES (1472967439580475394, 1472967438955524098, 5);
+INSERT INTO `ms_article_tag` VALUES (1472968451326291970, 1472968450655203330, 5);
+INSERT INTO `ms_article_tag` VALUES (1472970772517040130, 1472970771699150849, 5);
+INSERT INTO `ms_article_tag` VALUES (1474394237916753922, 1474394237451186177, 8);
+INSERT INTO `ms_article_tag` VALUES (1474394449007685634, 1474394448995102722, 8);
+INSERT INTO `ms_article_tag` VALUES (1474394705074139137, 1474394705053167618, 8);
+INSERT INTO `ms_article_tag` VALUES (1474394942199115778, 1474394942186532865, 8);
 
 -- ----------------------------
 -- Table structure for ms_category
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_category`;
 CREATE TABLE `ms_category`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_category
@@ -243,17 +256,17 @@ INSERT INTO `ms_category` VALUES (5, '/static/category/language.png', '编程语
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_comment`;
 CREATE TABLE `ms_comment`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `create_date` bigint(20) NOT NULL,
-  `article_id` bigint(20) NOT NULL,
-  `author_id` bigint(20) NOT NULL,
-  `parent_id` bigint(20) NOT NULL,
-  `to_uid` bigint(20) NOT NULL,
+  `create_date` bigint NOT NULL,
+  `article_id` bigint NOT NULL,
+  `author_id` bigint NOT NULL,
+  `parent_id` bigint NOT NULL,
+  `to_uid` bigint NOT NULL,
   `level` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1469580328435302403 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1469580328435302402 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_comment
@@ -295,12 +308,12 @@ INSERT INTO `ms_comment` VALUES (1469580328435302402, '什么', 1639210228437, 1
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_permission`;
 CREATE TABLE `ms_permission`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_permission
@@ -315,18 +328,18 @@ INSERT INTO `ms_permission` VALUES (8, '删除权限', '/admin/permission/add', 
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_sys_log`;
 CREATE TABLE `ms_sys_log`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `create_date` bigint(20) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `create_date` bigint NULL DEFAULT NULL,
   `ip` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `module` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `nickname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `operation` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `time` bigint(20) NULL DEFAULT NULL,
-  `userid` bigint(20) NULL DEFAULT NULL,
+  `time` bigint NULL DEFAULT NULL,
+  `userid` bigint NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_sys_log
@@ -337,21 +350,21 @@ CREATE TABLE `ms_sys_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_sys_user`;
 CREATE TABLE `ms_sys_user`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `account` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号',
   `admin` bit(1) NULL DEFAULT NULL COMMENT '是否管理员',
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
-  `create_date` bigint(20) NULL DEFAULT NULL COMMENT '注册时间',
+  `create_date` bigint NULL DEFAULT NULL COMMENT '注册时间',
   `deleted` bit(1) NULL DEFAULT NULL COMMENT '是否删除',
   `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `last_login` bigint(20) NULL DEFAULT NULL COMMENT '最后登录时间',
+  `last_login` bigint NULL DEFAULT NULL COMMENT '最后登录时间',
   `mobile_phone_number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '加密盐',
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1468572859206496259 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1468572859206496258 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_sys_user
@@ -373,11 +386,11 @@ INSERT INTO `ms_sys_user` VALUES (1468572859206496258, '80707', b'0', '/static/u
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_tag`;
 CREATE TABLE `ms_tag`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ms_tag
@@ -392,13 +405,13 @@ INSERT INTO `ms_tag` VALUES (8, '/static/tag/css.png', '刀剑录');
 -- ----------------------------
 DROP TABLE IF EXISTS `site_setting`;
 CREATE TABLE `site_setting`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `name_zh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `type` int(11) NULL DEFAULT NULL COMMENT '1基础设置，2页脚徽标，3资料卡，4友链信息',
+  `type` int NULL DEFAULT NULL COMMENT '1基础设置，2页脚徽标，3资料卡，4友链信息',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of site_setting
@@ -437,11 +450,11 @@ INSERT INTO `site_setting` VALUES (28, 'friendCommentEnabled', '友链页面评�
 -- ----------------------------
 DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签颜色(可选)',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tag
@@ -452,12 +465,12 @@ CREATE TABLE `tag`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `visit_record`;
 CREATE TABLE `visit_record`  (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `pv` int(11) NOT NULL COMMENT '访问量',
-  `uv` int(11) NOT NULL COMMENT '独立用户',
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `pv` int NOT NULL COMMENT '访问量',
+  `uv` int NOT NULL COMMENT '独立用户',
   `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '日期\"02-23\"',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of visit_record

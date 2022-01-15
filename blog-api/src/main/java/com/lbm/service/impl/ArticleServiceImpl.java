@@ -84,43 +84,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     }
 
-    //    @Override
-//    public List<ArticleVo> findArticles(PageParams pageParams) {
-//        /**
-//         * 1.分页查询数据库表
-//         */
-//        Page<Article> page = new Page<>(pageParams.getPage(), pageParams.getPageSize());
-//        LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-//
-//        //是否需要按分类查询
-//        if(pageParams.getCategoryId() != null){
-//            queryWrapper.eq(Article::getCategoryId, pageParams.getCategoryId());
-//        }
-//        //是否需要按文章标签查询
-//        if(pageParams.getTagId() != null){
-//            LambdaQueryWrapper<ArticleTag> articleTagLambdaQueryWrapper= new LambdaQueryWrapper<>();
-//            articleTagLambdaQueryWrapper.eq(ArticleTag::getTagId, pageParams.getTagId());
-//            articleTagLambdaQueryWrapper.select(ArticleTag::getArticleId);
-//            List<ArticleTag> articleTags = articleTagMapper.selectList(articleTagLambdaQueryWrapper);
-//            List<Long> articleIDList =new ArrayList<>();
-//            for (ArticleTag articleTag : articleTags) {
-//                articleIDList.add(articleTag.getArticleId());
-//                }
-//            if(articleIDList.size() >0){
-//                queryWrapper.in(Article::getId,articleIDList);
-//            }
-//        }
-//        /**
-//         * 是否进行置顶排序
-//         */
-//        queryWrapper.orderByDesc(Article::getWeight, Article::getCreateDate);
-//        Page<Article> articlePage = articleMapper.selectPage(page, queryWrapper);
-//        List<Article> records = articlePage.getRecords();
-//        List<ArticleVo> articleVoList = copyList(records);
-//        return articleVoList;
-//    }i
-//    @Cache
-
     @Override
     public List<ArticleVo> findArticles(PageParams pageParams) {
         //从Redis中获取数据
@@ -249,6 +212,12 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return articleId;
     }
 
+    @Override
+    public Result getSimpleList() {
+      List<ArticleSimpleVo>  articleSimpleVoList= articleMapper.getSimpleList();
+        return Result.success(articleSimpleVoList);
+    }
+
     private Long createArticleBody(ArticleBodyParam body, Long articleId) {
         ArticleBody articleBody = new ArticleBody();
         articleBody.setContent(body.getContent());
@@ -269,7 +238,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     private List<ArticleVo> copyList(List<Article> articles) {
         List<ArticleVo> articleVoList = new ArrayList<>();
         for (Article article : articles) {
-            ArticleVo articleVo = copy(article, true, true, false, false);
+            ArticleVo articleVo = copy(article, true, true, true, true);
             articleVoList.add(articleVo);
         }
         return articleVoList;
@@ -353,4 +322,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         BeanUtils.copyProperties(article, hotArticleVo);
         return hotArticleVo;
     }
+
+
 }

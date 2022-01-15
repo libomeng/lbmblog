@@ -16,7 +16,7 @@
             ms_tag t
             ON
                 `art`.tag_id =t.id
-        GROUP BY art.tag_id
+        GROUP BY id,tagName,avatar
         ORDER BY count(art.tag_id)
                 DESC
             LIMIT #{limit}

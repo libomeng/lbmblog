@@ -1,13 +1,14 @@
 server:
   port: 8888
-
 spring:
   application:
     name: lbm
   datasource:
-    url: "jdbc:mysql://localhost:3307/blog?useUnicode=true&characterEncoding=utf-8"
+    url: "jdbc:mysql://localhost:3307/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
     username: "root"
     password: "0507"
+
+
     druid:
       filters: stat,wall
       aop-patterns: 'com.lbm.*'
@@ -32,7 +33,8 @@ spring:
             drop-table-allow: false
   redis:
     port: 6379
-    host: localhost
+
+
 # datasource
 
 
@@ -49,4 +51,5 @@ qiniu:
   secretKey: Sbopp0PpVdgTxEpQefIPd3a3M16f2RFiWo-OlXwa
   url: http://r3qle33oa.hn-bkt.clouddn.com/
   bucket: lbmcc
-
+# 跨域访问地址
+allowedOrigins: "http://localhost:8080"

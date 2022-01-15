@@ -49,22 +49,30 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Result currentUser(String token) {
+
+        //校验token是否为空
         if (StringUtil.isNullOrEmpty(token)) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }
         Map<String, Object> body = JWTUtils.checkToken(token);
+
+        //验证token中的body是否为空
         if (body == null) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }
         String userJson = (String) redisTemplate.opsForValue().get("TOKEN_" + token);
+
+        //验证redis中是否是否存在token
         if (StringUtil.isNullOrEmpty(userJson)) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }
         LoginVo loginVo = JSON.parseObject(userJson, LoginVo.class);
         String idFromJWT = (String) body.get("userID");
+
         //由于JJWT有BUG 包装进MAP的LONG类型取出时为Integer,所以使用强转
         String idFromRedis = loginVo.getId().toString();
-        System.out.println(idFromJWT);
+
+        //验证前端返回token是否与redis中一致
         if (!idFromJWT.equals(idFromRedis)) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }

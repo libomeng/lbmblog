@@ -26,12 +26,20 @@ public class ArticleController {
     @Autowired
     RedisService redisService;
 
+    @LogAnnotation
+    @GetMapping
+    public Result getList(){
+       Result result  = articleService.getSimpleList();
+       return result;
+    }
+
+
+
     /**
      * 文章首页、列表
      * @param pageParams
      * @return
      */
-
     @LogAnnotation
     @PostMapping
     public Result Articles(@RequestBody PageParams pageParams){
