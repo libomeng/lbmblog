@@ -1,6 +1,7 @@
 package com.lbm.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lbm.common.cache.Cache;
 import com.lbm.config.RedisKeyConfig;
 import com.lbm.dao.entity.Category;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl extends ServiceImpl<CategoryMapper,Category> implements CategoryService {
 
 
     @Autowired
@@ -62,7 +63,7 @@ public class CategoryServiceImpl implements CategoryService {
         return categories;
     }
 
-    @Cache
+   
     @Override
     public Category findDetailCategoryById(Long id) {
         Category category = categoryMapper.selectById(id);

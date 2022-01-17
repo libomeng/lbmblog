@@ -1,12 +1,14 @@
 package com.lbm.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.lbm.dao.entity.Tag;
 import com.lbm.vo.DetailTagVo;
+import com.lbm.vo.Result;
 import com.lbm.vo.TagVo;
 
 import java.util.List;
 
-public interface TagService {
+public interface TagService extends IService<Tag> {
     /**
      * 根据文章ID查询标签集合
      * @param ArticleId 文章ID
@@ -26,4 +28,6 @@ public interface TagService {
     List<DetailTagVo> findDetailTags();
 
     TagVo findTagById(Long id);
+
+    Result getTagCount();
 }

@@ -39,4 +39,9 @@ public class CategoryController {
         return Result.success(category);
     }
 
+    @GetMapping("/count")
+    public Result getCount(){
+        Integer count = categoryService.count();
+        return Result.success(count);
+    }
 }

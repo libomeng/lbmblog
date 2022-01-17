@@ -12,6 +12,7 @@ import com.lbm.vo.ArticleVo;
 import com.lbm.vo.HotArticleVo;
 import com.lbm.vo.Result;
 import com.lbm.vo.params.ArticleParam;
+import com.lbm.vo.params.ArticleSimpleParam;
 import com.lbm.vo.params.PageParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,11 @@ public class ArticleController {
     RedisService redisService;
 
     @LogAnnotation
-    @GetMapping
-    public Result getList(){
-       Result result  = articleService.getSimpleList();
+    @PostMapping("/simple")
+    public Result getList(@RequestBody(required = false)ArticleSimpleParam param){
+       Result result  = articleService.getSimpleList(param);
        return result;
     }
-
-
 
     /**
      * 文章首页、列表
@@ -44,7 +43,6 @@ public class ArticleController {
     @PostMapping
     public Result Articles(@RequestBody PageParams pageParams){
         List<ArticleVo> articleVoList = articleService.findArticles(pageParams);
-
         return Result.success(articleVoList);
     }
 
@@ -58,8 +56,8 @@ public class ArticleController {
     @PostMapping("/new")
     public  Result newArticles(){
         int limit =2;
-        List<ArticleVo> articleVos =articleService.listNewArticles(limit);
-        return Result.success(articleVos);
+        Result result = articleService.listNewArticles(limit);
+        return result;
     }
 
     @PostMapping("/listArchives")
@@ -83,4 +81,9 @@ public class ArticleController {
         return Result.success(articleVo);
     }
 
+    @GetMapping("count")
+    public Result ArticleCount(){
+       Integer count = articleService.count();
+       return Result.success(count);
+    }
 }

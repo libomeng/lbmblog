@@ -31,6 +31,13 @@ public class TagsController {
         return Result.success(hotTags);
     }
 
+    @GetMapping("/count")
+    public Result getTagCount(){
+        Result result = tagService.getTagCount();
+        return result;
+    }
+
+
     @GetMapping
     public Result findAllTags(){
         List<Tag> tags =tagService.findAllTags();
@@ -46,5 +53,11 @@ public class TagsController {
     public Result DetailTagsById(@PathVariable("id") Long id){
        TagVo detailTagVo = tagService.findTagById(id);
         return Result.success(detailTagVo);
+    }
+
+    @GetMapping("/total")
+    public Result TagTotal(){
+        Integer count = tagService.count();
+        return Result.success(count);
     }
 }

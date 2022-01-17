@@ -7,6 +7,7 @@ import com.lbm.vo.ArticleVo;
 import com.lbm.vo.HotArticleVo;
 import com.lbm.vo.Result;
 import com.lbm.vo.params.ArticleParam;
+import com.lbm.vo.params.ArticleSimpleParam;
 import com.lbm.vo.params.PageParams;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public interface ArticleService extends IService<Article> {
      * @param limit 查询个数
      * @return
      */
-    List<ArticleVo> listNewArticles(int limit);
+    Result listNewArticles(int limit);
 
     /**
      * 获取文章创建时间的归档
@@ -54,5 +55,5 @@ public interface ArticleService extends IService<Article> {
      */
     Long  createArticle(ArticleParam articleParam);
 
-    Result getSimpleList();
+    Result getSimpleList(ArticleSimpleParam param);
 }

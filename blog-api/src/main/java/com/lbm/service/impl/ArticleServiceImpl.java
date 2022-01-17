@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.gson.Gson;
 import com.lbm.common.cache.Cache;
 import com.lbm.config.RedisKeyConfig;
 import com.lbm.dao.dos.Archives;
@@ -22,6 +23,7 @@ import com.lbm.util.JacksonUtil;
 import com.lbm.util.UserThreadLocal;
 import com.lbm.vo.*;
 import com.lbm.vo.params.ArticleParam;
+import com.lbm.vo.params.ArticleSimpleParam;
 import com.lbm.vo.params.PageParams;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
@@ -130,21 +132,20 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
 
     @Override
-    public List<ArticleVo> listNewArticles(int limit) {
+    public Result listNewArticles(int limit) {
         //从redis中获取数据
         String key = RedisKeyConfig.LIST_NEW_ARTICLES;
         List<ArticleVo> entity = redisService.getEntity(key, limit);
         if( entity != null){
-            return entity;
+            return Result.success(entity);
         }
         LambdaQueryWrapper<Article> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.select(Article::getId, Article::getTitle);
+        queryWrapper.select(Article::getId,Article::getTitle,Article::getCreateDate);
         queryWrapper.orderByDesc(Article::getCreateDate);
         queryWrapper.last("limit " + limit);
         List<Article> articles = articleMapper.selectList(queryWrapper);
-        List<ArticleVo> articleVoList = copyList(articles);
-        redisService.setEntity(key,limit,articleVoList);
-        return articleVoList;
+        redisService.setEntity(key,limit,articles);
+        return Result.success(articles);
     }
 
     @Override
@@ -213,8 +214,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     @Override
-    public Result getSimpleList() {
-      List<ArticleSimpleVo>  articleSimpleVoList= articleMapper.getSimpleList();
+    public Result getSimpleList(ArticleSimpleParam param) {
+      List<Article>  articleList= articleMapper.getSimpleList(param.getTagId(),param.getCategoryId());
+        List<ArticleSimpleVo> articleSimpleVoList = ArticleSimpleVo.copyList(articleList);
         return Result.success(articleSimpleVoList);
     }
 
@@ -225,6 +227,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleBody.setArticleId(articleId);
         articleBodyMapper.insert(articleBody);
         Long articleBodyId = articleBody.getId();
+
         return articleBodyId;
 
     }

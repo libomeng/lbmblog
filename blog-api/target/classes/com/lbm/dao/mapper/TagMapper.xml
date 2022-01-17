@@ -21,4 +21,16 @@
                 DESC
             LIMIT #{limit}
     </select>
+    <select id="selectTagCount" resultType="com.lbm.dao.dos.TagCount">
+        select
+            `art`.tag_id as id,t.tag_name as tagName ,t.avatar as avatar,count(art.tag_id) as count
+        from
+            ms_article_tag art
+                RIGHT JOIN
+            ms_tag t
+            ON
+                `art`.tag_id =t.id
+        GROUP BY id,tagName,avatar
+
+    </select>
 </mapper>

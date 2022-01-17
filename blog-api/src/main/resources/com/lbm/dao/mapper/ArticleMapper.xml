@@ -62,7 +62,16 @@
         <result column="title" property="title"/>
         <result column="create_date" property="createDate"/>
     </resultMap>
-    <select id="getSimpleList" resultMap="ArticleSimpleVo">
+    <select id="getSimpleList" resultType="com.lbm.dao.entity.Article">
         select id,title,create_date from ms_article
+        <where>
+            <if test="tagId !=null and tagId !=''">
+                and id in (select article_id from ms_article_tag where tag_id =#{tagId})
+            </if>
+            <if test="categoryId !=null and categoryId !=''">
+                and category_id =#{categoryId}
+            </if>
+        </where>
+        order by create_date desc
     </select>
 </mapper>
