@@ -7,7 +7,7 @@
       <div class="bm-task-box">
       <el-divider content-position="left">每日任务</el-divider>
         <p style="font-size: 14px">浏览量</p>
-        <el-progress class="bm-server-Task1" :text-inside="true" :stroke-width="26" :percentage="viewCount" :format="viewTask"></el-progress></div>
+        <el-progress class="bm-server-Task1" :text-inside="true" :stroke-width="26" :percentage="(viewCount/taskCount)*100" :format="viewTask"></el-progress></div>
     </el-card>
   </div>
 </template>
@@ -17,6 +17,7 @@
         name: "CardServer",
       data(){
           return{
+            taskCount:300
           }
       },
       props:{
@@ -24,7 +25,10 @@
       },
       methods:{
         viewTask(){
-          return `${this.viewCount}/100`
+          if(this.viewCount>this.taskCount){
+            return "我滴任务完成啦"
+          }
+          return `${this.viewCount}/${this.taskCount}`
         },
       }
     }

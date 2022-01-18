@@ -12,8 +12,11 @@
 
 <!--      </el-aside>-->
       <div class="em-container-me" v-show="screenWidth>1100">
-      <card-me ></card-me>
+      <card-me v-bind="$attrs" v-on="$listeners"></card-me>
         <card-server class="bm-container-server" :viewCount="viewCount"></card-server>
+      </div>
+      <div class="bm-server-box" v-show="screenWidth>1100">
+
       </div>
       <el-main :style="mainClass">
         <article-scroll-page></article-scroll-page>
@@ -43,6 +46,7 @@
       let Ip=returnCitySN['cip']
       let cityname=returnCitySN['cname']
       console.log(Ip,cityname)
+      console.log(this.music)
     },
     data() {
       return {
@@ -55,9 +59,8 @@
       }
     },
     props:{
-      screenWidth:Number
+      screenWidth:Number,
     },
-
     watch:{
       screenWidth(val){
         // 为了避免频繁触发resize函数导致页面卡顿，使用定时器
@@ -132,7 +135,7 @@
         .then(result=>{
           this.viewCount = result.data
         })
-      }
+      },
     },
     components: {
       'card-me': CardMe,
@@ -176,12 +179,17 @@
     margin-top: 20px;
   }
   .em-container-me{
-    position: fixed;
+    position: absolute;
     margin-top: 20px;
     margin-left: 40px;
   }
   .bm-container-server{
     margin-top: 20px;
-
+  }
+  .bm-server-box{
+    width: 15%;
+    position: absolute;
+    right: 90px;
+    top:800px
   }
 </style>

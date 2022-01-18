@@ -16,16 +16,19 @@
     </div>
     <br/>
     <div class="bm-collapse">
-      <el-collapse>
-        <el-collapse-item title="擅长的语言" name="1">
+      <el-collapse  >
+        <div >
+        <el-collapse-item title="擅长的语言" name="1" >
           <div>当然是JAVA！</div>
         </el-collapse-item>
+        </div>
         <el-collapse-item title="喜欢的日漫" name="2">
           <div>火影忍者</div>
           <div>死神</div>
         </el-collapse-item>
         <el-collapse-item title="喜欢的音乐" name="3">
-          <div><i class="el-icon-video-play"></i> <el-link>Moment Apart</el-link></div>
+          <div><i class="el-icon-video-play"></i><el-link @click="musicHandler">Moment Apart</el-link></div>
+          <div><i class="el-icon-video-play"></i><el-link @click="musicHandler2">Legacy</el-link></div>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -46,6 +49,10 @@
         tagCount:0,
         categoryCount:0,
       }
+    },
+    props:{
+      music:Object,
+      show:Boolean
     },
     created() {
       this.getArticleCount()
@@ -78,6 +85,30 @@
         getCategoryCount().then(result=>{
           that.categoryCount = result.data
         })
+      },
+      musicHandler(){
+        if(this.show===true) {
+          this.$emit("update:show", !this.show)
+        }
+        this.$set(this.music,'title','Moment Apart')
+        this.$set(this.music,'src','http://music.163.com/song/media/outer/url?id=1329665666.mp3')
+        this.$set(this.music,'artist','地平线4')
+        this.$set(this.music,'pic','http://p2.music.126.net/njCU7D_y3hRqQQSQmIW1lg==/109951163695044017.jpg?param=130y130')
+        setTimeout(()=>{
+          this.$emit("update:show", !this.show)
+        },200)
+      },
+      musicHandler2(){
+        if(this.show===true) {
+          this.$emit("update:show",!this.show)
+        }
+        this.$set(this.music,'title','Legacy')
+        this.$set(this.music,'src','http://music.163.com/song/media/outer/url?id=1353164046.mp3')
+        this.$set(this.music,'artist','DMC5 Main Theme')
+        this.$set(this.music,'pic','http://p2.music.126.net/NhZGQ2CoA5sf-o3fOTs-Ng==/109951163940415205.jpg?param=130y130')
+        setTimeout(()=>{
+          this.$emit("update:show", !this.show)
+        },200)
       }
     }
   }

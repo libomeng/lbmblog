@@ -1,11 +1,18 @@
 <template>
   <div id="home">
     <el-container>
-      <el-aside class="bm-music-player"><Aplayer :music="music" @oncanplay="aaa"></Aplayer></el-aside>
-      <!--TODO 音乐播放器未完成-->
+      <el-aside class="bm-music-player" style="width: 265px" >
+        <transition name="el-zoom-in-bottom">
+          <div @mouseenter="simple=false" @mouseout="aplayerOut">
+        <Aplayer v-if="musicInfo.show" :music="musicInfo.music" :mini="simple" theme="#2C3E50" />
+          </div>
+        </transition>
+        </el-aside>
     	<base-header :activeIndex="activeIndex" :screenWidth="screenWidth"></base-header>
-		  <router-view class="me-container" :screenWidth ="screenWidth"/>
-			<base-footer ></base-footer>
+		  <router-view class="me-container" :screenWidth ="screenWidth" v-bind.sync="musicInfo"/>
+      <transition name="el-zoom-in-bottom">
+        <base-footer style="z-index: 1"></base-footer>
+      </transition>
 		</el-container>
 
   </div>
@@ -16,6 +23,9 @@
 import BaseFooter from '@/components/BaseFooter'
 import BaseHeader from '@/views/BaseHeader'
 import Aplayer from 'vue-aplayer'
+
+
+
 export default {
   name: 'Home',
   data (){
@@ -23,12 +33,21 @@ export default {
       activeIndex: '/',
       footerShow: true,
       screenWidth: document.body.clientWidth,
-      music:{
-        title: '海阔天空',
-        artist: 'Silent Siren',
-        src: 'http://music.163.com/song/media/outer/url?id=1329665666.mp3',
-        pic: 'https://p1.music.126.net/6y-UleORITEDbvrOLV0Q8A==/5639395138885805.jpg'
-      }
+      musicInfo: {
+        show:false,
+        music:{
+          title:'222'
+        },
+      },
+      simple:true
+    }
+  },
+  watch:{
+    'musicInfo.show'(){
+      this.simple=false
+      setTimeout(()=>{
+        this.simple=true
+      },5000)
     }
   },
   created() {
@@ -64,8 +83,11 @@ export default {
 	  next()
 	},
   methods:{
-    aaa(){
-      console.log("aaaa")
+
+    aplayerOut(){
+     setTimeout(()=>{
+       this.simple=true
+     },5000)
     }
   }
 
@@ -78,9 +100,24 @@ export default {
   margin: 100px auto 140px;
 }
 .bm-music-player{
+  width: 250px;
+  z-index: 999;
   position: fixed;
-  bottom: 0;
-  z-index:999
-}
+  bottom:0px;
+  left: 0;
 
+
+}
+.transition-box {
+  margin-bottom: 10px;
+  width: 200px;
+  height: 100px;
+  border-radius: 4px;
+  background-color: #409EFF;
+  text-align: center;
+  color: #fff;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
 </style>
