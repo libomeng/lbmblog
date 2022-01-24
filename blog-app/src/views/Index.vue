@@ -1,6 +1,7 @@
 <template>
-  <div v-title data-title="码神之路">
-    <el-container>
+  <div v-title data-title="李搏猛的博客">
+
+<!--    <el-container style="width: 100%">-->
 <!--      <el-aside>-->
 <!--        <card-me ></card-me>-->
 <!--&lt;!&ndash;        <card-tag :tags="hotTags"></card-tag>&ndash;&gt;-->
@@ -9,19 +10,23 @@
 <!--&lt;!&ndash;        <card-archive cardHeader="文章归档" :archives="archives"></card-archive>&ndash;&gt;-->
 
 <!--&lt;!&ndash;        <card-article cardHeader="最新文章" :articles="newArticles"></card-article>&ndash;&gt;-->
+      <el-container>
+        <el-main>
+      <el-row>
+        <el-col  :span="screenWidth>1100?5:0">
+          <div v-show="screenWidth>1100">
+              <card-me v-bind="$attrs" v-on="$listeners"></card-me>
+              <card-server class="bm-container-server" :viewCount="viewCount"></card-server>
+          </div>
+          <div v-show="screenWidth<1100"></div>
 
-<!--      </el-aside>-->
-      <div class="em-container-me" v-show="screenWidth>1100">
-      <card-me v-bind="$attrs" v-on="$listeners"></card-me>
-        <card-server class="bm-container-server" :viewCount="viewCount"></card-server>
-      </div>
-      <div class="bm-server-box" v-show="screenWidth>1100">
-
-      </div>
-      <el-main :style="mainClass">
-        <article-scroll-page></article-scroll-page>
-      </el-main>
-    </el-container>
+        </el-col>
+        <el-col :offset="screenWidth>800 && screenWidth<1100?5:0" :span="screenWidth>800?14:24">
+          <article-scroll-page></article-scroll-page>
+        </el-col>
+      </el-row>
+        </el-main>
+      </el-container>
   </div>
 </template>
 
@@ -41,12 +46,11 @@
     name: 'Index',
     created() {
       this.count()
-      this.listArchives()
+      // this.listArchives()
       this.mainHandler()
       let Ip=returnCitySN['cip']
       let cityname=returnCitySN['cname']
       console.log(Ip,cityname)
-      console.log(this.music)
     },
     data() {
       return {
@@ -79,55 +83,11 @@
       }
     },
     methods: {
-      getHotArtices() {
-        let that = this
-        getHotArtices().then(data => {
-          that.hotArticles = data.data
-        }).catch(error => {
-          if (error !== 'error') {
-            that.$message({type: 'error', message: '最热文章加载失败!', showClose: true})
-          }
-
-        })
-
-      },
-      getNewArtices() {
-        let that = this
-        getNewArtices().then(data => {
-          that.newArticles = data.data
-        }).catch(error => {
-          if (error !== 'error') {
-            that.$message({type: 'error', message: '最新文章加载失败!', showClose: true})
-          }
-
-        })
-
-      },
-      getHotTags() {
-        let that = this
-        getHotTags().then(data => {
-          that.hotTags = data.data
-        }).catch(error => {
-          if (error !== 'error') {
-            that.$message({type: 'error', message: '最热标签加载失败!', showClose: true})
-          }
-
-        })
-      },
-      listArchives() {
-        listArchives().then((data => {
-          this.archives = data.data
-        })).catch(error => {
-          if (error !== 'error') {
-            that.$message({type: 'error', message: '文章归档加载失败!', showClose: true})
-          }
-        })
-      },
       mainHandler(){
         if(this.screenWidth<1100){
          this.mainClass = `margin-left: 0%;margin-right: 0%;`
         }else {
-          this.mainClass = `margin-left: 25%;margin-right: 25%;`
+          this.mainClass = `margin-left: 15%;margin-right: 15%;`
         }
       },
       count(){
@@ -149,47 +109,14 @@
 </script>
 
 <style scoped>
-  .me-area{
-
-  }
-  .el-container {
-    width: 100%;
-  }
-
-  /deep/ .el-aside {
-    margin-left: 5%;
-    margin-right: 5%;
-    width: 15%;
-  }
-
-  .bm-articles-simple {
-
-  }
-  .bm-articles{
-    padding: 0px;
-    margin-left: 25%;
-    margin-right: 25%;
-  }
-
-  .el-card {
-    border-radius: 0;
-  }
 
   .el-card:not(:first-child) {
     margin-top: 20px;
   }
-  .em-container-me{
-    position: absolute;
-    margin-top: 20px;
-    margin-left: 40px;
-  }
+
   .bm-container-server{
     margin-top: 20px;
+    width: 218px;
   }
-  .bm-server-box{
-    width: 15%;
-    position: absolute;
-    right: 90px;
-    top:800px
-  }
+
 </style>

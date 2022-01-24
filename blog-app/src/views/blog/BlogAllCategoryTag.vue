@@ -1,5 +1,5 @@
 <template>
-  <div class="me-allct-body" v-title data-title="标签分类" >
+  <div class="me-allct-body" v-title data-title="文章分类" >
     <el-container class="me-allct-container">
       <el-main>
               <div>
@@ -77,11 +77,10 @@
 
   .me-allct-items {
     padding-top: 2rem;
-    margin-left: 26px
   }
 
   .me-allct-item {
-    width: 200px;
+    width: 50%;
     display: inline-block;
     margin-bottom: 2.4rem;
     padding: 0 .7rem;

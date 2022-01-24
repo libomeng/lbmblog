@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <router-view/>
-    <go-top></go-top>
+<!--    <go-top></go-top>-->
   </div>
 </template>
 

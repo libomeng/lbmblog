@@ -1,7 +1,6 @@
 <template>
   <el-card class="me-area" :body-style="{ padding: '16px' }">
-    <el-row>
-      <el-col :span="16">
+
     <div class="me-article-info">
       <div class="me-article-header">
       <el-link @click="view(id)" class="me-article-title">{{title}}</el-link>
@@ -9,15 +8,18 @@
       </div>
       <div class="me-article-time">
         <span>
-	    	  <i class="el-icon-date"></i>&nbsp;发表于&nbsp;{{createDate | format}} &nbsp;&nbsp;|&nbsp;&nbsp;  <i class="el-icon-folder-opened"/>分类于
+	    	  <i class="el-icon-date"></i>&nbsp;发表于&nbsp;{{gmtCreate | moment("YYYY-MM-DD HH:mm")}} &nbsp;&nbsp;|&nbsp;&nbsp;  <i class="el-icon-folder-opened"/>分类于
           <a style="text-decoration: underline">{{category.categoryName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;{{viewCounts}} &nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;{{commentCounts}}
 	      </span>
     </div>
       <div class="me-article-description">
       {{summary}}
       </div>
-      <div class="el-article-button">
-        <el-button icon="el-icon-right" type="primary" size="mini"  @click="view(id)">阅读原文</el-button>
+      <div class="em-article-images">
+        <el-image class="article-images" src="http://cdn.libomeng.cn/3e8bdb73-81f8-447c-91fb-53871f2acede.jpg" ></el-image>
+      </div>
+      <div class="el-article-button" >
+        <el-button  icon="el-icon-right" type="primary" size="mini"  @click="view(id)">阅读原文</el-button>
       </div>
       <div class="me-article-footer">
 	  	<span class="me-article-author">
@@ -26,13 +28,6 @@
       <el-tag v-for="t in tags" :key="t.tagName" size="mini" >{{t.tagName}}</el-tag>
     </div>
     </div>
-      </el-col>
-      <el-col :span="8">
-    <div class="em-article-images">
-      <el-image class="article-images" src="http://cdn.libomeng.cn/3e8bdb73-81f8-447c-91fb-53871f2acede.jpg" ></el-image>
-    </div>
-      </el-col>
-    </el-row>
   </el-card>
 
 </template>
@@ -49,7 +44,7 @@
       summary: String,
       author: String,
       tags: Array,
-      createDate: String,
+      gmtCreate: Date,
       category:Object,
     },
     data() {
@@ -68,7 +63,6 @@
 
   }
   .me-article-info{
-    width: 90%;
   }
   .me-article-header {
   }
@@ -106,17 +100,16 @@
   .el-tag {
     margin-left: 6px;
   }
-  .em-article-images {
-    margin-top: 45px;
-  }
+
   .me-article-footer{
      margin-top: 20px;
   }
   .el-article-button{
-    margin-top: 80px;
-    margin-left: 20px;
+  text-align: center;
   }
-
+  .em-article-images {
+    margin-top: 10px;
+  }
   .article-images{
 
   }

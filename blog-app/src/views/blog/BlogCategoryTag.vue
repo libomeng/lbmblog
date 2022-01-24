@@ -1,5 +1,5 @@
 <template>
-  <div class="me-ct-body" v-title data-title="标签">
+  <div class="me-ct-body" v-title :data-title="`${ct.categoryName}-标签`">
     <el-container class="me-ct-container">
       <el-main>
         <div class="me-ct-title me-area">

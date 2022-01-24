@@ -8,13 +8,10 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>blog-api</artifactId>
-
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-
     </properties>
 <dependencies>
     <dependency>
@@ -24,7 +21,6 @@
     <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
         <artifactId>mybatis-spring-boot-starter</artifactId>
-        <version>2.2.0</version>
         <exclusions>
             <exclusion>
                 <groupId>org.springframework.boot</groupId>
@@ -45,13 +41,8 @@
         <artifactId>spring-boot-starter-data-redis</artifactId>
     </dependency>
     <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-redis</artifactId>
-    </dependency>
-    <dependency>
         <groupId>com.baomidou</groupId>
         <artifactId>mybatis-plus-boot-starter</artifactId>
-        <version>3.4.3</version>
     </dependency>
     <!-- 日志-->
     <dependency>
@@ -90,13 +81,10 @@
         <artifactId>spring-boot-starter-test</artifactId>
         <scope>test</scope>
     </dependency>
-
-
     <!--工具-->
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
-        <version>1.2.76</version>
     </dependency>
     <dependency>
         <groupId>org.apache.commons</groupId>
@@ -105,7 +93,6 @@
     <dependency>
         <groupId>commons-collections</groupId>
         <artifactId>commons-collections</artifactId>
-        <version>3.2.2</version>
     </dependency>
 
     <dependency>
@@ -115,23 +102,45 @@
     <dependency>
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
-        <version>2.10.10</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/com.alibaba/druid-spring-boot-starter -->
     <dependency>
         <groupId>com.alibaba</groupId>
         <artifactId>druid-spring-boot-starter</artifactId>
-        <version>1.2.8</version>
+
     </dependency>
-    <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
     <dependency>
         <groupId>io.jsonwebtoken</groupId>
         <artifactId>jjwt</artifactId>
-        <version>0.9.1</version>
     </dependency>
     <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
+    </dependency>
+    <dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-swagger2</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.springfox</groupId>
+        <artifactId>springfox-swagger-ui</artifactId>
+    </dependency>
+    <!--七牛云-->
+    <dependency>
+        <groupId>com.qiniu</groupId>
+        <artifactId>qiniu-java-sdk</artifactId>
+    </dependency>
+    <!--七牛云第三方包-->
+    <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.qiniu</groupId>
+        <artifactId>happy-dns-java</artifactId>
     </dependency>
 </dependencies>
     <build>

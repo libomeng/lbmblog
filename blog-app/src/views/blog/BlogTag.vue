@@ -1,5 +1,5 @@
 <template>
-  <div class="bm-tag">
+  <div class="bm-tag" v-title data-title="标签分类">
  <el-container>
   <el-main>
      <div class="bm-title"><span>Tags</span></div>
@@ -63,22 +63,22 @@ text-align: center;
   }
   .bm-tags{
     margin-top: 20px;
-
+    padding:15px
 
   }
   .tag-level-1{
-    margin-left: 20px;
-    font-size: 40px;
+    padding: 0px 15px 0px 15px;
+    font-size: 30px;
     font-weight: 700;
     color: black;
   }
 .tag-level-2{
-  margin-left: 20px;
+  padding: 0px 15px 0px 15px;
   font-size: 20px;
   color: #5E5E5E;
 }
  .tag-level-3{
-  margin-left: 20px;
+   padding: 0px 15px 0px 15px;
   font-size: 15px;
   color: #b0afaf;
 }

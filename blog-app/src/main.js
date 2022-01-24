@@ -27,7 +27,7 @@ Vue.directive('title',  function (el, binding) {
 })
 // 格式话时间
 Vue.filter('format', formatTime)
-
+Vue.use(require('vue-moment'));
 const vm = new Vue({
   el: '#app',
   router,

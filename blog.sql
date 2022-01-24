@@ -1,79 +1,32 @@
 /*
  Navicat MySQL Data Transfer
 
- Source Server         : lbmblog
+ Source Server         : 192.168.3.155
  Source Server Type    : MySQL
  Source Server Version : 80027
- Source Host           : 192.168.3.147:3306
+ Source Host           : 192.168.3.155:3306
  Source Schema         : blog
 
  Target Server Type    : MySQL
  Target Server Version : 80027
  File Encoding         : 65001
 
- Date: 31/12/2021 16:43:10
+ Date: 23/01/2022 02:41:18
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
--- Table structure for about
--- ----------------------------
-DROP TABLE IF EXISTS `about`;
-CREATE TABLE `about`  (
-  `id` bigint NOT NULL,
-  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `name_zh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of about
--- ----------------------------
-INSERT INTO `about` VALUES (1, 'title', '标题', '关于帅气的 Naccl');
-INSERT INTO `about` VALUES (2, 'musicId', '网易云歌曲ID', '423015580');
-INSERT INTO `about` VALUES (3, 'content', '正文Markdown', '');
-INSERT INTO `about` VALUES (4, 'commentEnabled', '评论开关', 'true');
-
--- ----------------------------
--- Table structure for blog_tag
--- ----------------------------
-DROP TABLE IF EXISTS `blog_tag`;
-CREATE TABLE `blog_tag`  (
-  `blog_id` bigint NOT NULL,
-  `tag_id` bigint NOT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of blog_tag
--- ----------------------------
-
--- ----------------------------
--- Table structure for category
--- ----------------------------
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE `category`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of category
--- ----------------------------
-
--- ----------------------------
 -- Table structure for ms_admin
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_admin`;
 CREATE TABLE `ms_admin`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_admin
@@ -86,11 +39,11 @@ INSERT INTO `ms_admin` VALUES (2, 'mszlu', '$2a$10$RZECQ90DjOT/t1mhnXsl5.XSuZWc0
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_admin_permission`;
 CREATE TABLE `ms_admin_permission`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `admin_id` bigint NOT NULL,
-  `permission_id` bigint NOT NULL,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `admin_id` bigint(0) NOT NULL,
+  `permission_id` bigint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_admin_permission
@@ -103,18 +56,18 @@ INSERT INTO `ms_admin_permission` VALUES (2, 2, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article`;
 CREATE TABLE `ms_article`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `comment_counts` int NULL DEFAULT NULL COMMENT '评论数量',
-  `create_date` bigint NULL DEFAULT NULL COMMENT '创建时间',
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `comment_counts` int(0) NULL DEFAULT NULL COMMENT '评论数量',
+  `create_date` bigint(0) NULL DEFAULT NULL COMMENT '创建时间',
   `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '简介',
   `title` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '标题',
-  `view_counts` int NULL DEFAULT NULL COMMENT '浏览数量',
-  `weight` int NOT NULL COMMENT '是否置顶',
-  `author_id` bigint NULL DEFAULT NULL COMMENT '作者id',
-  `body_id` bigint NULL DEFAULT NULL COMMENT '内容id',
-  `category_id` int NULL DEFAULT NULL COMMENT '类别id',
+  `view_counts` int(0) NULL DEFAULT NULL COMMENT '浏览数量',
+  `weight` int(0) NOT NULL COMMENT '是否置顶',
+  `author_id` bigint(0) NULL DEFAULT NULL COMMENT '作者id',
+  `body_id` bigint(0) NULL DEFAULT NULL COMMENT '内容id',
+  `category_id` int(0) NULL DEFAULT NULL COMMENT '类别id',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1474394942186532865 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942186532865 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_article
@@ -123,27 +76,27 @@ INSERT INTO `ms_article` VALUES (1, 20, 1602132131231, '通过Spring Boot实现�
 INSERT INTO `ms_article` VALUES (9, 0, 1632132131231, 'Vue (读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式框架。', 'Vue.js 到底是什么', 32, 0, 1, 20, 2);
 INSERT INTO `ms_article` VALUES (10, 0, 1532132131231, '本节将介绍如何在项目中使用 Element。', 'Element相关', 11, 0, 1, 21, 2);
 INSERT INTO `ms_article` VALUES (1405916999732707330, 0, 1232132131231, 'springboot入门案例', 'SpringBoot入门案例', 6, 0, 1, 1405916999854342146, 2);
-INSERT INTO `ms_article` VALUES (1468182881431461889, 0, 1638877051112, '魔刀千刃简介', '魔刀千刃', 26, 0, 1, 1468182881431461890, 4);
+INSERT INTO `ms_article` VALUES (1468182881431461889, 0, 1638877051112, '魔刀千刃简介', '魔刀千刃', 27, 0, 1, 1468182881431461890, 4);
 INSERT INTO `ms_article` VALUES (1471856156936065026, 0, 1639752828248, '调错日记，关于maven依赖注入时的版本问题', '【调错日记】fastjson:not found', 25, 0, 1, 1471856156936065027, 2);
-INSERT INTO `ms_article` VALUES (1472928309869883394, 0, 1640008449582, 'docker部署前后端分离项目', 'Docker部署Springboot+vue前后端分离项目', 21, 0, 1, 1472928310499028994, 2);
+INSERT INTO `ms_article` VALUES (1472928309869883394, 0, 1640008449582, 'docker部署前后端分离项目', 'Docker部署Springboot+vue前后端分离项目', 22, 0, 1, 1472928310499028994, 2);
 INSERT INTO `ms_article` VALUES (1472932224111816706, 0, 1640009382659, '调错日记', '【调错日记】容器时间与宿主机系统时间不符导致数据库链接失败', 43, 0, 1, 1472932224141176834, 2);
-INSERT INTO `ms_article` VALUES (1474394237451186177, 0, 1640357953894, '结构化面试', '社会现象题答题模板', 1, 0, 1, 1474394237883199489, 2);
-INSERT INTO `ms_article` VALUES (1474394448995102722, 0, 1640358004224, '结构化面试', '【结构化面试】人际关系', 4, 0, 1, 1474394449003491329, 2);
-INSERT INTO `ms_article` VALUES (1474394705053167618, 0, 1640358065274, '结构化面试', '【结构化面试】组织管理题', 6, 0, 1, 1474394705061556225, 1);
-INSERT INTO `ms_article` VALUES (1474394942186532865, 0, 1640358121810, '结构化面试', '【结构化面试】综合分析题答题思路', 8, 0, 1, 1474394942190727170, 1);
+INSERT INTO `ms_article` VALUES (1474394237451186177, 0, 1640357953894, '结构化面试', '社会现象题答题模板', 6, 0, 1, 1474394237883199489, 2);
+INSERT INTO `ms_article` VALUES (1474394448995102722, 0, 1640358004224, '结构化面试', '【结构化面试】人际关系', 5, 0, 1, 1474394449003491329, 2);
+INSERT INTO `ms_article` VALUES (1474394705053167618, 0, 1640358065274, '结构化面试', '【结构化面试】组织管理题', 7, 0, 1, 1474394705061556225, 1);
+INSERT INTO `ms_article` VALUES (1474394942186532865, 0, 1640358121810, '结构化面试', '【结构化面试】综合分析题答题思路', 15, 0, 1, 1474394942190727170, 1);
 
 -- ----------------------------
 -- Table structure for ms_article_body
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article_body`;
 CREATE TABLE `ms_article_body`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
   `content_html` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
-  `article_id` bigint NOT NULL,
+  `article_id` bigint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1474394942190727170 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942190727170 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_article_body
@@ -183,13 +136,13 @@ INSERT INTO `ms_article_body` VALUES (1474394942190727170, '\n## 消极类社会
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_article_tag`;
 CREATE TABLE `ms_article_tag`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `article_id` bigint NOT NULL,
-  `tag_id` bigint NOT NULL,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `article_id` bigint(0) NOT NULL,
+  `tag_id` bigint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE,
   INDEX `tag_id`(`tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1474394942199115778 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1474394942199115778 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_article_tag
@@ -235,12 +188,12 @@ INSERT INTO `ms_article_tag` VALUES (1474394942199115778, 1474394942186532865, 8
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_category`;
 CREATE TABLE `ms_category`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_category
@@ -256,17 +209,17 @@ INSERT INTO `ms_category` VALUES (5, '/static/category/language.png', '编程语
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_comment`;
 CREATE TABLE `ms_comment`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `content` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `create_date` bigint NOT NULL,
-  `article_id` bigint NOT NULL,
-  `author_id` bigint NOT NULL,
-  `parent_id` bigint NOT NULL,
-  `to_uid` bigint NOT NULL,
+  `create_date` bigint(0) NOT NULL,
+  `article_id` bigint(0) NOT NULL,
+  `author_id` bigint(0) NOT NULL,
+  `parent_id` bigint(0) NOT NULL,
+  `to_uid` bigint(0) NOT NULL,
   `level` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `article_id`(`article_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1469580328435302402 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1469580328435302402 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_comment
@@ -308,12 +261,12 @@ INSERT INTO `ms_comment` VALUES (1469580328435302402, '什么', 1639210228437, 1
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_permission`;
 CREATE TABLE `ms_permission`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_permission
@@ -328,18 +281,18 @@ INSERT INTO `ms_permission` VALUES (8, '删除权限', '/admin/permission/add', 
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_sys_log`;
 CREATE TABLE `ms_sys_log`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `create_date` bigint NULL DEFAULT NULL,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `create_date` bigint(0) NULL DEFAULT NULL,
   `ip` varchar(15) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `method` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `module` varchar(10) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `nickname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `operation` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
   `params` varchar(255) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL,
-  `time` bigint NULL DEFAULT NULL,
-  `userid` bigint NULL DEFAULT NULL,
+  `time` bigint(0) NULL DEFAULT NULL,
+  `userid` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_sys_log
@@ -350,21 +303,21 @@ CREATE TABLE `ms_sys_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_sys_user`;
 CREATE TABLE `ms_sys_user`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `account` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账号',
   `admin` bit(1) NULL DEFAULT NULL COMMENT '是否管理员',
   `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '头像',
-  `create_date` bigint NULL DEFAULT NULL COMMENT '注册时间',
+  `create_date` bigint(0) NULL DEFAULT NULL COMMENT '注册时间',
   `deleted` bit(1) NULL DEFAULT NULL COMMENT '是否删除',
   `email` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '邮箱',
-  `last_login` bigint NULL DEFAULT NULL COMMENT '最后登录时间',
+  `last_login` bigint(0) NULL DEFAULT NULL COMMENT '最后登录时间',
   `mobile_phone_number` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `nickname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '昵称',
   `password` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '密码',
   `salt` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '加密盐',
   `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1468572859206496258 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1468572859206496258 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_sys_user
@@ -386,11 +339,11 @@ INSERT INTO `ms_sys_user` VALUES (1468572859206496258, '80707', b'0', '/static/u
 -- ----------------------------
 DROP TABLE IF EXISTS `ms_tag`;
 CREATE TABLE `ms_tag`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
+  `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `avatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ms_tag
@@ -399,81 +352,5 @@ INSERT INTO `ms_tag` VALUES (5, '/static/tag/java.png', 'springboot');
 INSERT INTO `ms_tag` VALUES (6, '/static/tag/java.png', 'spring');
 INSERT INTO `ms_tag` VALUES (7, '/static/tag/java.png', 'springmvc');
 INSERT INTO `ms_tag` VALUES (8, '/static/tag/css.png', '刀剑录');
-
--- ----------------------------
--- Table structure for site_setting
--- ----------------------------
-DROP TABLE IF EXISTS `site_setting`;
-CREATE TABLE `site_setting`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `name_zh` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
-  `type` int NULL DEFAULT NULL COMMENT '1基础设置，2页脚徽标，3资料卡，4友链信息',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of site_setting
--- ----------------------------
-INSERT INTO `site_setting` VALUES (1, 'webTitleSuffix', '网页标题后缀', ' - Naccl\'s Blog', 1);
-INSERT INTO `site_setting` VALUES (2, 'blogName', '博客名称', 'Naccl\'s Blog', 1);
-INSERT INTO `site_setting` VALUES (3, 'footerImgTitle', '页脚图片标题', '手机看本站', 1);
-INSERT INTO `site_setting` VALUES (4, 'footerImgUrl', '页脚图片路径', '/img/qr.png', 1);
-INSERT INTO `site_setting` VALUES (5, 'copyright', 'Copyright', '{\"title\":\"Copyright © 2019 - 2020\",\"siteName\":\"NACCL\'S BLOG\"}', 1);
-INSERT INTO `site_setting` VALUES (6, 'beian', 'ICP备案号', '', 1);
-INSERT INTO `site_setting` VALUES (7, 'badge', '徽标', '{\"title\":\"由 Spring Boot 强力驱动\",\"url\":\"https://spring.io/projects/spring-boot/\",\"subject\":\"Powered\",\"value\":\"Spring Boot\",\"color\":\"blue\"}', 2);
-INSERT INTO `site_setting` VALUES (8, 'badge', '徽标', '{\"title\":\"Vue.js 客户端渲染\",\"url\":\"https://cn.vuejs.org/\",\"subject\":\"SPA\",\"value\":\"Vue.js\",\"color\":\"brightgreen\"}', 2);
-INSERT INTO `site_setting` VALUES (9, 'badge', '徽标', '{\"title\":\"UI 框架 Semantic-UI\",\"url\":\"https://semantic-ui.com/\",\"subject\":\"UI\",\"value\":\"Semantic-UI\",\"color\":\"semantic-ui\"}', 2);
-INSERT INTO `site_setting` VALUES (10, 'badge', '徽标', '{\"title\":\"阿里云提供服务器及域名相关服务\",\"url\":\"https://www.aliyun.com/\",\"subject\":\"VPS & DNS\",\"value\":\"Aliyun\",\"color\":\"blueviolet\"}', 2);
-INSERT INTO `site_setting` VALUES (11, 'badge', '徽标', '{\"title\":\"jsDelivr 提供 CDN 加速服务\",\"url\":\"https://www.jsdelivr.com/\",\"subject\":\"CDN\",\"value\":\"jsDelivr\",\"color\":\"orange\"}', 2);
-INSERT INTO `site_setting` VALUES (12, 'badge', '徽标', '{\"title\":\"GitHub 提供图床\",\"url\":\"https://github.com/\",\"subject\":\"OSS\",\"value\":\"GitHub\",\"color\":\"github\"}', 2);
-INSERT INTO `site_setting` VALUES (13, 'badge', '徽标', '{\"title\":\"本站点采用 CC BY 4.0 国际许可协议进行许可\",\"url\":\"https://creativecommons.org/licenses/by/4.0/\",\"subject\":\"CC\",\"value\":\"BY 4.0\",\"color\":\"lightgray\"}', 2);
-INSERT INTO `site_setting` VALUES (14, 'avatar', '图片路径', '/img/avatar.jpg', 3);
-INSERT INTO `site_setting` VALUES (15, 'name', '昵称', 'Naccl', 3);
-INSERT INTO `site_setting` VALUES (16, 'rollText', '滚动个签', '\"云鹤当归天，天不迎我妙木仙；\",\"游龙当归海，海不迎我自来也。\"', 3);
-INSERT INTO `site_setting` VALUES (17, 'github', 'GitHub地址', 'https://github.com/Naccl', 3);
-INSERT INTO `site_setting` VALUES (18, 'qq', 'QQ链接', 'http://sighttp.qq.com/authd?IDKEY=', 3);
-INSERT INTO `site_setting` VALUES (19, 'bilibili', 'bilibili链接', 'https://space.bilibili.com/', 3);
-INSERT INTO `site_setting` VALUES (20, 'netease', '网易云音乐', 'https://music.163.com/#/user/home?id=', 3);
-INSERT INTO `site_setting` VALUES (21, 'email', 'email', 'mailto:i@naccl.top', 3);
-INSERT INTO `site_setting` VALUES (22, 'favorite', '自定义', '{\"title\":\"最喜欢的动漫 📺\",\"content\":\"异度侵入、春物语、NO GAME NO LIFE、实力至上主义的教室、辉夜大小姐、青春猪头少年不会梦到兔女郎学姐、路人女主、Re0、魔禁、超炮、俺妹、在下坂本、散华礼弥、OVERLORD、慎勇、人渣的本愿、白色相簿2、死亡笔记、DARLING in the FRANXX、鬼灭之刃\"}', 3);
-INSERT INTO `site_setting` VALUES (23, 'favorite', '自定义', '{\"title\":\"最喜欢我的女孩子们 🤤\",\"content\":\"芙兰达、土间埋、食蜂操祈、佐天泪爷、樱岛麻衣、桐崎千棘、02、亚丝娜、高坂桐乃、五更琉璃、安乐冈花火、一色彩羽、英梨梨、珈百璃、时崎狂三、可儿那由多、和泉纱雾、早坂爱\"}', 3);
-INSERT INTO `site_setting` VALUES (24, 'favorite', '自定义', '{\"title\":\"最喜欢玩的游戏 🎮\",\"content\":\"Stellaris、巫师、GTA、荒野大镖客、刺客信条、魔兽争霸、LOL、PUBG\"}', 3);
-INSERT INTO `site_setting` VALUES (25, 'reward', '赞赏码路径', '/img/reward.jpg', 1);
-INSERT INTO `site_setting` VALUES (26, 'commentAdminFlag', '博主评论标识', '咕咕', 1);
-INSERT INTO `site_setting` VALUES (27, 'friendContent', '友链页面信息', '随机排序，不分先后。欢迎交换友链~(￣▽￣)~*\n\n* 昵称：Naccl\n* 一句话：游龙当归海，海不迎我自来也。\n* 网址：[https://naccl.top](https://naccl.top)\n* 头像URL：[https://naccl.top/img/avatar.jpg](https://naccl.top/img/avatar.jpg)\n\n仅凭个人喜好添加友链，请在收到我的回复邮件后再于贵站添加本站链接。原则上已添加的友链不会删除，如果你发现自己被移除了，恕不另行通知，只需和我一样做就好。\n\n', 4);
-INSERT INTO `site_setting` VALUES (28, 'friendCommentEnabled', '友链页面评论开关', '1', 4);
-
--- ----------------------------
--- Table structure for tag
--- ----------------------------
-DROP TABLE IF EXISTS `tag`;
-CREATE TABLE `tag`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `tag_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `color` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '标签颜色(可选)',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of tag
--- ----------------------------
-
--- ----------------------------
--- Table structure for visit_record
--- ----------------------------
-DROP TABLE IF EXISTS `visit_record`;
-CREATE TABLE `visit_record`  (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `pv` int NOT NULL COMMENT '访问量',
-  `uv` int NOT NULL COMMENT '独立用户',
-  `date` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '日期\"02-23\"',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of visit_record
--- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;

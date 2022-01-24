@@ -75,14 +75,11 @@
       getArticles() {
         let that = this
         that.loading = true
-
         getArticles(that.query, that.innerPage).then(data => {
-
           let newArticles = data.data
-          console.log(newArticles)
-          if (newArticles && newArticles.length > 0) {
+          if (newArticles ) {
             that.innerPage.pageNumber += 1
-            that.articles = that.articles.concat(newArticles)
+            that.articles = newArticles
           } else {
             that.noData = true
           }
@@ -111,7 +108,7 @@
   }
 
   .el-card:not(:first-child) {
-    margin-top: 50px;
+    margin-top: 30px;
 
   }
 </style>
