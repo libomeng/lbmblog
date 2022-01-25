@@ -8,7 +8,7 @@
       </div>
       <div class="me-article-time">
         <span>
-	    	  <i class="el-icon-date"></i>&nbsp;发表于&nbsp;{{gmtCreate | moment("YYYY-MM-DD HH:mm")}} &nbsp;&nbsp;|&nbsp;&nbsp;  <i class="el-icon-folder-opened"/>分类于
+	    	  <i class="el-icon-date"></i>&nbsp;发表于&nbsp;{{gmtCreate|moment("YYYY-MM-DD HH:mm")}} &nbsp;&nbsp;|&nbsp;&nbsp;  <i class="el-icon-folder-opened"/>分类于
           <a style="text-decoration: underline">{{category.categoryName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;{{viewCounts}} &nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;{{commentCounts}}
 	      </span>
     </div>
@@ -44,7 +44,7 @@
       summary: String,
       author: String,
       tags: Array,
-      gmtCreate: Date,
+      gmtCreate: String,
       category:Object,
     },
     data() {
