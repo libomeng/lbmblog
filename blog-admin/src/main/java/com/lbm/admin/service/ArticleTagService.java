@@ -1,7 +1,7 @@
 package com.lbm.admin.service;
 
-import com.lbm.admin.entity.ArticleTag;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lbm.admin.entity.ArticleTag;
 
 /**
  * <p>
@@ -9,7 +9,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author lbm
- * @since 2022-01-25
+ * @since 2022-01-27
  */
 public interface ArticleTagService extends IService<ArticleTag> {
 

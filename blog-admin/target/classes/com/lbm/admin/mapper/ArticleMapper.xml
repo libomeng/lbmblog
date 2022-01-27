@@ -15,12 +15,14 @@
         <result column="gmt_create" property="gmtCreate"/>
         <result column="gmt_modified" property="gmtModified"/>
     </resultMap>
+
     <select id="pageArticleVo" resultMap="articleListVo">
         select a.id,a.comment_counts,a.summary,a.title,a.view_counts,a.is_weight,a.is_publish,a.is_comment,b.content,c.category_name,a.gmt_create,a.gmt_modified
         from bm_article as a
                  join bm_article_body  as b
-                      on a.body_id =b.id
+                      on a.body_id =b.id and b.is_deleted=0
                  join bm_category as c
-                      on a.category_id = c.id
+                      on a.category_id = c.id and c.is_deleted=0
+        where a.is_deleted=0
     </select>
 </mapper>

@@ -43,7 +43,7 @@
                     v-for="item in categorys"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value"
+                    :value="item.label"
                   >
                   </el-option>
                 </el-select>
@@ -83,8 +83,8 @@
               </el-form-item>
             </el-col>
             <div class="bm-bottom-button">
-              <el-button>保存</el-button>
-              <el-button type="primary">发布</el-button>
+              <el-button @click="save">保存</el-button>
+              <el-button type="primary" @click="publish">发布</el-button>
             </div>
           </el-row>
         </el-form>
@@ -97,6 +97,7 @@ import upload from '@/components/Upload'
 import editor from '@/components/Editor'
 import tag from '@/api/tag'
 import cotegory from '@/api/cotegory'
+import article from '@/api/article'
 export default {
   name: 'ArticleAdd',
   components: {
@@ -108,6 +109,7 @@ export default {
       action: `${process.env.VUE_APP_BASE_API}/admin/upload/articleImg`,
       article: {
         title: '',
+        summary: '',
         img: '',
         value: '',
         category: '',
@@ -136,7 +138,16 @@ export default {
           this.categorys = result.data
         })
     },
-
+    save() {
+      article.createArticle(this.article)
+        .then(result => {
+          this.$message(result.message)
+        })
+    },
+    publish() {
+      this.article.isPublish = 1
+      this.save()
+    }
   }
 }
 </script>

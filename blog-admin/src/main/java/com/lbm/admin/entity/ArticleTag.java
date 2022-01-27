@@ -1,14 +1,13 @@
 package com.lbm.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
-import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author lbm
- * @since 2022-01-25
+ * @since 2022-01-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -36,12 +35,15 @@ public class ArticleTag implements Serializable {
     @ApiModelProperty(value = "标签id")
     private String tagId;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除 1=删除 0= 未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 

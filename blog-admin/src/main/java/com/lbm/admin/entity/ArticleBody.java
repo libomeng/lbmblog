@@ -1,9 +1,8 @@
 package com.lbm.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -37,7 +36,7 @@ public class ArticleBody implements Serializable {
     private String contentHtml;
 
     @ApiModelProperty(value = "文章字数")
-    private Long word;
+    private Integer word;
 
     @ApiModelProperty(value = "阅读时长 单位：分钟")
     private Integer redingTime;
@@ -45,12 +44,15 @@ public class ArticleBody implements Serializable {
     @ApiModelProperty(value = "文章id")
     private String articleId;
 
+    @TableLogic
     @ApiModelProperty(value = "逻辑删除 1=删除  0=未删除")
     private Integer isDeleted;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 

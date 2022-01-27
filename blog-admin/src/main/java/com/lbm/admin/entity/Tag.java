@@ -1,11 +1,9 @@
 package com.lbm.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.util.List;
 
@@ -41,9 +39,11 @@ public class Tag implements Serializable {
     @ApiModelProperty(value = "标签名称")
     private String tagName;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 

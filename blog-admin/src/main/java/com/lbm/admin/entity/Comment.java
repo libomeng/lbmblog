@@ -1,9 +1,8 @@
 package com.lbm.admin.entity;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.*;
+
 import java.util.Date;
-import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -48,12 +47,15 @@ public class Comment implements Serializable {
     @ApiModelProperty(value = "等级")
     private Integer level;
 
+    @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
+    @TableLogic
     @ApiModelProperty(value = "是否删除")
     private Integer isDeleted;
 

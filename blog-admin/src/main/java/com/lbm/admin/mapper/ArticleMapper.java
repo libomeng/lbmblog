@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lbm.admin.entity.Article;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lbm.admin.entity.vo.ArticleListVo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,4 +19,6 @@ import com.lbm.admin.entity.vo.ArticleListVo;
 public interface ArticleMapper extends BaseMapper<Article> {
 
     Page<ArticleListVo> pageArticleVo(Page<ArticleListVo> articlePage);
+
+
 }
