@@ -1,4 +1,4 @@
-package com.lbm.api.common.cache;
+package com.lbm.common.cache;
 
 import java.lang.annotation.*;
 

@@ -2,9 +2,14 @@ package com.lbm.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.util.ArrayList;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
+import com.lbm.admin.entity.vo.CategorySelectorVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -48,5 +53,20 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 
-
+    public static CategorySelectorVo toCategorySelectorVo(Category category){
+        CategorySelectorVo categorySelectorVo = new CategorySelectorVo();
+        categorySelectorVo.setId(category.getId());
+        categorySelectorVo.setLabel(category.getCategoryName());
+        categorySelectorVo.setDescription(category.getDescription());
+        categorySelectorVo.setValue(category.getId());
+        return categorySelectorVo;
+    }
+    public static List<CategorySelectorVo> copyList(List<Category> categoryList){
+        List<CategorySelectorVo> categorySelectorVoList =new ArrayList<>();
+        categoryList.forEach(category -> {
+            CategorySelectorVo categorySelectorVo = toCategorySelectorVo(category);
+            categorySelectorVoList.add(categorySelectorVo);
+        });
+        return categorySelectorVoList;
+    }
 }

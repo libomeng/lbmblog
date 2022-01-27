@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'bmBlog內容管理系統',
 
   /**
    * @type {boolean} true | false

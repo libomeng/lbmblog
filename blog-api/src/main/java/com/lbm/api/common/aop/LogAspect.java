@@ -1,4 +1,4 @@
-package com.lbm.api.common.aop;
+package com.lbm.common.aop;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.util.Date;
 @Slf4j
 @Component
 public class LogAspect {
-//    @Pointcut("@annotation(com.lbm.api.common.aop.LogAnnotation)")
+//    @Pointcut("@annotation(com.lbm.common.aop.LogAnnotation)")
     @Pointcut("execution(public * com.lbm.api.controller.*.*(..))")
     public void logPointCut() {
     }

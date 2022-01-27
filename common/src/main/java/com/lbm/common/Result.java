@@ -1,4 +1,4 @@
-package com.lbm.api.common;
+package com.lbm.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

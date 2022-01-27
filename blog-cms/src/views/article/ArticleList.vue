@@ -8,14 +8,14 @@
           <el-table-column
             prop="title"
             label="标题"
-            width="180">
+            min-width="80">
           </el-table-column>
           <el-table-column
             prop="viewCounts"
             label="浏览量"
-            width="180">
+            width="80">
           </el-table-column>
-          <el-table-column prop="category" label="所属分类" width="180">
+          <el-table-column prop="category" label="所属分类" width="80">
           </el-table-column>
           <el-table-column prop="isPublish" label="发布" width="80">
             <template slot-scope="scope">
@@ -43,6 +43,32 @@
                 inactive-value="0">
               </el-switch>
             </template>
+          </el-table-column >
+          <el-table-column prop="gmtCreate" label="修改时间" width="150">
+            <template slot-scope="scope">
+              {{scope.row.gmtCreate | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="操作" width= "180">
+            <template slot-scope="scope">
+              <el-row>
+                <el-col :span="12">
+                  <el-button
+                    size="mini"
+                    type="primary"
+                    icon="el-icon-edit"
+                    @click="showEdit(scope.row)">编辑
+                  </el-button>
+                </el-col>
+                <el-button
+                  size="mini"
+                  type="danger"
+                  icon="el-icon-delete"
+                  @click="deleteConfirm(scope.row)">删除
+                </el-button>
+              </el-row>
+            </template>
           </el-table-column>
         </el-table>
         <el-pagination
@@ -67,7 +93,7 @@ export default {
       articles:[],
       page:{
         page:1,
-        limit:5,
+        limit:10,
         currentPage:1,
         total:0
       }

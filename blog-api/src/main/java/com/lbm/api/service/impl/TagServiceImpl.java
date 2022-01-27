@@ -2,7 +2,7 @@ package com.lbm.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lbm.api.common.cache.Cache;
+import com.lbm.common.cache.Cache;
 import com.lbm.api.config.RedisKeyConfig;
 import com.lbm.api.dao.dos.TagCount;
 import com.lbm.api.dao.entity.Tag;

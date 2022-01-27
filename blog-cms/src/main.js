@@ -1,7 +1,8 @@
 import Vue from 'vue'
-
+import moment from 'vue-moment'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
-
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
@@ -32,7 +33,8 @@ if (process.env.NODE_ENV === 'production') {
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
-
+Vue.use(moment)
+Vue.use(mavonEditor)
 Vue.config.productionTip = false
 
 new Vue({

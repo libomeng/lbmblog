@@ -9,8 +9,6 @@ spring:
     url: "jdbc:mysql://localhost:3307/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
     username: "root"
     password: "0507"
-
-
     druid:
       filters: stat,wall
       aop-patterns: 'com.lbm.*'
@@ -18,9 +16,6 @@ spring:
         enabled: true
         login-username: admin
         login-password: "0507"
-
-
-
       web-stat-filter:
         enabled: true
         url-pattern: '/*'
@@ -33,7 +28,6 @@ spring:
           config:
             delete-allow: false
             drop-table-allow: false
-
 mybatis-plus:
   #  configuration:
   #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -47,7 +41,7 @@ mybatis-plus:
 qiniu:
   accessKey: Vdsp6CU6xnts94aMJkAxxAMrh8Vx3Ymxvi6FpDYg
   secretKey: Sbopp0PpVdgTxEpQefIPd3a3M16f2RFiWo-OlXwa
-  url: http://r3qle33oa.hn-bkt.clouddn.com/
+  url: http://cdn.libomeng.cn/
   bucket: lbmcc
 # 跨域访问地址
 allowedOrigins: "http://localhost:8666"

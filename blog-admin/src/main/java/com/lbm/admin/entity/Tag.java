@@ -2,9 +2,14 @@ package com.lbm.admin.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
+
+import java.util.ArrayList;
 import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
+import com.lbm.admin.entity.vo.TagSelectorVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -42,5 +47,21 @@ public class Tag implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Date gmtModified;
 
+    public static TagSelectorVo toSelectorVo(Tag tag){
+        TagSelectorVo tagSelectorVo= new TagSelectorVo();
+        tagSelectorVo.setId(tag.getId());
+        tagSelectorVo.setLabel(tag.getTagName());
+        tagSelectorVo.setValue(tag.getId());
+        return tagSelectorVo;
+    }
+
+    public static List<TagSelectorVo> copyList(List<Tag> tagList){
+        List<TagSelectorVo> tagSelectorVos = new ArrayList<>();
+        tagList.forEach((tag -> {
+            TagSelectorVo tagSelectorVo = toSelectorVo(tag);
+            tagSelectorVos.add(tagSelectorVo);
+        }));
+        return tagSelectorVos;
+    }
 
 }

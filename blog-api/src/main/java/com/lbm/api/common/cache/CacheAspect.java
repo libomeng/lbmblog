@@ -1,4 +1,4 @@
-package com.lbm.api.common.cache;
+package com.lbm.common.cache;
 
 import com.alibaba.fastjson.JSON;
 import com.lbm.api.service.RedisService;
@@ -30,7 +30,7 @@ public class CacheAspect {
     @Autowired
     RedisService redisService;
 
-    @Pointcut("@annotation(com.lbm.api.common.cache.Cache)")
+    @Pointcut("@annotation(com.lbm.common.cache.Cache)")
 //    @Pointcut("execution(public * com.lbm.api.controller.*.*(..))")
     public void pointcut(){
 

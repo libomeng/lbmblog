@@ -1,6 +1,6 @@
 package com.lbm.api.controller;
 
-import com.lbm.api.common.aop.LogAnnotation;
+import com.lbm.common.aop.LogAnnotation;
 
 import com.lbm.api.config.RedisKeyConfig;
 import com.lbm.api.dao.dos.Archives;
