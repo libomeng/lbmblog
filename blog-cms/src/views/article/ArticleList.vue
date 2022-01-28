@@ -50,7 +50,7 @@
             </template>
           </el-table-column>
           <el-table-column
-            label="操作" width= "180">
+            label="操作" width="180">
             <template slot-scope="scope">
               <el-row>
                 <el-col :span="12">
@@ -58,7 +58,7 @@
                     size="mini"
                     type="primary"
                     icon="el-icon-edit"
-                    @click="showEdit(scope.row)">编辑
+                    @click="edit(scope.row)">编辑
                   </el-button>
                 </el-col>
                 <el-button
@@ -88,34 +88,36 @@
 import article from '@/api/article'
 export default {
   name: 'ArticleList',
-  data(){
-    return{
-      articles:[],
-      page:{
-        page:1,
-        limit:10,
-        currentPage:1,
-        total:0
+  data() {
+    return {
+      articles: [],
+      page: {
+        page: 1,
+        limit: 10,
+        currentPage: 1,
+        total: 0
       }
     }
   },
   created() {
     this.getArticleList()
   },
-  methods:{
-    getArticleList(){
+  methods: {
+    getArticleList() {
       article.getArticleList(this.page.page,this.page.limit)
-      .then(result=>{
-        this.articles = result.data.records
-        this.page.currentPage = result.data.current
-        this.page.total = result.data.total
-      })
+        .then(result => {
+          this.articles = result.data.records
+          this.page.currentPage = result.data.current
+          this.page.total = result.data.total
+        })
     },
-    //使用当前页码进行查询
     handleCurrentChange(current) {
       this.page.page = current
       this.getArticleList()
     },
+    edit(val) {
+      this.$router.push({ name: 'categoryAdd', params: { id: val.id }})
+    }
   }
 }
 </script>

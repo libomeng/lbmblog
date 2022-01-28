@@ -2,6 +2,7 @@ package com.lbm.admin.service;
 
 import com.lbm.admin.entity.Category;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lbm.common.Result;
 
 /**
  * <p>
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface CategoryService extends IService<Category> {
 
+    Result updateCategory(Category category);
 }

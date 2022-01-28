@@ -96,7 +96,7 @@
 import upload from '@/components/Upload'
 import editor from '@/components/Editor'
 import tag from '@/api/tag'
-import cotegory from '@/api/cotegory'
+import category from '@/api/category'
 import article from '@/api/article'
 export default {
   name: 'ArticleAdd',
@@ -122,6 +122,9 @@ export default {
     }
   },
   created() {
+    if (this.$route.params.id) {
+      //TODO 根据ID回显文章信息
+    }
     this.getCategoryList()
     this.getTagList()
   },
@@ -133,7 +136,7 @@ export default {
         })
     },
     getTagList() {
-      cotegory.getCategoryList()
+      category.getCategoryList()
         .then(result => {
           this.categorys = result.data
         })

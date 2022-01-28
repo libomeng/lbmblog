@@ -49,7 +49,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [{
       path: 'dashboard',
-      name: 'Dashboard',
+      name: '数据面板',
       component: () => import('@/views/dashboard/index'),
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
@@ -76,23 +76,23 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/example',
+    path: '/category',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    redirect: '/category/list',
+    name: 'category',
+    meta: { title: '分类管理', icon: 'el-icon-s-unfold' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        path: '/category/list',
+        name: 'categoryList',
+        component: () => import('@/views/category/Index'),
+        meta: { title: '所有分类', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        path: '/category/add',
+        name: 'categoryAdd',
+        component: () => import('@/views/category/Add'),
+        meta: { title: '添加分类', icon: 'tree' }
       }
     ]
   },
