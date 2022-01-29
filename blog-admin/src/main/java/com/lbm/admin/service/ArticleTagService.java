@@ -3,6 +3,8 @@ package com.lbm.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lbm.admin.entity.ArticleTag;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -13,4 +15,7 @@ import com.lbm.admin.entity.ArticleTag;
  */
 public interface ArticleTagService extends IService<ArticleTag> {
 
+    Boolean addMap(List<String> tagIdList, String id);
+
+    Boolean newArticleTagHandler(List<String> tagIdList, String id);
 }

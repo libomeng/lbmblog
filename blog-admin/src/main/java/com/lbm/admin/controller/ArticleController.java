@@ -34,5 +34,10 @@ public class ArticleController {
        Result result = articleService.createArticle(articleParam);
        return result;
     }
+    @GetMapping("/info/{id}")
+    public Result getInfo(@PathVariable("id") String id){
+        Result res = articleService.getArticleInfo(id);
+        return res;
+    }
 }
 

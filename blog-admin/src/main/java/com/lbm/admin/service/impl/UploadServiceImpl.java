@@ -26,7 +26,7 @@ public class UploadServiceImpl implements UploadService {
         try {
             boolean result = qiniuUtil.upload(file, filename);
             if (result) {
-                return Result.success(url + filename);
+                return Result.success("上传成功",url + filename);
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -6,6 +6,7 @@ import com.lbm.admin.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lbm.common.Result;
 import com.lbm.common.uitl.ObjectUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
             return Result.fail("修改分类失败，请联系管理员小哥");
         }
         return Result.success("分类修改成功");
+    }
+
+    @Override
+    public Result addCategory(Category category) {
+        if(StringUtils.isEmpty(category.getCategoryName())||StringUtils.isEmpty(category.getDescription())){
+            return Result.fail("请正确填写分类信息");
+        }
+        int res = categoryMapper.insert(category);
+        if(res !=1){
+            return Result.fail("网络拥堵，请稍后再试");
+        }
+        return Result.success("分类添加成功");
     }
 }

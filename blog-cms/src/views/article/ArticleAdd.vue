@@ -64,7 +64,7 @@
                     v-for="item in tags"
                     :key="item.value"
                     :label="item.label"
-                    :value="item.value"
+                    :value="item.label"
                   >
                   </el-option>
                 </el-select>
@@ -122,8 +122,9 @@ export default {
     }
   },
   created() {
-    if (this.$route.params.id) {
-      //TODO 根据ID回显文章信息
+    const id = this.$route.params.id
+    if (id) {
+      this.getArticleInfo(id)
     }
     this.getCategoryList()
     this.getTagList()
@@ -145,11 +146,18 @@ export default {
       article.createArticle(this.article)
         .then(result => {
           this.$message(result.message)
+          this.$router.push({ name: 'articleList' })
         })
     },
     publish() {
       this.article.isPublish = 1
       this.save()
+    },
+    getArticleInfo(val) {
+      article.getArticleInfo(val).then(result => {
+        this.$message.success(result.message)
+        this.article = result.data
+      })
     }
   }
 }

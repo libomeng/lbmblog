@@ -7,6 +7,12 @@ export default {
       method: 'get'
     })
   },
+  getArticleInfo(id) {
+    return request({
+      url: `/admin/article/info/${id}`,
+      method: 'get'
+    })
+  },
   createArticle(article) {
     return request({
       url: `/admin/article/create`,

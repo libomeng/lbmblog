@@ -19,5 +19,18 @@ export default {
       method: 'post',
       data: category
     })
+  },
+  create(category) {
+    return request({
+      url: `/admin/category/add`,
+      method: 'post',
+      data: category
+    })
+  },
+  remove(id) {
+    return request({
+      url: `/admin/category/remove/${id}`,
+      method: 'post'
+    })
   }
 }

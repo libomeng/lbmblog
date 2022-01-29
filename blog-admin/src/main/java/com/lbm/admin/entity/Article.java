@@ -38,6 +38,9 @@ public class Article implements Serializable {
     @ApiModelProperty(value = "标题")
     private String title;
 
+    @ApiModelProperty(value = "文章首图URL")
+    private String img;
+
     @ApiModelProperty(value = "浏览数量")
     private Integer viewCounts;
 

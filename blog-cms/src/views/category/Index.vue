@@ -1,7 +1,7 @@
 <template>
   <div class="bm-category">
     <el-container>
-      <category-update v-if="visible" :visible="visible" :category="row" @visible="visibleHandler"></category-update>
+      <category-update v-if="visible" :visible="visible" :category="row" @visible="visibleHandler" @success="successHandler"></category-update>
       <el-main>
         <el-table :data="categorys">
           <el-table-column prop="categoryName" label="分类名称">
@@ -67,9 +67,16 @@ export default {
       this.visible = true
     },
     remove(val) {
+      category.remove(val.id).then(result => {
+        this.$message.success(result.message)
+        this.getList()
+      })
     },
     visibleHandler(val) {
       this.visible = val
+    },
+    successHandler() {
+      this.getList()
     }
   }
 }

@@ -2,6 +2,7 @@ package com.lbm.admin.service;
 
 import com.lbm.admin.entity.ArticleBody;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lbm.admin.entity.params.CreateArticleParam;
 
 /**
  * <p>
@@ -13,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ArticleBodyService extends IService<ArticleBody> {
 
+    String createArticleBody(CreateArticleParam articleParam, String id);
+
+    Boolean updateArticleBody(CreateArticleParam articleParam);
 }

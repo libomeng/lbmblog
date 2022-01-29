@@ -20,4 +20,6 @@ public interface ArticleService extends IService<Article> {
     Page<ArticleListVo> pageArticleVo(Page<ArticleListVo> articlePage);
 
     Result createArticle(CreateArticleParam articleParam);
+
+    Result getArticleInfo(String id);
 }

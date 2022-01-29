@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class CreateArticleParam {
+    private String id;
     private String title;
     private String summary;
     private String img;
