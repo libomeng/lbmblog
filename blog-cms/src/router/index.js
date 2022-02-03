@@ -59,123 +59,43 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/article/list',
     name: 'article',
-    meta: { title: '文章管理', icon: 'el-icon-s-help' },
+    meta: { title: '博客管理', icon: 'el-icon-s-help' },
     children: [
-      {
-        path: '/article/list',
-        name: 'articleList',
-        component: () => import('@/views/article/ArticleList'),
-        meta: { title: '文章列表', icon: 'table' }
-      },
       {
         path: '/article/add',
         name: 'articleAdd',
         component: () => import('@/views/article/ArticleAdd'),
-        meta: { title: '添加文章', icon: 'tree' }
-      }
-    ]
-  },
-  {
-    path: '/category',
-    component: Layout,
-    redirect: '/category/list',
-    name: 'category',
-    meta: { title: '分类管理', icon: 'el-icon-s-unfold' },
-    children: [
-      {
-        path: '/category/list',
-        name: 'categoryList',
-        component: () => import('@/views/category/Index'),
-        meta: { title: '所有分类', icon: 'table' }
+        meta: { title: '写文章', icon: 'el-icon-edit' }
       },
       {
         path: '/category/add',
         name: 'categoryAdd',
         component: () => import('@/views/category/Add'),
-        meta: { title: '添加分类', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        meta: { title: '添加分类', icon: 'el-icon-edit' }
       },
       {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
-    path: 'external-link',
-    component: Layout,
-    children: [
+        path: '/article/list',
+        name: 'articleList',
+        component: () => import('@/views/article/ArticleList'),
+        meta: { title: '文章管理', icon: 'el-icon-s-order' }
+      },
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: '/category/list',
+        name: 'categoryList',
+        component: () => import('@/views/category/Index'),
+        meta: { title: '分类管理', icon: 'el-icon-menu' }
+      },
+      {
+        path: '/tag/list',
+        name: 'tagList',
+        component: () => import('@/views/tag/Index'),
+        meta: { title: '标签管理', icon: 'el-icon-price-tag' }
+      },
+      {
+        path: '/comment/list',
+        name: 'commentList',
+        component: () => import('@/views/comment/Index'),
+        meta: { title: '评论管理', icon: 'el-icon-chat-dot-square' }
       }
     ]
   },

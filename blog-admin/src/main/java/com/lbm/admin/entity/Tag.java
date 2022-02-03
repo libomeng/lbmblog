@@ -39,6 +39,10 @@ public class Tag implements Serializable {
     @ApiModelProperty(value = "标签名称")
     private String tagName;
 
+    @TableLogic
+    @ApiModelProperty(value = "逻辑删除 1=删除 0=未删除")
+    private Integer isDeleted;
+
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;

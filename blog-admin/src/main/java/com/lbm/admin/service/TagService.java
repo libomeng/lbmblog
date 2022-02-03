@@ -2,6 +2,8 @@ package com.lbm.admin.service;
 
 import com.lbm.admin.entity.Tag;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.lbm.admin.entity.params.TagQueryWrapperParam;
+import com.lbm.common.Result;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface TagService extends IService<Tag> {
 
+    Result getConditionList(Integer page, Integer limit, TagQueryWrapperParam param);
 }

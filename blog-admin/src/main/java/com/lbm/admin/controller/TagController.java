@@ -1,15 +1,14 @@
 package com.lbm.admin.controller;
 
 
+import com.baomidou.mybatisplus.extension.api.R;
 import com.lbm.admin.entity.Tag;
+import com.lbm.admin.entity.params.TagQueryWrapperParam;
 import com.lbm.admin.entity.vo.TagSelectorVo;
 import com.lbm.admin.service.TagService;
 import com.lbm.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,5 +33,28 @@ public class TagController {
         return Result.success(tagSelectorVos);
     }
 
+    @PostMapping("/getConditionList/{page}/{limit}")
+    public Result getConditionList(@PathVariable("page")Integer page, @PathVariable("limit")Integer limit,@RequestBody(required = false) TagQueryWrapperParam param){
+       Result result =  this.tagService.getConditionList(page,limit,param);
+       return result;
+    }
+
+    @PostMapping("/update")
+    public Result update(@RequestBody Tag tag){
+        boolean res = tagService.updateById(tag);
+        if(!res){
+            return Result.fail("标签修改失败");
+        }
+        return Result.success("标签修改成功");
+    }
+
+    @PostMapping("/remove/{id}")
+    public Result remove(@PathVariable("id")String id){
+        boolean res = this.tagService.removeById(id);
+        if(!res){
+            return Result.fail("删除标签失败");
+        }
+        return Result.success("删除标签成功");
+    }
 }
 
