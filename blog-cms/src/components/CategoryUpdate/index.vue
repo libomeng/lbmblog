@@ -59,10 +59,10 @@ export default {
         if (valid) {
           category.update(this.categoryCopy).then(result => {
             this.$message.success(result.message)
+            this.$emit('success')
+            this.$emit('visible', false)
+            this.categoryCopy = null
           })
-          this.$emit('success')
-          this.$emit('visible', false)
-          this.categoryCopy = null
         } else {
           return false
         }
