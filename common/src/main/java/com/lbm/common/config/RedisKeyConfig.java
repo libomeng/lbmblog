@@ -1,4 +1,4 @@
-package com.lbm.api.config;
+package com.lbm.common.config;
 
 public class RedisKeyConfig {
 

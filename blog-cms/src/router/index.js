@@ -96,6 +96,12 @@ export const constantRoutes = [
         name: 'commentList',
         component: () => import('@/views/comment/Index'),
         meta: { title: '评论管理', icon: 'el-icon-chat-dot-square' }
+      },
+      {
+        path: '/article/recycle',
+        name: 'articleRecycle',
+        component: () => import('@/views/article/RemoveList'),
+        meta: { title: '回收站', icon: 'el-icon-delete' }
       }
     ]
   },

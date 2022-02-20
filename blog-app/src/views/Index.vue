@@ -24,6 +24,10 @@
         <el-col :offset="screenWidth>800 && screenWidth<1100?5:0" :span="screenWidth>800?14:24">
           <article-scroll-page></article-scroll-page>
         </el-col>
+        <el-col :offset="1" :span="4">
+                  <card-article cardHeader="热门文章" :articles="hotArticles"></card-article>
+                  <card-article cardHeader="最新文章" :articles="newArticles"></card-article>
+        </el-col>
       </el-row>
         </el-main>
       </el-container>
@@ -46,7 +50,8 @@
     name: 'Index',
     created() {
       this.count()
-      // this.listArchives()
+      this.getHotArtices()
+      this.getNewArtices()
       this.mainHandler()
       let Ip=returnCitySN['cip']
       let cityname=returnCitySN['cname']
@@ -94,6 +99,26 @@
         count.count()
         .then(result=>{
           this.viewCount = result.data
+        })
+      },
+      getNewArtices() {
+        let that = this
+        getNewArtices().then(data => {
+          that.newArticles = data.data
+        }).catch(error => {
+          if (error !== 'error') {
+            that.$message({type: 'error', message: '最新文章加载失败!', showClose: true})
+          }
+        })
+      },
+      getHotArtices() {
+        let that = this
+        getHotArtices().then(data => {
+          that.hotArticles = data.data
+        }).catch(error => {
+          if (error !== 'error') {
+            that.$message({type: 'error', message: '最热文章加载失败!', showClose: true})
+          }
         })
       },
     },

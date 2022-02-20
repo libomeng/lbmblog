@@ -1,18 +1,12 @@
 <template>
   <div class="me-view-comment-item">
+    <el-card>
+      <el-avatar class="bm-view-avatar" :src="comment.author.avatar"/>
     <div class="me-view-comment-author">
-      <a class="">
-        <img class="me-view-picture" :src="comment.author.avatar"></img>
-      </a>
-      <div class="me-view-info">
-        <span class="me-view-nickname">{{comment.author.nickname}}</span>
-        <div class="me-view-meta">
-          <span>{{rootCommentCounts - index}}楼</span>
-          <span>{{comment.createDate | format}}</span>
-        </div>
-      </div>
+        <span class="me-view-nickname">{{comment.author.nickname}}&nbsp;</span>
+        <span class="bm-view-date">{{comment.gmtCreate | moment('YYYY-MM-DD HH:mm')}}</span>
     </div>
-    <div>
+    <div style="margin-top: 10px">
       <p class="me-view-comment-content">{{comment.content}}</p>
       <div class="me-view-comment-tools">
         <!--<a class="me-view-comment-tool">-->
@@ -22,31 +16,25 @@
           <i class="me-icon-comment"></i>&nbsp; 评论
         </a>
       </div>
-
       <div class="me-reply-list">
         <div class="me-reply-item" v-for="c in comment.childrens" :key="c.id">
           <div style="font-size: 14px">
             <span class="me-reply-user">{{c.author.nickname}}:&nbsp;&nbsp;</span>
-
             <span v-if="c.level == 2" class="me-reply-user">@{{c.toUser.nickname}} </span>
-
             <span>{{c.content}}</span>
           </div>
           <div class="me-view-meta">
-            <span style="padding-right: 10px">{{c.createDate | format}}</span>
+            <span class="bm-view-date">{{c.gmtCreate | moment('YYYY-MM-DD HH:mm')}}</span>
           <!--  <a class="me-view-comment-tool" @click="showComment(c.id, c.author)">
               <i class="me-icon-comment"></i>&nbsp;回复
             </a> -->
           </div>
-
         </div>
-
         <div class="me-view-comment-write" v-show="commentShow">
-
           <el-input
             v-model="reply.content"
             type="input"
-            style="width: 90%"
+            style="width: 80%"
             :placeholder="placeholder"
             class="me-view-comment-text"
             resize="none">
@@ -59,6 +47,7 @@
       </div>
 
     </div>
+    </el-card>
   </div>
 </template>
 
@@ -169,18 +158,21 @@
   }
 
   .me-view-comment-item {
-    margin-top: 20px;
-    padding-bottom: 16px;
+    padding: 20px;
     border-bottom: 1px solid #f0f0f0;
   }
 
   .me-view-comment-author {
-    margin: 10px 0;
+    height: 40px;
+    display: table-cell;
     vertical-align: middle;
+    padding-left: 10px;
+
   }
 
   .me-view-nickname {
     font-size: 14px;
+    font-weight: 600;
   }
 
   .me-view-comment-content {
@@ -214,5 +206,14 @@
 
   .me-reply-user {
     color: #78b6f7;
+  }
+  .bm-view-date{
+    margin-top:14px;
+    color: #a6a6a6;
+    font-size: 13px;
+  }
+  .bm-view-avatar{
+    display: block;
+    float: left;
   }
 </style>

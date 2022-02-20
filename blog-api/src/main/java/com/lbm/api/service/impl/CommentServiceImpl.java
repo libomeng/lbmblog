@@ -1,13 +1,11 @@
 package com.lbm.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.api.dao.entity.Article;
+import com.lbm.api.service.*;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.dao.entity.Comment;
 import com.lbm.api.dao.mapper.CommentMapper;
-import com.lbm.api.service.CommentService;
-import com.lbm.api.service.RedisService;
-import com.lbm.api.service.SysUserService;
-import com.lbm.api.service.ThreadPoolService;
 import com.lbm.api.util.UserThreadLocal;
 import com.lbm.api.vo.CommentVo;
 import com.lbm.api.vo.UserVo;
@@ -35,9 +33,17 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     RedisService redisService;
 
-
+    @Autowired
+    ArticleService articleService;
     @Override
-    public List<CommentVo> commentsByArticleId(Long ArticleId) {
+    public List<CommentVo> commentsByArticleId(String ArticleId) {
+        LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        articleLambdaQueryWrapper.eq(Article::getId,ArticleId);
+        articleLambdaQueryWrapper.select(Article::getIsComment);
+        Article article = articleService.getOne(articleLambdaQueryWrapper);
+        if(article.getIsComment()==0){
+            return null;
+        }
         //从redis中获取数据
         String key =RedisKeyConfig.COMMENT_VO_LIST;
         List listByKey = redisService.getListByKey(key, ArticleId);
@@ -97,14 +103,15 @@ public class CommentServiceImpl implements CommentService {
          */
         CommentVo commentVo =new CommentVo();
         BeanUtils.copyProperties(comment, commentVo);
-        commentVo.setCreateDate(new DateTime(comment.getGmtCreate()).toDate());
         String authorId = comment.getAuthorId();
         UserVo userVo =sysUserService.findUserVoById(authorId);
         commentVo.setAuthor(userVo);
         //查找子评论
         String parentID = comment.getId();
-        List<CommentVo> CommentChildrens= this.findCommentByParentId(parentID);
-        commentVo.setChildrens(CommentChildrens);
+        if(comment.getLevel()==1){
+            List<CommentVo> CommentChildrens= this.findCommentByParentId(parentID);
+            commentVo.setChildrens(CommentChildrens);
+        }
         //如果Level大于1，说明为子comment,则会有toUser属性
         if(comment.getLevel()>1){
             String toUid = comment.getToUid();

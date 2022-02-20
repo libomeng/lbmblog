@@ -27,7 +27,7 @@ public class SysUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
       @TableId(value = "id", type = IdType.AUTO)
-    private Long id;
+    private String id;
 
     @ApiModelProperty(value = "账号")
     private String account;

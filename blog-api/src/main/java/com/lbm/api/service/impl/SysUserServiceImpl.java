@@ -90,13 +90,13 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public Long addUser(SysUser user) {
+    public String addUser(SysUser user) {
          sysUserMapper.insert(user);
          LambdaQueryWrapper<SysUser> queryWrapper =new LambdaQueryWrapper<>();
          queryWrapper.eq(SysUser::getAccount, user.getAccount());
          queryWrapper.select(SysUser::getId);
         SysUser sysUser = sysUserMapper.selectOne(queryWrapper);
-        Long id = sysUser.getId();
+        String id = sysUser.getId();
         return id;
     }
 

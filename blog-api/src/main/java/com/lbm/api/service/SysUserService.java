@@ -48,7 +48,7 @@ public interface SysUserService {
      * @param user
      * @return
      */
-    Long addUser(SysUser user);
+    String addUser(SysUser user);
 
     /**
      * 根据ID查询UserVo对象

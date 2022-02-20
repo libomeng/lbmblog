@@ -19,5 +19,36 @@ export default {
       method: 'post',
       data: article
     })
+  },
+  updateState(state) {
+    return request({
+      url: `/admin/article/updateState`,
+      method: 'post',
+      data: state
+    })
+  },
+  deleteById(id) {
+    return request({
+      url: `/admin/article/delete/${id}`,
+      method: 'post'
+    })
+  },
+  getDeletedArticle() {
+    return request({
+      url: `/admin/article/getRemoveArticle`,
+      method: 'get'
+    })
+  },
+  recycleArticle(id) {
+    return request({
+      url: `/admin/article/recycleArticle/${id}`,
+      method: 'post'
+    })
+  },
+  deleteArticle(id, bodyId) {
+    return request({
+      url: `/admin/article/deleteArticle/${id}/${bodyId}`,
+      method: 'post'
+    })
   }
 }

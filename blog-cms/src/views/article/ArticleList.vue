@@ -24,8 +24,9 @@
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.isPublish"
-                active-value="1"
-                inactive-value="0"
+                :active-value=1
+                :inactive-value=0
+                @change="articleStateHandler(scope.row)"
               >
               </el-switch>
             </template>
@@ -34,8 +35,9 @@
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.isWeight"
-                active-value="1"
-                inactive-value="0"
+                :active-value=1
+                :inactive-value=0
+                @change="articleStateHandler(scope.row)"
               >
               </el-switch>
             </template>
@@ -44,8 +46,9 @@
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.isComment"
-                active-value="1"
-                inactive-value="0"
+                :active-value=1
+                :inactive-value=0
+                @change="articleStateHandler(scope.row)"
               >
               </el-switch>
             </template>
@@ -118,6 +121,7 @@ export default {
       article.getArticleList(this.page.page, this.page.limit)
         .then(result => {
           this.articles = result.data.records
+          console.log(result.data.records)
           this.page.currentPage = result.data.current
           this.page.total = result.data.total
         })
@@ -128,6 +132,23 @@ export default {
     },
     edit(val) {
       this.$router.push({ name: 'articleAdd', params: { id: val.id } })
+    },
+    articleStateHandler(art) {
+      const state = {
+        id: art.id,
+        isWeight: art.isWeight,
+        isPublish: art.isPublish,
+        isComment: art.isComment
+      }
+      article.updateState(state).then(result => {
+        this.$message.success(result.message)
+      })
+    },
+    deleteConfirm(art) {
+      article.deleteById(art.id).then(result => {
+        this.$message.success(`删除${art.title}文章成功`)
+        this.getArticleList()
+      })
     }
   }
 }

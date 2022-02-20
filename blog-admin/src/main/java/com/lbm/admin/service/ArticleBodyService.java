@@ -17,4 +17,6 @@ public interface ArticleBodyService extends IService<ArticleBody> {
     String createArticleBody(CreateArticleParam articleParam, String id);
 
     Boolean updateArticleBody(CreateArticleParam articleParam);
+
+    boolean deleteArticleBody(String bodyId);
 }

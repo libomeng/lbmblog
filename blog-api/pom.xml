@@ -142,6 +142,11 @@
         <groupId>com.qiniu</groupId>
         <artifactId>happy-dns-java</artifactId>
     </dependency>
+    <dependency>
+        <groupId>com.common</groupId>
+        <artifactId>common</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
 </dependencies>
     <build>
         <plugins>

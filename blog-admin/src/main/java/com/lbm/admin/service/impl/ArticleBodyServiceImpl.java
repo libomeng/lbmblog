@@ -59,4 +59,13 @@ public class ArticleBodyServiceImpl extends ServiceImpl<ArticleBodyMapper, Artic
         }
         return true;
     }
+
+    @Override
+    public boolean deleteArticleBody(String bodyId) {
+        int res =this.articleBodyMapper.deleteArticleBody(bodyId);
+        if(res ==1){
+            return true;
+        }
+        return false;
+    }
 }

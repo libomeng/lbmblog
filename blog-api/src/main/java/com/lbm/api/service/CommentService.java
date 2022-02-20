@@ -6,7 +6,7 @@ import com.lbm.api.vo.params.CommentParams;
 import java.util.List;
 
 public interface CommentService {
-    List<CommentVo> commentsByArticleId(Long ArticleId);
+    List<CommentVo> commentsByArticleId(String ArticleId);
 
     void createComment(CommentParams commentParams);
 }

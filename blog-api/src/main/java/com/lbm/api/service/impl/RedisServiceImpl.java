@@ -1,15 +1,15 @@
 package com.lbm.api.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class RedisServiceImpl implements RedisService {
@@ -22,7 +22,6 @@ public class RedisServiceImpl implements RedisService {
         return jsonRedisTemplate.opsForHash().entries(hash);
 
     }
-
 
     @Override
     public boolean isEmptyMap(String redisKey) {
@@ -95,7 +94,6 @@ public class RedisServiceImpl implements RedisService {
         Integer count = this.getArticleView(id);
         jsonRedisTemplate.opsForHash().put(RedisKeyConfig.ARTICLE_VIEW_MAP,id,count+1);
     }
-
     @Override
     public Integer getArticleView(String id) {
         Integer count = (Integer)jsonRedisTemplate.opsForHash().get(RedisKeyConfig.ARTICLE_VIEW_MAP, id);

@@ -4,7 +4,7 @@
     <div class="me-article-info">
       <div class="me-article-header">
       <el-link @click="view(id)" class="me-article-title">{{title}}</el-link>
-      <el-button v-if="weight > 0" class="me-article-icon" type="text">置顶</el-button>
+        <el-tag v-if="isWeight > 0" size="mini">置顶</el-tag>
       </div>
       <div class="me-article-time">
         <span>
@@ -16,7 +16,7 @@
       {{summary}}
       </div>
       <div class="em-article-images">
-        <el-image class="article-images" src="http://cdn.libomeng.cn/3e8bdb73-81f8-447c-91fb-53871f2acede.jpg" ></el-image>
+        <el-image class="article-images" :src="img" :preview-src-list="img" fit="cover"></el-image>
       </div>
       <div class="el-article-button" >
         <el-button  icon="el-icon-right" type="primary" size="mini"  @click="view(id)">阅读原文</el-button>
@@ -37,7 +37,7 @@
     name: 'ArticleItem',
     props: {
       id: String,
-      weight: Number,
+      isWeight: Number,
       title: String,
       commentCounts: Number,
       viewCounts: Number,
@@ -46,6 +46,7 @@
       tags: Array,
       gmtCreate: String,
       category:Object,
+      img:String
     },
     data() {
       return {}
@@ -111,6 +112,7 @@
     margin-top: 10px;
   }
   .article-images{
-
+    width: 100%;
+    height: 500px;
   }
 </style>

@@ -1,8 +1,8 @@
 package com.lbm.api.task;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.lbm.common.aop.LogAnnotation;
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.api.common.aop.LogAnnotation;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.dao.entity.Article;
 import com.lbm.api.service.ArticleService;
 import com.lbm.api.service.RedisService;

@@ -1,6 +1,6 @@
 package com.lbm.api.service.impl;
 
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.service.CountService;
 import com.lbm.api.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;

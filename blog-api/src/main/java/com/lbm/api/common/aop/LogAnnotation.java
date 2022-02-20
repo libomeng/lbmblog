@@ -1,4 +1,4 @@
-package com.lbm.common.aop;
+package com.lbm.api.common.aop;
 
 import java.lang.annotation.*;
 

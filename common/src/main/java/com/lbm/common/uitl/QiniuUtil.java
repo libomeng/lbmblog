@@ -19,12 +19,10 @@ public class QiniuUtil {
     private static final String secretKey="Sbopp0PpVdgTxEpQefIPd3a3M16f2RFiWo-OlXwa";
     private static final String url="http://cdn.libomeng.cn/";
     private static final String bucket="lbmcc-beimei";
-
     public boolean upload(MultipartFile file,String key) throws IOException {
         //构造一个带指定 Region 对象的配置类
-        Configuration cfg = new Configuration(Region.regionNa0());
+        Configuration cfg = new Configuration(Region.autoRegion());
 //...其他参数参考类注释
-
         UploadManager uploadManager = new UploadManager(cfg);
 //...生成上传凭证，然后准备上传
 //        String accessKey = "your access key";

@@ -1,8 +1,6 @@
 package com.lbm.api.controller;
-
-import com.lbm.common.aop.LogAnnotation;
-
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.api.common.aop.LogAnnotation;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.dao.dos.Archives;
 import com.lbm.api.service.ArticleService;
 import com.lbm.api.service.RedisService;
@@ -15,7 +13,6 @@ import com.lbm.api.vo.params.PageParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 @RestController
 @RequestMapping("articles")
 public class ArticleController {

@@ -34,6 +34,9 @@ public class Article implements Serializable {
     @ApiModelProperty(value = "评论数量")
     private Integer commentCounts;
 
+    @ApiModelProperty(value = "首图路径")
+    private String img;
+
     @ApiModelProperty(value = "简介")
     private String summary;
 

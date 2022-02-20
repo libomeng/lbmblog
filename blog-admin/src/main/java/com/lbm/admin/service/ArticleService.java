@@ -22,4 +22,12 @@ public interface ArticleService extends IService<Article> {
     Result createArticle(CreateArticleParam articleParam);
 
     Result getArticleInfo(String id);
+
+    Result updateState(Article article);
+
+    Result recycleArticleById(String id);
+
+    Result getDeletedArticleList();
+
+    Result deleteArticle(String id,String bodyId);
 }

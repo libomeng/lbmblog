@@ -57,7 +57,7 @@ public class RegisterServiceImpl implements RegisterService {
         user.setCreateDate(System.currentTimeMillis());
         user.setLastLogin(System.currentTimeMillis());
         user.setAvatar("/static/user/user_1.png");
-        Long id = sysUserService.addUser(user);
+        String id = sysUserService.addUser(user);
         String token = JWTUtils.createToken(id);
 //        RedisUtil.saveToKen(token);
         LoginVo loginVo =new LoginVo();

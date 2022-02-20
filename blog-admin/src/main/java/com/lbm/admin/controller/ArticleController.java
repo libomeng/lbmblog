@@ -2,6 +2,7 @@ package com.lbm.admin.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lbm.admin.entity.Article;
 import com.lbm.admin.entity.params.CreateArticleParam;
 import com.lbm.admin.entity.vo.ArticleListVo;
 import com.lbm.admin.service.ArticleService;
@@ -38,6 +39,35 @@ public class ArticleController {
     public Result getInfo(@PathVariable("id") String id){
         Result res = articleService.getArticleInfo(id);
         return res;
+    }
+
+    @PostMapping("/updateState")
+    public Result updateState(@RequestBody Article article){
+        Result result = this.articleService.updateState(article);
+        return  result;
+    }
+    @PostMapping("/delete/{id}")
+    public Result deleteById(@PathVariable("id") String id){
+        boolean res = this.articleService.removeById(id);
+        if(!res){
+            return Result.fail("文章删除失败");
+        }
+        return Result.success("文章删除成功");
+    }
+    @GetMapping("/getRemoveArticle")
+    public Result getRemoveArticle(){
+       Result res =  this.articleService.getDeletedArticleList();
+       return res;
+    }
+    @PostMapping("/recycleArticle/{id}")
+    public Result recycleArticle(@PathVariable("id") String id){
+        Result res = this.articleService.recycleArticleById(id);
+        return res;
+    }
+    @PostMapping("/deleteArticle/{id}/{bodyId}")
+    public Result deleteArticle(@PathVariable("id") String id,@PathVariable("bodyId") String bodyId){
+       Result res =  this.articleService.deleteArticle(id,bodyId);
+       return res;
     }
 }
 

@@ -1,14 +1,17 @@
 package com.lbm.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.api.R;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lbm.admin.entity.*;
 import com.lbm.admin.entity.params.CreateArticleParam;
 import com.lbm.admin.entity.vo.ArticleListVo;
+import com.lbm.admin.entity.vo.ArticleRemoveVo;
 import com.lbm.admin.mapper.ArticleMapper;
 import com.lbm.admin.service.*;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lbm.common.Result;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.common.uitl.ObjectUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +41,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     ArticleBodyService articleBodyService;
     @Autowired
     ArticleTagService articleTagService;
+
+    @Autowired
+    RedisService redisService;
 
     @Override
     public Page<ArticleListVo> pageArticleVo(Page<ArticleListVo> articlePage) {
@@ -102,13 +108,13 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
          * 判断请求是需要新建文章还是修改文章
          */
         Article article = new Article();
-        ArticleBody articleBody = new ArticleBody();
         if (articleParam.getId().equals("11")) {  //新建文章请求(请求参数为临时ID)
             articleMapper.insert(article);
             String articleBodyId = articleBodyService.createArticleBody(articleParam, article.getId());
             if(StringUtils.isEmpty(articleBodyId)){
                 return Result.fail("文章体添加失败");
             }
+            article.setBodyId(articleBodyId);
             Boolean res = articleTagService.addMap(tagIdList, article.getId());
             if(!res){
                 return Result.fail("文章标签添加失败");
@@ -126,7 +132,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
                 return Result.fail("文章标签添加失败");
             }
         }
-        article.setBodyId(articleBody.getId());
         article.setCategoryId(category.getId());
         article.setImg(articleParam.getImg());
         article.setIsPublish(articleParam.getIsPublish());
@@ -165,6 +170,49 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleParam.setWords(body.getWord());
         articleParam.setReadTime(body.getRedingTime());
         return Result.success(articleParam);
+    }
+
+    @Override
+    @Transactional
+    public Result updateState(Article article) {
+        int res = this.articleMapper.updateById(article);
+        if(res !=1){
+            return Result.fail("更新文章状态失败");
+        }
+        //删除文章缓存
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_VO);
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_VO_LIST);
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_BODY);
+        return Result.success("更新文章状态成功");
+    }
+
+    @Override
+    public Result recycleArticleById(String id) {
+       int res =  this.articleMapper.recycleArticleById(id);
+        if(res ==1){
+            return Result.success("文章回收成功");
+        }
+        return Result.fail("文章回收失败");
+    }
+
+    @Override
+    public Result getDeletedArticleList() {
+       List<ArticleRemoveVo> articleList = this.articleMapper.getDeletedArticleList();
+        return Result.success("获取文章列表成功",articleList);
+    }
+
+    @Override
+    @Transactional
+    public Result deleteArticle(String id,String bodyId) {
+        int res = this.articleMapper.deleteArticle(id);
+       if(res != 1){
+           return Result.fail("文章删除失败");
+       }
+        boolean resBody = articleBodyService.deleteArticleBody(bodyId);
+        if(!resBody){
+            return Result.fail("文章删除失败");
+        }
+        return Result.success("文章删除成功");
     }
 
 }

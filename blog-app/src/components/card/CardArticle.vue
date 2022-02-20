@@ -50,7 +50,7 @@
   .me-category-item {
     padding: 4px;
     font-size: 14px;
-    color: #5FB878;
+    color: #2C3E50;
   }
 
   .me-category-item a:hover {

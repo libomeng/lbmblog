@@ -1,11 +1,12 @@
 package com.lbm.api.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lbm.api.config.RedisKeyConfig;
+import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.dao.dos.Archives;
 import com.lbm.api.dao.entity.Article;
 import com.lbm.api.dao.entity.ArticleBody;
@@ -21,14 +22,16 @@ import com.lbm.api.vo.*;
 import com.lbm.api.vo.params.ArticleParam;
 import com.lbm.api.vo.params.ArticleSimpleParam;
 import com.lbm.api.vo.params.PageParams;
+import com.qiniu.util.Json;
 import org.joda.time.DateTime;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.PostConstruct;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
@@ -55,7 +58,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Autowired
     RedisService redisService;
 
-
+    @Autowired
+    RedisTemplate jsonRedisTemplate;
     /**
      * 项目启动时，获取所有文章阅读量写入Redis
      */
@@ -97,6 +101,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Article> articleList = iPage.getRecords();
         articleVoList = copyList(articleList);
         redisService.setListByKey(key, pageParams, articleVoList);
+        jsonRedisTemplate.expire(key,1,TimeUnit.MINUTES);
         return articleVoList;
     }
 
@@ -148,7 +153,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         List<Archives> archives = articleMapper.getArchives();
         return archives;
     }
-
     @Override
     public ArticleVo findArticlesById(String id) {
         //如果Redis中有数据，从Redis中获取
@@ -168,8 +172,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         threadPoolService.updateArticleViewCount(id);
         return articleVo;
     }
-
-
     @Transactional
     @Override
     public String createArticle(ArticleParam articleParam) {
@@ -218,7 +220,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         articleBody.setArticleId(articleId);
         articleBodyMapper.insert(articleBody);
         String articleBodyId = articleBody.getId();
-
         return articleBodyId;
 
     }

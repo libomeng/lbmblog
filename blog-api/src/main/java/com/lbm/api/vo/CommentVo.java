@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CommentVo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long id;
+    private String id;
 
     private UserVo author;
 
@@ -18,7 +18,7 @@ public class CommentVo {
 
     private List<CommentVo> childrens;
 
-    private Date createDate;
+    private Date gmtCreate;
 
     private Integer level;
 

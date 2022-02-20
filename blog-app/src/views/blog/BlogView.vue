@@ -1,6 +1,6 @@
 <template>
   <div class="me-view-body" v-title :data-title="title">
-    <el-container >
+    <el-container>
       <el-main class="el-main">
         <div class="me-view-card">
           <h3 class="me-view-title">{{ article.title }}</h3>
@@ -28,7 +28,7 @@
               {{ article.category.categoryName }}
             </el-button>
           </div>
-          <div class="me-view-comment">
+          <div class="me-view-comment" v-if="article.isComment===1">
             <div class="me-view-comment-write">
               <el-row :gutter="20">
                 <el-col :offset="2" :span="20">
@@ -48,7 +48,7 @@
                 </el-col>
               </el-row>
             </div>
-            <div class="me-view-comment-title">
+            <div class="bm-view-comment">
               <span>{{ article.commentCounts }} 条评论</span>
             </div>
             <div>
@@ -101,6 +101,7 @@ export default {
         tags: [],
         category: {},
         createDate: '',
+        isComment: false,
         editor: {
           value: '',
           html: '',
@@ -115,8 +116,8 @@ export default {
         content: ''
       },
       mainStyle: '',
-      preWidth:{
-        width:''
+      preWidth: {
+        width: ''
       }
     }
   },
@@ -148,7 +149,9 @@ export default {
         Object.assign(that.article, data.data)
         that.article.editor.value = data.data.body.content
         that.article.editor.html = data.data.body.html
-        that.getCommentsByArticle()
+        if (data.data.isComment === 1) {
+          that.getCommentsByArticle()
+        }
       }).catch(error => {
         if (error !== 'error') {
           that.$message({type: 'error', message: '文章加载失败', showClose: true})
@@ -196,11 +199,11 @@ export default {
     commentCountsIncrement() {
       this.article.commentCounts += 1
     },
-    preWidthHandler(){
-      if(this.screenWidth<1000){
-        this.preWidth.width=` width: ${this.screenWidth}px;`
-      }else {
-        this.preWidth.width=''
+    preWidthHandler() {
+      if (this.screenWidth < 1000) {
+        this.preWidth.width = ` width: ${this.screenWidth}px;`
+      } else {
+        this.preWidth.width = ''
       }
     }
   },
@@ -230,12 +233,14 @@ export default {
 .me-view-container {
 
 }
-.me-view-card{
-width: 50%;
+
+.me-view-card {
+  width: 50%;
   margin: auto;
 }
-@media screen and (max-width: 1000px){
-  .me-view-card{
+
+@media screen and (max-width: 1000px) {
+  .me-view-card {
     width: 100%;
   }
 }
@@ -334,7 +339,8 @@ width: 50%;
     padding: 0;
   }
 }
-.bm-editor{
+
+.bm-editor {
 
 }
 </style>

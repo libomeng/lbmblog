@@ -7,8 +7,6 @@ spring:
     url: "jdbc:mysql://localhost:3307/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
     username: "root"
     password: "0507"
-
-
     druid:
       filters: stat,wall
       aop-patterns: 'com.lbm.*'
@@ -16,9 +14,6 @@ spring:
         enabled: true
         login-username: admin
         login-password: "0507"
-
-
-
       web-stat-filter:
         enabled: true
         url-pattern: '/*'
@@ -40,8 +35,8 @@ spring:
 
 
 mybatis-plus:
-#  configuration:
-#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       table-prefix: ms_
