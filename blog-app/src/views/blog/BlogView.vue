@@ -30,23 +30,34 @@
           </div>
           <div class="me-view-comment" v-if="article.isComment===1">
             <div class="me-view-comment-write">
+              <el-form :model="comment" :rules="commentRules" ref="comment">
               <el-row :gutter="20">
                 <el-col :offset="2" :span="20">
+                  <el-form-item prop="content">
                   <el-input
                     type="textarea"
                     :autosize="{ minRows: 2}"
                     placeholder="说点什么"
                     class="me-view-comment-text"
                     v-model="comment.content"
-                    resize="none">
+                    resize="none"
+                  @focus="showComment=true">
                   </el-input>
+                  </el-form-item>
                 </el-col>
               </el-row>
-              <el-row :gutter="20">
-                <el-col :span="2" :offset="20">
-                  <el-button type="text" @click="publishComment()">评论</el-button>
+              <el-row :gutter="10" v-if="showComment">
+                <el-col :offset="2" :span="6">
+                  <el-input placeholder="你的邮箱(必填)" v-model="comment.email"></el-input>
+                </el-col>
+                <el-col :span="6">
+                  <el-input placeholder="你的邮箱(必填)" v-model="comment.email"></el-input>
+                </el-col>
+                <el-col :span="2" >
+                  <el-button type="primary" size="" @click="publishComment('comment')">评论</el-button>
                 </el-col>
               </el-row>
+              </el-form>
             </div>
             <div class="bm-view-comment">
               <span>{{ article.commentCounts }} 条评论</span>
@@ -113,13 +124,26 @@ export default {
       comments: [],
       comment: {
         article: {},
-        content: ''
+        content: '',
+        nickName:'',
+        email:''
       },
       mainStyle: '',
       preWidth: {
         width: ''
-      }
+      },
+      commentRules:{
+        nickName: [
+          { required: true, message: '请输入昵称', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+        ],
+        email: [
+          { required: true, message: '请输入邮箱地址', trigger: 'blur' }
+        ],
+      },
+      showComment: false
     }
+
   },
   props: {
     screenWidth: Number
@@ -158,29 +182,34 @@ export default {
         }
       })
     },
-    publishComment() {
-      let that = this
-      if (!that.comment.content) {
-        return;
-      }
-      that.comment.article.id = that.article.id
-      let parms = {articleId: that.article.id, content: that.comment.content}
-      publishComment(parms, this.$store.state.token).then(data => {
-        if (data.success) {
-          that.$message({type: 'success', message: '评论成功', showClose: true})
-          that.comment.content = ''
-          that.comments.unshift(data.data)
-          that.commentCountsIncrement()
+    publishComment(ref) {
+      this.$refs[ref].validate((valid) => {
+        if (valid) {
+          let that = this
+          if (!that.comment.content) {
+            return;
+          }
+          that.comment.article.id = that.article.id
+          let parms = {articleId: that.article.id, content: that.comment.content ,nickName: that.comment.nickName ,email: that.comment.email }
+          publishComment(parms).then(data => {
+            if (data.success) {
+              that.$message({type: 'success', message: '评论成功', showClose: true})
+              that.comment.content = ''
+              that.comments.unshift(data.data)
+              that.commentCountsIncrement()
 
+            } else {
+              that.$message({type: 'error', message: data.msg, showClose: true})
+            }
+          }).catch(error => {
+            if (error !== 'error') {
+              that.$message({type: 'error', message: '评论失败', showClose: true})
+            }
+          })
         } else {
-          that.$message({type: 'error', message: data.msg, showClose: true})
+          return false;
         }
-
-      }).catch(error => {
-        if (error !== 'error') {
-          that.$message({type: 'error', message: '评论失败', showClose: true})
-        }
-      })
+      });
     },
     getCommentsByArticle() {
       let that = this
@@ -228,6 +257,9 @@ export default {
 <style scoped>
 .me-view-body {
   width: 100%;
+}
+.bm-view-comment {
+  margin-top: 30px;
 }
 
 .me-view-container {

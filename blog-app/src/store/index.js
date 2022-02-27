@@ -2,38 +2,44 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import {getToken, setToken, removeToken} from '@/request/token'
 import {login, getUserInfo, logout, register} from '@/api/login'
+import guestUser from "@/api/guestUser";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     id: '',
-    account: '',
-    name: '',
-    avatar: '',
+    ip: '',
+    cityName: '',
+    nickName:'',
+    email:'',
     token: getToken(),
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token;
     },
-    SET_ACCOUNT: (state, account) => {
-      state.account = account
+    SET_IP: (state, ip) => {
+      state.ip = ip
     },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
+    SET_CITY_NAME: (state, cityName) => {
+      state.cityName = cityName
     },
     SET_ID: (state, id) => {
       state.id = id
+    },
+    SET_NICK_NAME: (state,nickName) => {
+      state.nickName =nickName
+    },
+    SET_EMAIL:(state,email) =>{
+      state.email=email
     }
   },
   actions: {
-    login({commit}, user) {
+    visit({commit}, user) {
       return new Promise((resolve, reject) => {
-        login(user.account, user.password).then(data => {
+        guestUser.access(user).then(data => {
+          console.log(data)
           if(data.success){
             commit('SET_TOKEN', data.data)
             setToken(data.data)
@@ -47,32 +53,34 @@ export default new Vuex.Store({
       })
     },
     // 获取用户信息
-    getUserInfo({commit, state}) {
-
+    getUserInfo({commit, state}){
       let that = this
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(data => {
           if (data.success) {
-            commit('SET_ACCOUNT', data.data.account)
-            commit('SET_NAME', data.data.nickname)
-            commit('SET_AVATAR', data.data.avatar)
+            commit('SET_IP', data.data.ip)
+            commit('SET_CITY_NAME', data.data.cityName)
             commit('SET_ID', data.data.id)
+            commit('SET_NICK_NAME',data.data.nickName)
+            commit('SET_EMAIL',data.data.email)
             resolve(data)
           } else {
-            commit('SET_ACCOUNT', '')
-            commit('SET_NAME', '')
-            commit('SET_AVATAR', '')
+            commit('SET_IP', '')
+            commit('SET_CITY_NAME', '')
             commit('SET_ID', '')
-            removeToken()
+            commit('SET_NICK_NAME','')
+            commit('SET_EMAIL','')
+            // removeToken()
             resolve(data)
           }
 
         }).catch(error => {
-          commit('SET_ACCOUNT', '')
-          commit('SET_NAME', '')
-          commit('SET_AVATAR', '')
+          commit('SET_IP', '')
+          commit('SET_CITY_NAME', '')
           commit('SET_ID', '')
-          removeToken()
+          commit('SET_NICK_NAME','')
+          commit('SET_EMAIL','')
+          // removeToken()
           reject(error)
         })
       })
@@ -84,9 +92,8 @@ export default new Vuex.Store({
           if(data.success){
 
             commit('SET_TOKEN', '')
-            commit('SET_ACCOUNT', '')
-            commit('SET_NAME', '')
-            commit('SET_AVATAR', '')
+            commit('SET_IP', '')
+            commit('SET_CITY_NAME', '')
             commit('SET_ID', '')
             removeToken()
             resolve()
@@ -101,9 +108,8 @@ export default new Vuex.Store({
     fedLogOut({commit}) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
-        commit('SET_ACCOUNT', '')
-        commit('SET_NAME', '')
-        commit('SET_AVATAR', '')
+        commit('SET_CITY_NAME', '')
+        commit('SET_IP', '')
         commit('SET_ID', '')
         removeToken()
         resolve()

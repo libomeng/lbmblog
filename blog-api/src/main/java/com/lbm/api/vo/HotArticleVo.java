@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class HotArticleVo {
     @JsonSerialize(using = ToStringSerializer.class)
-    private long id;
+    private String id;
     private String title;
 }

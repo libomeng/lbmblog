@@ -22,7 +22,7 @@ export function logout(token) {
 
 export function getUserInfo(token) {
   return request({
-    headers: {'Authorization': token},
+    // headers: {'Authorization': token},
     url: '/users/currentUser',
     method: 'get'
   })

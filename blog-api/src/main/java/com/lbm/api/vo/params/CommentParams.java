@@ -12,4 +12,8 @@ public class CommentParams {
     private String parent;
 
     private String toUserId;
+
+    private String nickName;
+
+    private String email;
 }

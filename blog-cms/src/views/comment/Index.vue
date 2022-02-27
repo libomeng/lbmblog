@@ -1,6 +1,5 @@
 <template>
 <div class="bm-comment">
-
 </div>
 </template>
 

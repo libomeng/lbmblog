@@ -3,7 +3,6 @@
     <div slot="header" >
       <span>{{cardHeader}}</span>
     </div>
-
     <ul class="me-category-list">
       <li v-for="a in articles" @click="view(a.id)" :style="itemStyle" :key="a.id" class="me-category-item"><a>{{a.title}}</a>
       </li>

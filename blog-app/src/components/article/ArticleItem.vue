@@ -9,14 +9,14 @@
       <div class="me-article-time">
         <span>
 	    	  <i class="el-icon-date"></i>&nbsp;发表于&nbsp;{{gmtCreate|moment("YYYY-MM-DD HH:mm")}} &nbsp;&nbsp;|&nbsp;&nbsp;  <i class="el-icon-folder-opened"/>分类于
-          <a style="text-decoration: underline">{{category.categoryName}}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;{{viewCounts}} &nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;{{commentCounts}}
+          <a v-if="category" style="text-decoration: underline">{{category.categoryName }}</a>&nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-view"></i>&nbsp;{{viewCounts}} &nbsp;&nbsp;|&nbsp;&nbsp;<i class="el-icon-chat-dot-round"></i>&nbsp;{{commentCounts}}
 	      </span>
     </div>
       <div class="me-article-description">
       {{summary}}
       </div>
       <div class="em-article-images">
-        <el-image class="article-images" :src="img" :preview-src-list="img" fit="cover"></el-image>
+        <el-image class="article-images" :src="img" :preview-src-list="arrayImg" fit="cover"></el-image>
       </div>
       <div class="el-article-button" >
         <el-button  icon="el-icon-right" type="primary" size="mini"  @click="view(id)">阅读原文</el-button>
@@ -49,7 +49,13 @@
       img:String
     },
     data() {
-      return {}
+      return {
+      }
+    },
+    computed :{
+      arrayImg(){
+        return new Array(this.img)
+      }
     },
     methods: {
       view(id) {

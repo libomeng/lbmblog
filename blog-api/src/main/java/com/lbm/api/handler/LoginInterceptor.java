@@ -27,10 +27,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }
-        String token = request.getHeader("Authorization");
+        String token = request.getHeader("Token");
         log.info("=================request start===========================");
-        String requestURI = request.getRequestURI();
-        log.info("request uri:{}",requestURI);
+        log.info("request uri:{}",request.getRequestURI());
         log.info("request IP:{}", request.getRemoteAddr());
         log.info("request method:{}",request.getMethod());
         log.info("token:{}", token);
@@ -42,13 +41,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         Result result = sysUserService.currentUser(token);
-
         if (!result.getSuccess()){
             response.setContentType("application/json;charset=utf-8");
             response.getWriter().write(JSON.toJSONString(result));
             return false;
         }
-
         LoginVo loginVo = (LoginVo)result.getData();
         UserThreadLocal.put(loginVo);
         return true;
@@ -57,6 +54,5 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         UserThreadLocal.remove();
-
     }
 }

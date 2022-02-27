@@ -143,9 +143,14 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         queryWrapper.select(Article::getId,Article::getTitle,Article::getGmtCreate);
         queryWrapper.orderByDesc(Article::getGmtCreate);
         queryWrapper.last("limit " + limit);
+        //转化成vo对象
         List<Article> articles = articleMapper.selectList(queryWrapper);
-        redisService.setEntity(key,limit,articles);
-        return Result.success(articles);
+        List<NewArticleVo> newArticleVos =new ArrayList<>();
+        articles.forEach(article -> {
+            newArticleVos.add(new NewArticleVo(article));
+        });
+        redisService.setEntity(key,limit,newArticleVos);
+        return Result.success(newArticleVos);
     }
 
     @Override

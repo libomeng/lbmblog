@@ -50,9 +50,6 @@ public class SysUser implements Serializable {
     @ApiModelProperty(value = "最后登录时间")
     private Long lastLogin;
 
-    @ApiModelProperty(value = "手机号")
-    private String mobilePhoneNumber;
-
     @ApiModelProperty(value = "昵称")
     private String nickname;
 

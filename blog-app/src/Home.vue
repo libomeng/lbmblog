@@ -1,19 +1,19 @@
 <template>
   <div id="home">
     <el-container>
-      <el-aside class="bm-music-player" style="width: 265px" >
+      <el-aside class="bm-music-player" style="width: 265px">
         <transition name="el-zoom-in-bottom">
           <div @mouseenter="simple=false" @mouseout="aplayerOut">
-        <Aplayer v-if="musicInfo.show" :music="musicInfo.music" :mini="simple" theme="#2C3E50" />
+            <Aplayer v-if="musicInfo.show" :music="musicInfo.music" :mini="simple" theme="#2C3E50"/>
           </div>
         </transition>
-        </el-aside>
-    	<base-header :activeIndex="activeIndex" :screenWidth="screenWidth"></base-header>
-		  <router-view class="me-container" :screenWidth ="screenWidth" v-bind.sync="musicInfo"/>
+      </el-aside>
+      <base-header :activeIndex="activeIndex" :screenWidth="screenWidth"></base-header>
+      <router-view v-if="show" class="me-container" :screenWidth="screenWidth" v-bind.sync="musicInfo"/>
       <transition name="el-zoom-in-bottom">
         <base-footer style="z-index: 1"></base-footer>
       </transition>
-		</el-container>
+    </el-container>
 
   </div>
 
@@ -24,34 +24,33 @@ import BaseFooter from '@/components/BaseFooter'
 import BaseHeader from '@/views/BaseHeader'
 import Aplayer from 'vue-aplayer'
 
-
-
 export default {
   name: 'Home',
-  data (){
-  	return {
+  data() {
+    return {
       activeIndex: '/',
       footerShow: true,
       screenWidth: document.body.clientWidth,
       musicInfo: {
-        show:false,
-        music:{
-          title:'222'
+        show: false,
+        music: {
+          title: '222'
         },
       },
-      simple:true
+      simple: true,
+      show: true
     }
   },
-  watch:{
-    'musicInfo.show'(){
-      this.simple=false
-      setTimeout(()=>{
-        this.simple=true
-      },5000)
+  watch: {
+    'musicInfo.show'() {
+      this.simple = false
+      setTimeout(() => {
+        this.simple = true
+      }, 5000)
     }
   },
   created() {
-    console.log(this)
+    console.log(222)
   },
   mounted() {
     //获取页面宽度
@@ -63,51 +62,51 @@ export default {
       })()
     }
   },
-  components:{
-  	'base-header':BaseHeader,
-  	'base-footer':BaseFooter,
-      Aplayer
+  components: {
+    'base-header': BaseHeader,
+    'base-footer': BaseFooter,
+    Aplayer
   },
-  beforeRouteEnter (to, from, next){
-  	 next(vm => {
-    	vm.activeIndex = to.path
-  	})
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.activeIndex = to.path
+    })
   },
-  beforeRouteUpdate (to, from, next) {
-	  if(to.path == '/'){
-	  	this.footerShow = true
-	  }else{
-	  	this.footerShow = false
-	  }
-	  this.activeIndex = to.path
-	  next()
-	},
-  methods:{
-
-    aplayerOut(){
-     setTimeout(()=>{
-       this.simple=true
-     },5000)
+  beforeRouteUpdate(to, from, next) {
+    if (to.path == '/') {
+      this.footerShow = true
+    } else {
+      this.footerShow = false
     }
+    this.activeIndex = to.path
+    next()
+  },
+  methods: {
+    aplayerOut() {
+      setTimeout(() => {
+        this.simple = true
+      }, 5000)
+    },
   }
-
 }
 </script>
 
 <style>
 
-.me-container{
+.me-container {
   margin: 100px auto 140px;
 }
-.bm-music-player{
+
+.bm-music-player {
   width: 250px;
   z-index: 999;
   position: fixed;
-  bottom:0px;
+  bottom: 0px;
   left: 0;
 
 
 }
+
 .transition-box {
   margin-bottom: 10px;
   width: 200px;

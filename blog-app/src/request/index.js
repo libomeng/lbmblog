@@ -2,7 +2,6 @@ import axios from 'axios'
 import {Message} from 'element-ui'
 import store from '@/store'
 import {getToken} from '@/request/token'
-
 const service = axios.create({
   baseURL: process.env.BASE_API,
   timeout: 10000
@@ -12,9 +11,8 @@ const service = axios.create({
 
 //request拦截器
 service.interceptors.request.use(config => {
-
   if (store.state.token) {
-    config.headers['Oauth-Token'] = getToken()
+    config.headers['Token'] = getToken()
   }
   return config
 }, error => {

@@ -28,7 +28,6 @@ public class CommentController {
         if(StringUtil.isNullOrEmpty(commentParams.getContent())){
             return Result.fail(1111, "请输入评论内容");
         }
-
         commentService.createComment(commentParams);
         return  Result.success(null);
     }

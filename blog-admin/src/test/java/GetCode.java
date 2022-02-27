@@ -35,7 +35,7 @@ public class GetCode {
 
         //全局配置
         GlobalConfig globalConfig =new GlobalConfig();
-        String property = System.getProperty("user.dir")+"\\blog-admin";
+        String property = System.getProperty("user.dir")+"\\blog-api";
         System.out.println(property);
         globalConfig.setOutputDir(property+"/src/main/java");
         globalConfig.setAuthor("lbm");

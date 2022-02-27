@@ -2,8 +2,10 @@ package com.lbm.api.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.lbm.api.dao.entity.GuestUser;
 import com.lbm.api.dao.entity.SysUser;
 import com.lbm.api.dao.mapper.SysUserMapper;
+import com.lbm.api.service.GuestUserService;
 import com.lbm.api.service.SysUserService;
 import com.lbm.api.util.JWTUtils;
 import com.lbm.api.vo.ErrorCode;
@@ -11,6 +13,7 @@ import com.lbm.api.vo.LoginVo;
 import com.lbm.api.vo.Result;
 import com.lbm.api.vo.UserVo;
 import io.netty.util.internal.StringUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,6 +25,9 @@ import java.util.Map;
 public class SysUserServiceImpl implements SysUserService {
     @Autowired
     private SysUserMapper sysUserMapper;
+
+    @Autowired
+    private GuestUserService guestUserService;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -46,34 +52,21 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public Result currentUser(String token) {
-
         //校验token是否为空
         if (StringUtil.isNullOrEmpty(token)) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }
-        Map<String, Object> body = JWTUtils.checkToken(token);
-
+        String userId = JWTUtils.checkToken(token);
         //验证token中的body是否为空
-        if (body == null) {
+        if (StringUtils.isEmpty(userId)) {
             return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
         }
-        String userJson = (String) redisTemplate.opsForValue().get("TOKEN_" + token);
-
-        //验证redis中是否是否存在token
-        if (StringUtil.isNullOrEmpty(userJson)) {
-            return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
+        GuestUser user = this.guestUserService.getById(userId);
+        if(user==null){
+            return Result.fail("数据库中无此用户");
         }
-        LoginVo loginVo = JSON.parseObject(userJson, LoginVo.class);
-        String idFromJWT = (String) body.get("userID");
-
-        //由于JJWT有BUG 包装进MAP的LONG类型取出时为Integer,所以使用强转
-        String idFromRedis = loginVo.getId().toString();
-
-        //验证前端返回token是否与redis中一致
-        if (!idFromJWT.equals(idFromRedis)) {
-            return Result.fail(ErrorCode.TOKEN_ERROR.getCode(), ErrorCode.TOKEN_ERROR.getMsg());
-        }
-        return Result.success(loginVo);
+        LoginVo loginVo = new LoginVo(user);
+        return Result.success("获取用户信息成功",loginVo);
     }
 
     @Override
