@@ -48,6 +48,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }
         return true;
+        //TODO 将用户加入线程池
     }
 
     @Override
