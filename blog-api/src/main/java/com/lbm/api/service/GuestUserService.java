@@ -15,5 +15,7 @@ import com.lbm.common.Result;
  */
 public interface GuestUserService extends IService<GuestUser> {
 
-    Result createToken(GuestUserParam param,String token);
+    Result issueToken(GuestUserParam param,String token);
+
+    Result getUserInfo(String token);
 }

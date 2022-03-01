@@ -18,7 +18,7 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/guestUser/access").excludePathPatterns("/users/currentUser");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns("/guestUser/**");
     }
 
     //开启跨域访问

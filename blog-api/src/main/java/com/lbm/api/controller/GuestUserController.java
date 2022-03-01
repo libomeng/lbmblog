@@ -21,9 +21,15 @@ public class GuestUserController {
     @Autowired
     GuestUserService guestUserService;
 
-    @PostMapping("/access")
-    public Result access(@RequestBody GuestUserParam param, @RequestHeader(value = "Token" ,required=false) String token) {
-        Result result = this.guestUserService.createToken(param,token);
+    @PostMapping("/issue/token")
+    public Result issueToken(@RequestBody GuestUserParam param, @RequestHeader(value = "Token", required = false) String token) {
+        Result result = this.guestUserService.issueToken(param, token);
+        return result;
+    }
+
+    @PostMapping("/info")
+    public Result getUserInfo(@RequestHeader("Token") String token) {
+        Result result = guestUserService.getUserInfo(token);
         return result;
     }
 }

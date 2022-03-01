@@ -12,12 +12,7 @@ import BlogAllCategoryTag from '@/views/blog/BlogAllCategoryTag'
 import BlogCategoryTag from '@/views/blog/BlogCategoryTag'*/
 
 import {Message} from 'element-ui';
-
-
 import store from '@/store'
-
-import {getToken} from '@/request/token'
-
 Vue.use(Router)
 
 const router = new Router({
@@ -88,20 +83,6 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  let Ip = returnCitySN['cip']
-  let cityname = returnCitySN['cname']
-  const user = {ip: Ip, cityName: cityname}
-  store.dispatch('visit', user).then(result => {
-    store.dispatch('getUserInfo').then(data => { //获取用户信息
-      next()
-    }).catch(err => {
-      store.dispatch('visit', user).then(result => {
-        store.dispatch('getUserInfo')
-        console.log(111)
-        next()
-      })
-    })
-  })
   if (to.matched.some(r => r.meta.requireLogin)) {
     Message({
       type: 'warning',

@@ -4,7 +4,7 @@ import store from '@/store'
 import {getToken} from '@/request/token'
 const service = axios.create({
   baseURL: process.env.BASE_API,
-  timeout: 10000
+  timeout: 30000
 })
 
 // axios.defaults.baseURL="http://192.168.3.146:8081"
@@ -14,12 +14,14 @@ service.interceptors.request.use(config => {
   if (store.state.token) {
     config.headers['Token'] = getToken()
   }
+  if(store.state.id){
+    config.headers['user_id'] =store.state.id
+  }
   return config
 }, error => {
 
   Promise.reject(error)
 })
-
 // respone拦截器
 service.interceptors.response.use(
   response => {
@@ -28,9 +30,7 @@ service.interceptors.response.use(
     if (response.headers['session_time_out'] == 'timeout') {
       store.dispatch('fedLogOut')
     }
-
     const res = response.data;
-
     //0 为成功状态
     if (res.code !== 200) {
 

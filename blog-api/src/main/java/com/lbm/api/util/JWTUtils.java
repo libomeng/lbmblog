@@ -31,6 +31,26 @@ public class JWTUtils {
         return ToKen;
     }
 
+    /**
+     * 根据传入的map生成token
+     * @param map
+     * @return
+     */
+    public static String createToken(Map<String,Object> map) {
+        JwtBuilder jwtBuilder = Jwts.builder()
+                .signWith(SignatureAlgorithm.HS256, jwtToken)//签发算法，秘钥是jwtToken
+                .setClaims(map)   //ToKen Body 内容
+                .setIssuedAt(new Date());  //ToKen 签发时间
+        String ToKen = jwtBuilder.compact();
+        return ToKen;
+    }
+
+    /**
+     * 根据id签发token,并设置过期时间
+     * @param userID
+     * @param expired
+     * @return
+     */
     public static String createToken(Object userID, Long expired) {
         Map<String, Object> claims = new HashMap<>();
         String id = userID.toString();
@@ -48,13 +68,24 @@ public class JWTUtils {
      * token 验证
      *
      * @param token
-     * @return
+     * @return 返回id值
      */
     public static String checkToken(String token) {
         Jwt parse = Jwts.parser().setSigningKey(jwtToken).parse(token);
         Map<String, Object> body = (Map<String, Object>) parse.getBody();
         String id = (String) body.get(KEY);
         return id;
+    }
+
+    /**
+     * token验证
+     * @param token
+     * @return 返回Map
+     */
+    public static Map checkTokenResMap(String token) {
+        Jwt parse = Jwts.parser().setSigningKey(jwtToken).parse(token);
+        Map<String, Object> body = (Map<String, Object>) parse.getBody();
+        return body;
     }
 }
 

@@ -2,7 +2,7 @@ import Vuex from 'vuex'
 import Vue from 'vue'
 import {getToken, setToken, removeToken} from '@/request/token'
 import {login, getUserInfo, logout, register} from '@/api/login'
-import guestUser from "@/api/guestUser";
+import user from '@/api/user';
 
 Vue.use(Vuex);
 
@@ -36,9 +36,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    visit({commit}, user) {
+    issueToken({commit}, val) {
       return new Promise((resolve, reject) => {
-        guestUser.access(user).then(data => {
+        user.issueToken(val).then(data => {
           console.log(data)
           if(data.success){
             commit('SET_TOKEN', data.data)
@@ -56,8 +56,9 @@ export default new Vuex.Store({
     getUserInfo({commit, state}){
       let that = this
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(data => {
+        user.getUserInfo().then(data => {
           if (data.success) {
+            console.log(data)
             commit('SET_IP', data.data.ip)
             commit('SET_CITY_NAME', data.data.cityName)
             commit('SET_ID', data.data.id)

@@ -45,7 +45,6 @@ import count from "@/api/count";
 import {getArticles, getHotArtices, getNewArtices} from '@/api/article'
 import {getHotTags} from '@/api/tag'
 import {listArchives} from '@/api/article'
-import guestUser from "@/api/guestUser";
 
 export default {
   name: 'Index',
