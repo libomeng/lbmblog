@@ -35,12 +35,19 @@ public class CommentServiceImpl implements CommentService {
 
     @Autowired
     ArticleService articleService;
+
+    /**
+     * 根据文章id查询评论内容
+     * @param ArticleId 文章ID
+     * @return CommentVoList
+     */
     @Override
     public List<CommentVo> commentsByArticleId(String ArticleId) {
         LambdaQueryWrapper<Article> articleLambdaQueryWrapper = new LambdaQueryWrapper<>();
         articleLambdaQueryWrapper.eq(Article::getId,ArticleId);
         articleLambdaQueryWrapper.select(Article::getIsComment);
         Article article = articleService.getOne(articleLambdaQueryWrapper);
+        //isComment ==0 不开启评论
         if(article.getIsComment()==0){
             return null;
         }
@@ -120,7 +127,6 @@ public class CommentServiceImpl implements CommentService {
         }
         return commentVo;
     }
-
     private List<CommentVo> findCommentByParentId(String parentID) {
         LambdaQueryWrapper<Comment> queryWrapper =new LambdaQueryWrapper();
         queryWrapper.eq(Comment::getParentId, parentID);
@@ -128,6 +134,5 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> comments = commentMapper.selectList(queryWrapper);
         List<CommentVo> commentVos = this.copyList(comments);
         return commentVos;
-
     }
 }

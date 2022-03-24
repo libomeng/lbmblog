@@ -39,13 +39,9 @@
             class="me-view-comment-text"
             resize="none">
           </el-input>
-
           <el-button style="margin-left: 8px" @click="publishComment()" type="text">评论</el-button>
-
         </div>
-
       </div>
-
     </div>
     </el-card>
   </div>
