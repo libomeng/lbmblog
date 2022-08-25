@@ -1,13 +1,13 @@
 server:
-  port: 8001
+  port: 6088
 
 spring:
   application:
     name: lbm
   datasource:
-    url: "jdbc:mysql://mysql:3306/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
+    url: "jdbc:mysql://libomeng.cn:3306/lbmblog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
     username: "root"
-    password: "0507"
+    password: "lbm304304"
     druid:
       filters: stat,wall
       aop-patterns: 'com.lbm.*'
@@ -32,7 +32,7 @@ spring:
             drop-table-allow: false
   redis:
     port: 6379
-    host: redis
+    host: libomeng.cn
 # datasource
 
 
@@ -42,7 +42,7 @@ mybatis-plus:
   #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
-      table-prefix: ms_
+      table-prefix: bm_
 
 qiniu:
   accessKey: Vdsp6CU6xnts94aMJkAxxAMrh8Vx3Ymxvi6FpDYg
@@ -51,4 +51,4 @@ qiniu:
   bucket: lbmcc
 
 #跨域访问地址
-allowedOrigins: "http://lbm.dsmynas.com:2000"
+allowedOrigins: "http://libomeng.cn:81"

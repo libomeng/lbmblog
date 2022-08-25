@@ -6,7 +6,7 @@ spring:
   application:
     name: lbm
   datasource:
-    url: "jdbc:mysql://localhost:3307/blog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
+    url: "jdbc:mysql://libomeng.cn:3306/lbmblog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
     username: "root"
     password: "0507"
     druid:
@@ -44,4 +44,4 @@ qiniu:
   url: http://cdn.libomeng.cn/
   bucket: lbmcc
 # 跨域访问地址
-allowedOrigins: "http://localhost:8666"
+allowedOrigins: "http://localhost:8081"
