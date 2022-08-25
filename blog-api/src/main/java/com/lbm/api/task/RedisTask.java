@@ -35,7 +35,7 @@ public class RedisTask{
      * 固化文章浏览量数据到数据库
      */
     @LogAnnotation
-    @Scheduled(fixedDelay = 2*60*1000)
+    @Scheduled(fixedDelay = 5*1000)
     public void updateArticleViewCount(){
         String redisKey = RedisKeyConfig.ARTICLE_VIEW_MAP;
         Map articleViews = jsonRedisTemplate.opsForHash().entries(redisKey);
