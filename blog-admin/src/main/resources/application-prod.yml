@@ -29,6 +29,9 @@ spring:
           config:
             delete-allow: false
             drop-table-allow: false
+  redis:
+    host: libomeng.cn
+    port: 6380
 mybatis-plus:
   #  configuration:
   #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
