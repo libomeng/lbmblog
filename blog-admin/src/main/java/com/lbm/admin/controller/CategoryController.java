@@ -32,8 +32,8 @@ public class CategoryController {
     }
     @GetMapping("/getList")
     public Result getList(){
-        List<Category> list = categoryService.list();
-        return Result.success(list);
+       Result result =  categoryService.getCategoryVos();
+        return result;
     }
     @PostMapping("/update")
     public Result update(@RequestBody Category category){
@@ -47,11 +47,8 @@ public class CategoryController {
     }
     @PostMapping("/remove/{id}")
     public Result remove(@PathVariable("id")String id){
-        boolean res = this.categoryService.removeById(id);
-        if(!res){
-            return Result.fail("删除失败");
-        }
-        return Result.success("删除成功");
+        Result result = categoryService.checkAndRemove(id);
+        return result;
     }
 }
 

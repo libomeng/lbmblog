@@ -30,4 +30,6 @@ public interface ArticleService extends IService<Article> {
     Result getDeletedArticleList();
 
     Result deleteArticle(String id,String bodyId);
+
+    Result removeArticle(String id);
 }

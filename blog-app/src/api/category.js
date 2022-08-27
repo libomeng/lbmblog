@@ -34,3 +34,10 @@ export function getCategoryCount() {
     method: 'get',
   })
 }
+
+export function getAllArticleCountForCategory() {
+  return request({
+    url: '/categorys/allArticleCountForCategory',
+    method: 'get',
+  })
+}

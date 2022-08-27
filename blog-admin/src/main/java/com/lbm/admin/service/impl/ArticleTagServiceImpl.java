@@ -3,6 +3,7 @@ package com.lbm.admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lbm.admin.entity.ArticleTag;
+import com.lbm.admin.entity.dos.TagCount;
 import com.lbm.admin.mapper.ArticleTagMapper;
 import com.lbm.admin.service.ArticleTagService;
 import com.lbm.common.Result;
@@ -88,5 +89,26 @@ public class ArticleTagServiceImpl extends ServiceImpl<ArticleTagMapper, Article
             }
         }
         return true;
+    }
+
+    /**
+     * 根据文章ID删除ARTICLE——TAG 映射表
+     * @param articleId
+     * @return
+     */
+    @Override
+    public Integer deleteTagByArticleId(String articleId) {
+        Integer res = articleTagMapper.deleteTagByArticleId(articleId);
+        return res;
+    }
+
+    /**
+     * 查询各个标签下文章的数量
+     * @return
+     */
+    @Override
+    public List<TagCount> getTagArticleCount() {
+        List<TagCount> tagCountList = articleTagMapper.getTagCount();
+        return tagCountList;
     }
 }

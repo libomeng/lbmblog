@@ -2,4 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lbm.admin.mapper.CategoryMapper">
 
+    <resultMap id="categoryVo" type="com.lbm.admin.entity.vo.CategoryVo">
+        <result column="id" property="id"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="description" property="description"/>
+        <result column="count" property="count"/>
+    </resultMap>
+    <select id="getCategoryVos" resultMap="categoryVo">
+        SELECT b.id,b.category_name,b.description,IFNULL(count(a.id),0) as count
+        FROM bm_article as a
+            RIGHT  JOIN bm_category as b
+        on a.category_id = b.id
+        where b.is_deleted=0
+        GROUP BY b.id
+    </select>
+    <select id="checkCategoryInTheArticle" resultType="java.lang.Integer">
+        SELECT count(category_id)
+        from bm_article
+        WHERE category_id = #{id}
+        GROUP BY category_id
+    </select>
 </mapper>

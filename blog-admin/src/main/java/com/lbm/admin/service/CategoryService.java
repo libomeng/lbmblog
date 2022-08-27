@@ -17,4 +17,8 @@ public interface CategoryService extends IService<Category> {
     Result updateCategory(Category category);
 
     Result addCategory(Category category);
+
+    Result getCategoryVos();
+
+    Result checkAndRemove(String id);
 }

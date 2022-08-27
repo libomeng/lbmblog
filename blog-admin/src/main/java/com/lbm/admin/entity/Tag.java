@@ -8,10 +8,12 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.lbm.admin.entity.vo.TagSelectorVo;
+import com.lbm.admin.entity.vo.TagVo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.beans.BeanUtils;
 
 /**
  * <p>
@@ -66,6 +68,12 @@ public class Tag implements Serializable {
             tagSelectorVos.add(tagSelectorVo);
         }));
         return tagSelectorVos;
+    }
+
+    public static TagVo toVo(Tag tag){
+        TagVo tagVo = new TagVo();
+        BeanUtils.copyProperties(tag,tagVo);
+        return tagVo;
     }
 
 }

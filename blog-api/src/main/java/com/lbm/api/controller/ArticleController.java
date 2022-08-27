@@ -76,9 +76,9 @@ public class ArticleController {
         return Result.success(articleVo);
     }
 
-    @GetMapping("count")
+    @GetMapping("/count")
     public Result ArticleCount(){
-       Integer count = articleService.count();
+       Integer count = articleService.articleCount();
        return Result.success(count);
     }
 }

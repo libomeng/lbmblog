@@ -22,7 +22,7 @@
           <el-col :offset="screenWidth>800 && screenWidth<1100?5:0" :span="screenWidth>800?14:24">
             <article-scroll-page></article-scroll-page>
           </el-col>
-          <el-col :offset="screenWidth>800 && screenWidth<1100?5:0.5" :span="screenWidth>1100?4.5:0">
+          <el-col :offset="screenWidth>800 && screenWidth<1100?5:1" :span="screenWidth>1100?4:0">
             <div v-show="screenWidth>1100">
             <card-article cardHeader="热门文章" :articles="hotArticles"></card-article>
             <card-article cardHeader="最新文章" :articles="newArticles"></card-article>

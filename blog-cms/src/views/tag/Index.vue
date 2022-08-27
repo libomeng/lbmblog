@@ -41,11 +41,14 @@
         <el-table :data="tags">
           <el-table-column prop="tagName" label="标签名称">
           </el-table-column>
-          <el-table-column prop="description" label="分类">
-          </el-table-column>
           <el-table-column label="修改时间">
             <template slot-scope="scope">
               {{ scope.row.gmtModified | moment('YYYY-MM-DD HH:mm:ss') }}
+            </template>
+          </el-table-column>
+          <el-table-column label="文章数量">
+            <template slot-scope="scope">
+              {{scope.row.articleCount}}
             </template>
           </el-table-column>
           <el-table-column
@@ -67,7 +70,7 @@
                   type="danger"
                   icon="el-icon-delete"
                   @click="remove(scope.row)"
-                >删除
+                :disabled="removeHandle(scope.row.articleCount)">删除
                 </el-button>
               </el-row>
             </template>
@@ -144,6 +147,13 @@ export default {
     handleCurrentChange(current) {
       this.query.page = current
       this.getList()
+    },
+    removeHandle(articleCount) {
+      if (articleCount > 0) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }

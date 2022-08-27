@@ -48,11 +48,8 @@ public class ArticleController {
     }
     @PostMapping("/delete/{id}")
     public Result deleteById(@PathVariable("id") String id){
-        boolean res = this.articleService.removeById(id);
-        if(!res){
-            return Result.fail("文章删除失败");
-        }
-        return Result.success("文章删除成功");
+       Result result = this.articleService.removeArticle(id);
+        return result;
     }
     @GetMapping("/getRemoveArticle")
     public Result getRemoveArticle(){

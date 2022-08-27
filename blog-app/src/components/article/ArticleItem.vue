@@ -1,6 +1,5 @@
 <template>
   <el-card class="me-area" :body-style="{ padding: '16px' }">
-
     <div class="me-article-info">
       <div class="me-article-header">
       <el-link @click="view(id)" class="me-article-title">{{title}}</el-link>
@@ -67,7 +66,6 @@
 
 <style scoped>
   .me-area{
-
   }
   .me-article-info{
   }
@@ -116,6 +114,7 @@
   }
   .em-article-images {
     margin-top: 10px;
+
   }
   .article-images{
     width: 100%;

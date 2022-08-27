@@ -38,7 +38,7 @@
     <select id="listArticle" resultType="com.lbm.api.dao.entity.Article">
         select * from bm_article
         <where>
-                is_publish = 1
+                is_publish = 1 and is_deleted= 0
             <if test="tagId != null">
                 and id in (select article_id from bm_article_tag where tag_id =#{tagId})
             </if>
@@ -59,6 +59,7 @@
     <select id="getSimpleList" resultType="com.lbm.api.dao.entity.Article">
         select id,title,gmt_create from bm_article
         <where>
+            is_deleted = 0
             <if test="tagId !=null and tagId !=''">
                 and id in (select article_id from bm_article_tag where tag_id =#{tagId})
             </if>
@@ -67,5 +68,8 @@
             </if>
         </where>
         order by gmt_create desc
+    </select>
+    <select id="articleCount" resultType="java.lang.Integer">
+        select count(*) from bm_article where is_deleted =0
     </select>
 </mapper>

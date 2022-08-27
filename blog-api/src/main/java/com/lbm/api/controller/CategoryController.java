@@ -4,11 +4,9 @@ import com.lbm.api.dao.entity.Category;
 import com.lbm.api.service.CategoryService;
 import com.lbm.api.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
@@ -43,4 +41,13 @@ public class CategoryController {
         Integer count = categoryService.count();
         return Result.success(count);
     }
+    /**
+     * 获取该标签下的文章数量
+     */
+    @GetMapping("allArticleCountForCategory")
+    public Result getAllArticleCountForCategory(){
+        Result result = categoryService.getAllArticleCountForCategory();
+        return result;
+    }
+
 }

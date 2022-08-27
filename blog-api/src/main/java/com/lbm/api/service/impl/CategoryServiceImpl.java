@@ -2,6 +2,8 @@ package com.lbm.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lbm.api.dao.dos.ArticleCountForCategory;
+import com.lbm.api.vo.Result;
 import com.lbm.common.config.RedisKeyConfig;
 import com.lbm.api.dao.entity.Category;
 import com.lbm.api.dao.mapper.CategoryMapper;
@@ -68,6 +70,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public Category findDetailCategoryById(String id) {
         Category category = categoryMapper.selectById(id);
         return category;
+    }
+
+    @Override
+    public Result getAllArticleCountForCategory() {
+        List<ArticleCountForCategory> articleCountForCategoryList = categoryMapper.getAllArticleCountForCategory();
+        return Result.success(articleCountForCategoryList);
     }
 
 

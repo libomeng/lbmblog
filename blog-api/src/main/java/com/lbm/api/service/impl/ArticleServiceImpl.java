@@ -218,6 +218,16 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         return Result.success(articleSimpleVoList);
     }
 
+    /**
+     * 统计文章数量，排除已经被remove的文章
+     * @return 文章数量
+     */
+    @Override
+    public Integer articleCount() {
+        Integer count =  articleMapper.articleCount();
+        return count;
+    }
+
     private String createArticleBody(ArticleBodyParam body, String articleId) {
         ArticleBody articleBody = new ArticleBody();
         articleBody.setContent(body.getContent());

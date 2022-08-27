@@ -17,4 +17,6 @@ public interface ArticleMapper extends BaseMapper<Article> {
     IPage<Article> listArticle(Page<Article> page, @Param("tagId")Long tagId, @Param("categoryId")Long categoryId, @Param("year")String year, @Param("month")String month);
 
     List<Article> getSimpleList(@Param("tagId")String tagId,@Param("categoryId")String categoryId);
+
+    Integer articleCount();
 }

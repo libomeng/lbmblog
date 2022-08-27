@@ -2,6 +2,10 @@ package com.lbm.admin.mapper;
 
 import com.lbm.admin.entity.Category;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.lbm.admin.entity.vo.CategoryVo;
+import io.lettuce.core.dynamic.annotation.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface CategoryMapper extends BaseMapper<Category> {
 
+    List<CategoryVo> getCategoryVos();
+
+    Integer checkCategoryInTheArticle(@Param("id") String id);
 }

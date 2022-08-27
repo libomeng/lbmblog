@@ -56,4 +56,6 @@ public interface ArticleService extends IService<Article> {
     String  createArticle(ArticleParam articleParam);
 
     Result getSimpleList(ArticleSimpleParam param);
+
+    Integer articleCount();
 }

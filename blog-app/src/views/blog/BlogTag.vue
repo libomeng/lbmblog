@@ -4,7 +4,7 @@
   <el-main>
      <div class="bm-title"><span>Tags</span></div>
     <div class="mb-title-info"><span>目前共计{{tags.length}}个</span></div>
-    <div class="bm-tags">
+    <div class="bm-tags"  >
           <el-link @click="view(tag)" :class="classHandler(tag.count)" v-for="tag in tags" :key="tag.id">{{tag.tagName}}</el-link>
     </div>
   </el-main>

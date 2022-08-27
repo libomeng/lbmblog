@@ -4,9 +4,11 @@
       <category-update v-if="visible" :visible="visible" :category="row" @visible="visibleHandler" @success="successHandler"></category-update>
       <el-main>
         <el-table :data="categorys">
-          <el-table-column prop="categoryName" label="分类名称">
+          <el-table-column prop="categoryName" label="分类名称" >
           </el-table-column>
-          <el-table-column prop="description" label="分类描述">
+          <el-table-column prop="description" label="分类描述" >
+          </el-table-column>
+          <el-table-column prop="count" label="文章数量" >
           </el-table-column>
           <el-table-column
             label="操作" width="180"
@@ -22,13 +24,13 @@
                   >编辑
                   </el-button>
                 </el-col>
-                <el-button
-                  size="mini"
-                  type="danger"
-                  icon="el-icon-delete"
-                  @click="remove(scope.row)"
-                >删除
-                </el-button>
+                  <el-button
+                    size="mini"
+                    type="danger"
+                    icon="el-icon-delete"
+                    @click="remove(scope.row)"
+                    :disabled="removeHandler(scope.row)">删除
+                  </el-button>
               </el-row>
             </template>
           </el-table-column>
@@ -77,6 +79,13 @@ export default {
     },
     successHandler() {
       this.getList()
+    },
+    removeHandler(row) {
+      if (row.count > 0) {
+        return true
+      } else {
+        return false
+      }
     }
   }
 }

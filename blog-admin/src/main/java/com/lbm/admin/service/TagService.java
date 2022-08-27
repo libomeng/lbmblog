@@ -16,4 +16,6 @@ import com.lbm.common.Result;
 public interface TagService extends IService<Tag> {
 
     Result getConditionList(Integer page, Integer limit, TagQueryWrapperParam param);
+
+    Boolean deleteTagByArticleID(String id);
 }

@@ -204,15 +204,35 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     @Transactional
     public Result deleteArticle(String id,String bodyId) {
-        int res = this.articleMapper.deleteArticle(id);
-       if(res != 1){
-           return Result.fail("文章删除失败");
-       }
-        boolean resBody = articleBodyService.deleteArticleBody(bodyId);
-        if(!resBody){
+        try {
+        Article deleteArticle = this.getById(id);
+        this.articleMapper.deleteArticle(id);
+        articleBodyService.deleteArticleBody(bodyId);
+        tagService.deleteTagByArticleID(deleteArticle.getId()); //删除标签
+            this.deleteRedisFromArticle();
+        return Result.success("文章删除成功");
+        }catch (Exception e){
             return Result.fail("文章删除失败");
         }
-        return Result.success("文章删除成功");
     }
-
+    //删除文章
+    @Override
+    @Transactional
+    public Result removeArticle(String id) {
+        try{
+            this.removeById(id); //删除文章
+            this.deleteRedisFromArticle();
+            return Result.success("文章删除成功");
+        }catch (Exception e){
+            return Result.fail("文章删除失败");
+        }
+    }
+    /**
+     * 删除关于文章的Redis缓存
+     */
+    private void deleteRedisFromArticle(){
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_BODY);
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_VO);
+        redisService.removeByHash(RedisKeyConfig.ARTICLE_VO_LIST);
+    }
 }
