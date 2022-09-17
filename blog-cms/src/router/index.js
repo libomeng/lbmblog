@@ -42,25 +42,19 @@ export const constantRoutes = [
     component: () => import('@/views/404'),
     hidden: true
   },
-
   {
     path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: '数据面板',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
-  },
-  {
-    path: '/article',
     component: Layout,
     redirect: '/article/list',
     name: 'article',
     meta: { title: '博客管理', icon: 'el-icon-s-help' },
     children: [
+      {
+        path: '/article/list',
+        name: 'articleList',
+        component: () => import('@/views/article/ArticleList'),
+        meta: { title: '文章管理', icon: 'el-icon-s-order' }
+      },
       {
         path: '/article/add',
         name: 'articleAdd',
@@ -72,12 +66,6 @@ export const constantRoutes = [
         name: 'categoryAdd',
         component: () => import('@/views/category/Add'),
         meta: { title: '添加分类', icon: 'el-icon-edit' }
-      },
-      {
-        path: '/article/list',
-        name: 'articleList',
-        component: () => import('@/views/article/ArticleList'),
-        meta: { title: '文章管理', icon: 'el-icon-s-order' }
       },
       {
         path: '/category/list',

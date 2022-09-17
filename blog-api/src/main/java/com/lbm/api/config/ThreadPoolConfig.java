@@ -17,13 +17,13 @@ public class ThreadPoolConfig {
         // 设置核心线程数
         executor.setCorePoolSize(5);
         // 设置最大线程数
-        executor.setMaxPoolSize(20);
+        executor.setMaxPoolSize(10);
         //配置队列大小
-        executor.setQueueCapacity(Integer.MAX_VALUE);
+        executor.setQueueCapacity(100);
         // 设置线程活跃时间（秒）
         executor.setKeepAliveSeconds(60);
         // 设置默认线程名称
-        executor.setThreadNamePrefix("码神之路博客项目");
+        executor.setThreadNamePrefix("LBM博客项目");
         // 等待所有任务结束后再关闭线程池
         executor.setWaitForTasksToCompleteOnShutdown(true);
         //执行初始化

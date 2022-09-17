@@ -119,7 +119,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             if(!res){
                 return Result.fail("文章标签添加失败");
             }
-            article.setIsComment(1);
+            article.setIsComment(0); //文章默认状态设置
             article.setIsWeight(0);
         } else {    //修改文章请求
             article.setId(articleParam.getId()); //将id参数保存到实体类

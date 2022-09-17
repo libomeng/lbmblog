@@ -35,6 +35,11 @@
         <result column="body_id" property="bodyId"/>
         <result column="category_id" property="categoryId"/>
     </resultMap>
+    <resultMap id="ArticleSimpleVo" type="com.lbm.api.vo.ArticleSimpleVo">
+        <result column="id" property="id" />
+        <result column="title" property="title"/>
+        <result column="gmt_create" property="gmtCreate"/>
+    </resultMap>
     <select id="listArticle" resultType="com.lbm.api.dao.entity.Article">
         select * from bm_article
         <where>
@@ -51,11 +56,7 @@
         </where>
         order by is_weight desc,gmt_create desc
     </select>
-    <resultMap id="ArticleSimpleVo" type="com.lbm.api.vo.ArticleSimpleVo">
-        <result column="id" property="id" />
-        <result column="title" property="title"/>
-        <result column="gmt_create" property="gmtCreate"/>
-    </resultMap>
+
     <select id="getSimpleList" resultType="com.lbm.api.dao.entity.Article">
         select id,title,gmt_create from bm_article
         <where>
@@ -70,6 +71,6 @@
         order by gmt_create desc
     </select>
     <select id="articleCount" resultType="java.lang.Integer">
-        select count(*) from bm_article where is_deleted =0
+        select count(*) from bm_article where is_deleted =0 and is_publish =1
     </select>
 </mapper>

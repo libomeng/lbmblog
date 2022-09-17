@@ -4,10 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lbm.api.dao.mapper.CategoryMapper">
     <select id="getAllArticleCountForCategory" resultType="com.lbm.api.dao.dos.ArticleCountForCategory">
-        select a.category_id as id,c.category_name as categoryName ,count(a.category_id) as count from bm_article as a
-                                                                                                               left join bm_category c
-                                                                                                                         on a.category_id = c.id
-        where a.is_deleted =0 and c.is_deleted =0
+        select a.category_id as id, c.category_name as categoryName, count(a.category_id) as count
+        from bm_article as a
+            left join bm_category c
+        on a.category_id = c.id
+        where a.is_deleted =0 and c.is_deleted =0 and is_publish =1
         group by a.category_id
     </select>
 </mapper>

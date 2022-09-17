@@ -37,7 +37,6 @@ const actions = {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)
-
         resolve()
       }).catch(error => {
         reject(error)
@@ -50,13 +49,13 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { data } = response
-
         if (!data) {
           return reject('Verification failed, please Login again.')
         }
 
         const { name, avatar } = data
-
+        console.log(data)
+        console.log(avatar)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
         resolve(data)

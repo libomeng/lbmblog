@@ -24,9 +24,9 @@
     <select id="pageArticleVo" resultMap="articleListVo">
         select a.id,a.comment_counts,a.summary,a.title,a.view_counts,a.is_weight,a.is_publish,a.is_comment,b.content,c.category_name,a.gmt_create,a.gmt_modified
         from bm_article as a
-                 join bm_article_body  as b
+                left join bm_article_body  as b
                       on a.body_id =b.id
-                 join bm_category as c
+                left join bm_category as c
                       on a.category_id = c.id
         where a.is_deleted=0
 order by a.gmt_create desc

@@ -3,33 +3,36 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lbm.api.dao.mapper.TagMapper">
-    <select id="selectByTagId"  parameterType="String" resultType="com.lbm.api.dao.entity.Tag">
-        select id,avatar,tag_name as tagName from bm_tag
-        where id in (select tag_id from bm_article_tag where article_id =#{ArticleId})
+    <select id="selectByTagId" parameterType="String" resultType="com.lbm.api.dao.entity.Tag">
+        select id, avatar, tag_name as tagName
+        from bm_tag
+        where id in (select tag_id from bm_article_tag where article_id = #{ArticleId})
     </select>
     <select id="selectHots" parameterType="int" resultType="com.lbm.api.dao.entity.Tag">
-        select
-            `art`.tag_id as id,t.tag_name as tagName ,t.avatar as avatar
-        from
-            bm_article_tag art
-                RIGHT JOIN
-            bm_tag t
-            ON
-                `art`.tag_id =t.id
-        GROUP BY id,tagName,avatar
+        select `art`.tag_id as id,
+               t.tag_name   as tagName,
+               t.avatar     as avatar
+        from bm_article_tag art
+                 RIGHT JOIN
+             bm_tag t
+             ON
+                 `art`.tag_id = t.id
+        GROUP BY id, tagName, avatar
         ORDER BY count(art.tag_id)
                 DESC
             LIMIT #{limit}
     </select>
     <select id="selectTagCount" resultType="com.lbm.api.dao.dos.TagCount">
-        select
-            `art`.tag_id as id,t.tag_name as tagName ,t.avatar as avatar,count(art.tag_id) as count
-        from
-            bm_article_tag art
-                RIGHT JOIN
-            bm_tag t
-            ON
-                `art`.tag_id =t.id
-        GROUP BY id,tagName,avatar
+        SELECT a.tag_id as id, b.tag_name as tagName, count(a.tag_id) as count
+        FROM bm_article_tag as a
+                 LEFT JOIN
+             bm_tag as b
+             ON a.tag_id = b.id
+                 LEFT JOIN bm_article as c
+                           on a.article_id = c.id
+        WHERE c.is_deleted = 0
+          and c.is_publish = 1
+          and b.is_deleted = 0
+        GROUP BY b.id
     </select>
 </mapper>

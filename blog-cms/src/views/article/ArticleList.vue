@@ -26,7 +26,7 @@
                 v-model="scope.row.isPublish"
                 :active-value=1
                 :inactive-value=0
-                @change="articleStateHandler(scope.row)"
+                @change="articleStateHandler(scope.row,'publish')"
               >
               </el-switch>
             </template>
@@ -37,7 +37,7 @@
                 v-model="scope.row.isWeight"
                 :active-value=1
                 :inactive-value=0
-                @change="articleStateHandler(scope.row)"
+                @change="articleStateHandler(scope.row,'weight')"
               >
               </el-switch>
             </template>
@@ -48,7 +48,7 @@
                 v-model="scope.row.isComment"
                 :active-value=1
                 :inactive-value=0
-                @change="articleStateHandler(scope.row)"
+                @change="articleStateHandler(scope.row,'comment')"
               >
               </el-switch>
             </template>
@@ -131,9 +131,9 @@ export default {
       this.getArticleList()
     },
     edit(val) {
-      this.$router.push({ name: 'articleAdd', params: { id: val.id } })
+      this.$router.push({name: 'articleAdd', params: {id: val.id}})
     },
-    articleStateHandler(art) {
+    articleStateHandler(art, val) {
       const state = {
         id: art.id,
         isWeight: art.isWeight,
@@ -142,7 +142,45 @@ export default {
       }
       article.updateState(state).then(result => {
         this.$message.success(result.message)
+      }).catch(() => {
+        // 还原文章之前的状态
+        if (val === 'weight') {
+          if (state.isWeight === 0) {
+            this.delay(() => {
+              art.isWeight = 1
+            })
+          } else {
+            this.delay(() => {
+              art.isWeight = 0
+            })
+          }
+        }
+        if (val === 'publish') {
+          if (state.isPublish === 0) {
+            this.delay(() => {
+              art.isPublish = 1
+            })
+          } else {
+            this.delay(() => {
+              art.isPublish = 0
+            })
+          }
+        }
+        if (val === 'comment') {
+          if (state.isComment === 0) {
+            this.delay(() => {
+              art.isComment = 1
+            })
+          } else {
+            this.delay(() => {
+              art.isComment = 0
+            })
+          }
+        }
       })
+    },
+    delay(val) {
+      setTimeout(val, 400)
     },
     deleteConfirm(art) {
       article.deleteById(art.id).then(result => {

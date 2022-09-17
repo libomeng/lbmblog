@@ -26,6 +26,7 @@ public class UploadServiceImpl implements UploadService {
     @Override
     @Transactional
     public Result uploadImg(MultipartFile file) {
+
         //检查数据库中是否有此文件
         String md5 ="";
         try {
@@ -39,7 +40,7 @@ public class UploadServiceImpl implements UploadService {
         }
         //修改文件名为唯一名字
         String originalFilename = file.getOriginalFilename();
-        String filename = UUID.randomUUID().toString() + "." + StringUtils.substringAfter(originalFilename, ".");
+        String filename = UUID.randomUUID().toString() + ".jpg";
         try {
             boolean result = qiniuUtil.upload(file, filename);
             if (result) {

@@ -3,6 +3,7 @@ package com.lbm.admin.controller;
 import com.lbm.admin.service.UploadService;
 import com.lbm.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadController {
     @Autowired
     UploadService uploadService;
+    @PreAuthorize("hasAuthority('sys:admin')")
     @PostMapping("/articleImg")
     public Result uploadArticleImg(@RequestParam("articleImg") MultipartFile file){
            Result res  = uploadService.uploadImg(file);

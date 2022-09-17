@@ -8,6 +8,7 @@
       :on-success="handleAvatarSuccess"
       :on-progress="handleUploading"
       :before-upload="beforeAvatarUpload"
+      :headers="headers"
     >
       <el-image v-if="obj.img" :src="obj.img" class="avatar">
         <div slot="placeholder" class="image-slot">
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import { getToken } from '@/utils/auth'
 export default {
   name: 'Upload',
   /**
@@ -32,7 +34,10 @@ export default {
     return {
       res: {},
       success: false,
-      loading: false
+      loading: false,
+      headers: {
+        token: getToken()
+      }
     }
   },
   props: {

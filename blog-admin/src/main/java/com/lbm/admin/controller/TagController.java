@@ -8,6 +8,7 @@ import com.lbm.admin.entity.vo.TagSelectorVo;
 import com.lbm.admin.service.TagService;
 import com.lbm.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,20 +26,20 @@ import java.util.List;
 public class TagController {
     @Autowired
     TagService tagService;
-
+    @PreAuthorize("hasAuthority('sys:demo')")
     @GetMapping
     public Result getTagList(){
         List<Tag> list = tagService.list();
         List<TagSelectorVo> tagSelectorVos = Tag.copyList(list);
         return Result.success(tagSelectorVos);
     }
-
+    @PreAuthorize("hasAuthority('sys:demo')")
     @PostMapping("/getConditionList/{page}/{limit}")
     public Result getConditionList(@PathVariable("page")Integer page, @PathVariable("limit")Integer limit,@RequestBody(required = false) TagQueryWrapperParam param){
        Result result =  this.tagService.getConditionList(page,limit,param);
        return result;
     }
-
+    @PreAuthorize("hasAuthority('sys:admin')")
     @PostMapping("/update")
     public Result update(@RequestBody Tag tag){
         boolean res = tagService.updateById(tag);
@@ -47,7 +48,7 @@ public class TagController {
         }
         return Result.success("标签修改成功");
     }
-
+    @PreAuthorize("hasAuthority('sys:admin')")
     @PostMapping("/remove/{id}")
     public Result remove(@PathVariable("id")String id){
         boolean res = this.tagService.removeById(id);

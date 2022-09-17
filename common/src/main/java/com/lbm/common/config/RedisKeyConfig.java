@@ -18,4 +18,8 @@ public class RedisKeyConfig {
     public static final String LIST_NEW_ARTICLES = "listNewArticles";
     public static final String FIND_TAG_BY_ID = "findTagById";
     public static final String SERVER_COUNT = "serverCount";
+
+    public static final  String ARTICLE_COUNT = "articleCount";
+
+    public static final String USER_DETAILS = "USER_DETAILS";
 }

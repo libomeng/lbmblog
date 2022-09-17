@@ -29,6 +29,7 @@ spring:
   redis:
     port: 6380
     host: libomeng.cn
+    password: Mm304304!!!
 
 
 # datasource

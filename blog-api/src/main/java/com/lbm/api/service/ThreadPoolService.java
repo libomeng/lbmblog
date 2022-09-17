@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-
-@Async("taskExecutor")
 @Component
 public class ThreadPoolService {
     @Autowired
@@ -26,12 +24,13 @@ public class ThreadPoolService {
     RedisService redisService;
 
 
+    @Async
     public void updateArticleViewCount(String id) {
         redisService.saveArticleView(id);
 
     }
 
-
+    @Async
     public void updateArticleCommentCount(String ArticleId) {
         LambdaQueryWrapper<Comment> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Comment::getArticleId, ArticleId);
@@ -41,7 +40,5 @@ public class ThreadPoolService {
         Article updateArticle = new Article();
         updateArticle.setCommentCounts(count);
         articleMapper.update(updateArticle, updateWrapper);
-
-
     }
 }
