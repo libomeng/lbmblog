@@ -1,7 +1,6 @@
 package com.lbm.admin.entity.dos;
 
 import com.lbm.admin.entity.SysUser;
-import com.sun.xml.internal.ws.developer.Serialization;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
