@@ -1,8 +1,5 @@
 <template>
   <div id="login" v-title data-title="登录 - 码神之路">
-    <!--<video preload="auto" class="me-video-player" autoplay="autoplay" loop="loop">
-          <source src="../../static/vedio/sea.mp4" type="video/mp4">
-      </video>-->
 
     <div class="me-login-box me-login-box-radius">
       <h1>登录BLOG</h1>

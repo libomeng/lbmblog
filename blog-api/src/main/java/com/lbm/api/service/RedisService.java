@@ -36,12 +36,11 @@ public interface RedisService {
     <T> T getEntity(String key,Object hash);
 
     <T> T getEntity(String key);
-
-    void setEntity(String key, Long id, Object obj);
+    void setEntity(String key, Object obj);
 
     void setEntity(String key, Object hash, Object obj);
 
-    void setEntity(String key, Object obj);
+    void setHashTimeout(String hash, Object key,Object value,Long time);
 
     <T> List<T> getListByKey(String key, Object hashKey);
 

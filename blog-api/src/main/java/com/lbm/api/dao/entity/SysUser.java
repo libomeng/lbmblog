@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -39,7 +40,7 @@ public class SysUser implements Serializable {
     private String avatar;
 
     @ApiModelProperty(value = "注册时间")
-    private Long createDate;
+    private Date createDate;
 
     @ApiModelProperty(value = "是否删除")
     private Boolean deleted;

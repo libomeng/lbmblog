@@ -50,7 +50,6 @@ export default {
     }
   },
   created() {
-    console.log(222)
   },
   mounted() {
     //获取页面宽度
@@ -59,6 +58,7 @@ export default {
       return (() => {
         window.screenWidth = document.body.clientWidth
         that.screenWidth = window.screenWidth
+
       })()
     }
   },

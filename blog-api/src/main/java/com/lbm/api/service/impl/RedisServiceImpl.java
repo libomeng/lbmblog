@@ -63,10 +63,6 @@ public class RedisServiceImpl implements RedisService {
         return o;
     }
 
-    @Override
-    public void setEntity(String key, Long id, Object obj) {
-        jsonRedisTemplate.opsForHash().put(key,id.toString(), obj);
-    }
 
     @Override
     public void setEntity(String key, Object hash, Object obj) {
@@ -74,10 +70,18 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public void setHashTimeout(String key, Object hashKey, Object value, Long time) {
+        jsonRedisTemplate.opsForHash().put(key,hashKey,value);
+        jsonRedisTemplate.expire(key,time,TimeUnit.MINUTES);
+    }
+
+    @Override
     public void setEntity(String key, Object obj){
         jsonRedisTemplate.opsForValue().set(key,obj);
     }
-
+    public void setEntity(String key, Object obj,Long time){
+        jsonRedisTemplate.opsForValue().set(key,obj,time,TimeUnit.MINUTES);
+    }
     @Override
     public <T> List<T> getListByKey(String key, Object hashKey) {
         List<T> list = (List<T>) jsonRedisTemplate.opsForHash().get(key, hashKey);

@@ -32,37 +32,38 @@ public class RegisterServiceImpl implements RegisterService {
     @Transactional
     @Override
     public Result registerUser(@RequestBody RegisterParams registerParams) {
-        String account = registerParams.getAccount();
-        String password = registerParams.getPassword();
-        String nickname = registerParams.getNickname();
-        if (StringUtil.isNullOrEmpty(account)
-                || StringUtil.isNullOrEmpty(password)
-                || StringUtil.isNullOrEmpty(nickname)) {
-            return Result.fail(ErrorCode.REGISTER_NO_ALL.getCode(), ErrorCode.REGISTER_NO_ALL.getMsg());
-        }
-
-        //验证用户名是否存在 true为存在
-        boolean existUser =sysUserService.findAccount(account);
-        if(existUser){
-            return Result.fail(ErrorCode.USER_EXIST.getCode(), ErrorCode.USER_EXIST.getMsg());
-        }
-        //新建用户
-        SysUser user =new SysUser();
-        user.setAccount(account);
-        user.setPassword(MD5Utils.passwordToMD5(password));
-        user.setNickname(nickname);
-        user.setAdmin(true);
-        user.setAvatar(nickname);
-        user.setEmail("");
-        user.setCreateDate(System.currentTimeMillis());
-        user.setLastLogin(System.currentTimeMillis());
-        user.setAvatar("/static/user/user_1.png");
-        String id = sysUserService.addUser(user);
-        String token = JWTUtils.createToken(id);
-//        RedisUtil.saveToKen(token);
-        LoginVo loginVo =new LoginVo();
-        BeanUtils.copyProperties(user, loginVo);
-        redisTemplate.opsForValue().set("TOKEN_"+token, JSON.toJSONString(loginVo),24, TimeUnit.MINUTES);
-        return Result.success(token);
+//        String account = registerParams.getAccount();
+//        String password = registerParams.getPassword();
+//        String nickname = registerParams.getNickname();
+//        if (StringUtil.isNullOrEmpty(account)
+//                || StringUtil.isNullOrEmpty(password)
+//                || StringUtil.isNullOrEmpty(nickname)) {
+//            return Result.fail(ErrorCode.REGISTER_NO_ALL.getCode(), ErrorCode.REGISTER_NO_ALL.getMsg());
+//        }
+//
+//        //验证用户名是否存在 true为存在
+//        boolean existUser =sysUserService.findAccount(account);
+//        if(existUser){
+//            return Result.fail(ErrorCode.USER_EXIST.getCode(), ErrorCode.USER_EXIST.getMsg());
+//        }
+//        //新建用户
+//        SysUser user =new SysUser();
+//        user.setAccount(account);
+//        user.setPassword(MD5Utils.passwordToMD5(password));
+//        user.setNickname(nickname);
+//        user.setAdmin(true);
+//        user.setAvatar(nickname);
+//        user.setEmail("");
+//        user.setCreateDate(System.currentTimeMillis());
+//        user.setLastLogin(System.currentTimeMillis());
+//        user.setAvatar("/static/user/user_1.png");
+//        String id = sysUserService.addUser(user);
+//        String token = JWTUtils.createToken(id);
+////        RedisUtil.saveToKen(token);
+//        LoginVo loginVo =new LoginVo();
+//        BeanUtils.copyProperties(user, loginVo);
+//        redisTemplate.opsForValue().set("TOKEN_"+token, JSON.toJSONString(loginVo),24, TimeUnit.MINUTES);
+//        return Result.success(token);
+        return null;
     }
 }
