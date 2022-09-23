@@ -37,7 +37,7 @@ LbmBlog是一个前后端分离的博客，是一个本人开发使用、长期�
 #### 1.clone项目代码
 
 ~~~ shell
-git clone https://github.com/libomeng/test.git
+git clone https://github.com/libomeng/lbmblog.git
 ~~~
 
 
