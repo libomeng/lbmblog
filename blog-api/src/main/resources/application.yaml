@@ -3,10 +3,11 @@ server:
 spring:
   application:
     name: lbm
+    #修改为你的数据库地址
   datasource:
-    url: "jdbc:mysql://libomeng.cn:3307/lbmblog?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai"
-    username: "root"
-    password: "0507"
+    url: ""       #url
+    username: ""  #username
+    password: ""  #password
     druid:
       filters: stat,wall
       aop-patterns: 'com.lbm.*'
@@ -26,10 +27,11 @@ spring:
           config:
             delete-allow: false
             drop-table-allow: false
+  #修改为你的redis地址
   redis:
-    port: 6380
-    host: libomeng.cn
-    password: Mm304304!!!
+    port: 6379
+    host:  localhost
+    password: #password
 
 
 # datasource
@@ -45,11 +47,11 @@ mybatis-plus:
       logic-delete-field: flag # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
-
+# 图床配置，这里可以修改为你的图床
 qiniu:
-  accessKey: Vdsp6CU6xnts94aMJkAxxAMrh8Vx3Ymxvi6FpDYg
-  secretKey: Sbopp0PpVdgTxEpQefIPd3a3M16f2RFiWo-OlXwa
-  url: http://r3qle33oa.hn-bkt.clouddn.com/
+  accessKey: Vdsp6CU6xnts94aMJksasadadAxxAMrh8Vx3Ymxvi6FpDYg
+  secretKey: Sbopp0PpVdgTxEpQefIPd2213asc3a3M1asda6f2RFiWo-OlXwa
+  url: http://r3qle33oa.hn-bkt.clouddn.com/ #图片上传模块的图片URL前缀 上传后的图片地址为 url+uuid.jpg
   bucket: lbmcc
 # 跨域访问地址
 allowedOrigins: "http://localhost:8080"
