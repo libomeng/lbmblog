@@ -2,7 +2,7 @@
 
 ## 简介
 
-LbmBlog是一个前后端分离的博客，是一个本人开发使用、长期维护的真实博客项目。后端主要使用SpringBoot开发，前端使用Vue+element开发
+LbmBlog是一个前后端分离的博客，是一个长期维护的真实使用博客项目。后端主要使用SpringBoot开发，前端使用Vue+element开发
 
 **预览地址**：http://libomeng.cn:81 | **后台管理**： http://libomeng.cn:82
 
@@ -30,14 +30,13 @@ LbmBlog是一个前后端分离的博客，是一个本人开发使用、长期�
 + 使用SpringSecurity，实现用户权限控制功能
 + 集成音乐播放插件
 + 服务信息统计：服务浏览量、运行时间等
-+ 使用响应式布局，适配移动端浏览
 
 ## 快速使用
 
 #### 1.clone项目代码
 
 ~~~ shell
-git clone https://github.com/libomeng/lbmblog.git
+git clone https://github.com/libomeng/test.git
 ~~~
 
 
@@ -70,7 +69,13 @@ npm install
 
   使用maven依赖管理
 
-#### 4.运行
+#### 4.重建数据库
+
+~~~ shell
+blog.sql
+~~~
+
+#### 5.运行
 
 + **Blog-api**、**Blog-admin**
 
@@ -82,7 +87,7 @@ npm install
 npm run dev
 ~~~
 
-#### 5.打包
+#### 6.打包
 
 + **Blog-api**、**Blog-admin**
 
