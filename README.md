@@ -2,7 +2,7 @@
 
 ## 简介
 
-LbmBlog是一个前后端分离的博客，是一个长期维护的真实使用博客项目。后端主要使用SpringBoot开发，前端使用Vue+element开发
+LbmBlog是一个前后端分离的博客，是一个长期维护并真实使用的博客项目。后端主要使用SpringBoot开发，前端使用Vue+element开发
 
 **预览地址**：http://libomeng.cn:81 | **后台管理**： http://libomeng.cn:82
 
