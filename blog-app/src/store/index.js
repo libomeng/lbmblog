@@ -58,14 +58,14 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         user.getUserInfo().then(data => {
           if (data.success) {
-            console.log(data)
             commit('SET_IP', data.data.ip)
             commit('SET_CITY_NAME', data.data.cityName)
             commit('SET_ID', data.data.id)
             commit('SET_NICK_NAME',data.data.nickName)
             commit('SET_EMAIL',data.data.email)
             resolve(data)
-          } else {
+          }
+            else {
             commit('SET_IP', '')
             commit('SET_CITY_NAME', '')
             commit('SET_ID', '')

@@ -72,7 +72,6 @@ public class ArticleController {
         String articleId =articleService.createArticle(articleParam);
         ArticleVo articleVo =new ArticleVo();
         articleVo.setId(articleId);
-        redisService.removeMap(RedisKeyConfig.ARTICLE_VO_LIST);
         return Result.success(articleVo);
     }
 

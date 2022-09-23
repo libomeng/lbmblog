@@ -207,6 +207,8 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         redisService.removeMap(RedisKeyConfig.LIST_NEW_ARTICLES);
         //删除文章浏览量缓存
         redisService.removeMap(RedisKeyConfig.ARTICLE_VIEW_MAP);
+        //删除文章缓存
+        redisService.removeMap(RedisKeyConfig.ARTICLE_VO_LIST);
         this.saveArticleViewToRedis();
         return articleId;
     }

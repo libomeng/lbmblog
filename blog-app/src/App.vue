@@ -9,12 +9,13 @@
 import GoTop from '@/components/gotop/GoTop'
 import user from "@/api/user"
 import location from "@/utils/location";
-
+import store from "@/store";
 export default {
   name: 'App',
   data() {
     return {
-      display: false
+      display: false,
+
     }
   },
   created() {
@@ -29,6 +30,7 @@ export default {
       this.$store.dispatch('issueToken', location.getLocation()).then(() => {
         this.display = true
         this.$store.dispatch('getUserInfo')
+
       })
     }
   }
