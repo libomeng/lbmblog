@@ -35,11 +35,13 @@ LbmBlog是一个前后端分离的博客，是一个本人开发使用、长期�
 
 1. #### clone项目代码
 
-   ~~~ shell
-   git clone https://github.com/libomeng/test.git
-   ~~~
+~~~ shell
+git clone https://github.com/libomeng/test.git
+~~~
 
-2. #### 修改你的数据库配置文件
+
+
+#### 2.修改你的数据库配置文件
 
 ~~~xml 
 spring:
@@ -55,7 +57,7 @@ spring:
     password:  #your password
 ~~~
 
-3. #### 依赖管理
+#### 3.依赖管理
 
 + **Blog-app、Blog-cms**
 
@@ -67,7 +69,7 @@ npm install
 
   使用maven依赖管理
 
-4. #### 运行
+#### 4.运行
 
 + **Blog-api**、**Blog-admin**
 
